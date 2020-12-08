@@ -1,7 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import TestContainer from "./ui/testComponent/TestContainer";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,8 +19,11 @@ function App() {
           Learn React
         </a>
       </header>
+      <div>
+        <TestContainer normalInput="Input Normale"></TestContainer>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
