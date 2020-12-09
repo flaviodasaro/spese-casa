@@ -1,5 +1,5 @@
 
-import { TEST } from "./actions";
+import { TEST } from "./actionTypes";
 
 const initialState = {
     input:""

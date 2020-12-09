@@ -1,9 +1,10 @@
 import TestComponent from "./TestComponent";
 import { connect } from "react-redux";
 import { testDispatch } from "../../redux/test/actions";
+import { getTestInput } from "../../redux/test/selectors";
 
-const mapStateToProps = (state, ownProps) => ({
-    input:state.testReducer.input
+const mapStateToProps = (state) => ({
+    input:getTestInput(state)
 });
 const mapDispatchToProps = { testDispatch };
 
