@@ -5,7 +5,6 @@
     from {
         width: 0;
     }
-
     to {
         width: pxToRem(300);
     }
@@ -15,7 +14,6 @@
     from {
         width: pxToRem(300);
     }
-
     to {
         width: 0;
     }
@@ -32,12 +30,12 @@
 
 .open {
     width: pxToRem(300);
-    animation-duration: 3s;
+    animation-duration: 1s;
     animation-name: slidein;
     animation-iteration-count: 1;
 }
 .closed {
-    animation-duration: 3s;
+    animation-duration: 0.5s;
     animation-name: slideout;
     animation-iteration-count: 1;
 }

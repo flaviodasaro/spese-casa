@@ -1,11 +1,29 @@
-@import '../../styles/utils.scss';
-@import '../Layout.scss';
+@import "../../styles/utils.scss";
+@import "../Layout.scss";
 
-.sidebar{
+.sidebar {
     position: fixed;
     left: 0;
-    top:0;
+    top: 0;
     width: $sidebar-width;
     height: $sidebar-heigth;
-    background-color: blue;
+    background-color: #007cffad;
+    z-index: 1;
+
+    .sidebar-icon-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: pxToRem(15) pxToRem(15) 0 pxToRem(15);
+        cursor: pointer;
+        .divider {
+            height: pxToRem(1.5);
+            background-color: white;
+            border-radius: pxToRem(1.5);
+            width: 100%;
+            opacity: 0.6;
+            margin-top: pxToRem(10);
+        }
+    }
 }
