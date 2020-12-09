@@ -1,0 +1,11 @@
+@import '../../styles/utils.scss';
+@import '../Layout.scss';
+
+.sidebar{
+    position: fixed;
+    left: 0;
+    top:0;
+    width: $sidebar-width;
+    height: $sidebar-heigth;
+    background-color: blue;
+}

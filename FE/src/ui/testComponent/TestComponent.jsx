@@ -5,7 +5,7 @@ const TestComponent = (props) => {
   return (
     <div>
       <h1>{normalInput}</h1>
-      <p>
+      <p className="asdasd">
         <span>{input}</span>
       </p>
       <p>

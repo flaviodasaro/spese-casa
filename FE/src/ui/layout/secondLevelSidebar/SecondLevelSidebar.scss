@@ -1,0 +1,43 @@
+@import "../../styles/utils.scss";
+@import "../Layout.scss";
+
+@keyframes slidein {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: pxToRem(300);
+    }
+}
+
+@keyframes slideout {
+    from {
+        width: pxToRem(300);
+    }
+
+    to {
+        width: 0;
+    }
+}
+
+.second-level-sidebar {
+    margin-left: $sidebar-width;
+    min-height: $sidebar-heigth;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: gray;
+}
+
+.open {
+    width: pxToRem(300);
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-iteration-count: 1;
+}
+.closed {
+    animation-duration: 3s;
+    animation-name: slideout;
+    animation-iteration-count: 1;
+}

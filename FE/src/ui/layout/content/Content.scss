@@ -1,0 +1,7 @@
+@import "../../styles/utils.scss";
+@import "../Layout.scss";
+
+.content {
+    margin-left: $sidebar-width;
+    padding: pxToRem(10);
+}
