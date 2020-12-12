@@ -4,7 +4,7 @@ import { Tutorial } from "../routes/tutorial/Tutorial";
 import { Home } from "../routes/home/Home";
 import { AddUserPage, CreateGroupPage, ManageUsersPage } from "../routes/users";
 import { AddPaymentPage, ReportsPage } from "../routes/payments";
-import { SettingsPage } from "../routes/settings/SettingsPage";
+import { SettingsPageContainer } from "../routes/settings/SettingsPageContainer";
 import {
   ADD_USER_ROUTE,
   CREATE_GROUP_ROUTE,
@@ -38,7 +38,7 @@ export const AppRouter = props => {
             <ReportsPage />
           </Route>
           <Route path={SETTINGS_ROUTE}>
-            <SettingsPage />
+            <SettingsPageContainer />
           </Route>
           <Route path={TUTORIAL_ROUTE}>
             <Tutorial />

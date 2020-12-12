@@ -6,7 +6,7 @@ import {
   MENU_SECOND_LEVEL_SIDEBAR_CLOSED,
   MENU_SECOND_LEVEL_SIDEBAR_TOGGLED
 } from "./actionTypes";
-
+import { getSecondLevelSidebarOpen } from "./selectors";
 import { push } from "connected-react-router";
 
 export const initMenu = (menuItems, initialActiveIcon) => ({
@@ -41,9 +41,11 @@ export const toggleSecondLevelSidebar = () => ({
   type: MENU_SECOND_LEVEL_SIDEBAR_TOGGLED
 });
 
-export const closeSidebarAndResetIconClicked = () => dispatch => {
-  dispatch(closeSecondLevelSidebar());
-  dispatch(clickMenuIcon(null));
+export const closeSidebarAndResetIconClicked = () => (dispatch, getState) => {
+  if(getSecondLevelSidebarOpen(getState())){
+    dispatch(closeSecondLevelSidebar());
+    dispatch(clickMenuIcon(null));
+  }
 };
 
 export const navigateAndCloseSidebar = (

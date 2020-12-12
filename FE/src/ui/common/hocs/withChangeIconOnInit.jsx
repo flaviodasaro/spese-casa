@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { getIconObjectByKey } from "../../../redux/menu/selectors";
+import { getIconObjectByKey, getMenuItems } from "../../../redux/menu/selectors";
 import { changeActiveIcon } from "../../../redux/menu/actions";
 
 const mapStateToProps = state => ({
-  getIconObjByKey: key => getIconObjectByKey(key)(state)
+  getIconObjByKey: key => getIconObjectByKey(key)(state),
+  menuItems:getMenuItems(state)
 });
 
 const mapDispatchToProps = {
@@ -12,11 +13,11 @@ const mapDispatchToProps = {
 };
 
 const disconnectedWithChangeIconOnInit = iconKey => WrappedComponent => props => {
-  const { getIconObjByKey, changeActiveIcon } = props;
+  const { getIconObjByKey, changeActiveIcon, menuItems } = props;
   useEffect(() => {
     const iconObj = getIconObjByKey(iconKey);
     iconObj && changeActiveIcon(iconObj);
-  }, []);
+  }, [menuItems]);
   return (
     <>
       <WrappedComponent {...props} />
