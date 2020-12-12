@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+   "usage": "run npm start. This will run a HTTP webserver on the port 4000. It will search for api mock under ./src/mocks. The syntax for writing mock files is ${endpoint}/{HTTP_VERB}.mock",
+   "documentation":"https://www.npmjs.com/package/mockserver"
+}

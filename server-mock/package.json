@@ -1,0 +1,11 @@
+{
+  "name": "spese-react-mock-server",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "mockserver": "^3.1.1"
+  },
+  "scripts": {
+    "start": "mockserver -p 4000 -m ./src/mocks"
+  }
+}
