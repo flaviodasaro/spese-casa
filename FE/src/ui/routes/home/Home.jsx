@@ -1,5 +1,8 @@
-import { useHistory } from "react-router-dom";
-export const Home = props => {
-  const history = useHistory();
-  return <div onClick={() => history.push("/tutorial")}>AAA</div>;
+import { withChangeIconOnInit } from "../../common/hocs/withChangeIconOnInit";
+import { HOME_KEY } from "../../common/constants";
+
+const HomeComponent = props => {
+  return <div>AAA</div>;
 };
+
+export const Home = withChangeIconOnInit(HOME_KEY)(HomeComponent);
