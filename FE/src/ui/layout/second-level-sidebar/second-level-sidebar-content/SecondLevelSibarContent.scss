@@ -1,0 +1,11 @@
+@import "../../../styles/utils.scss";
+
+.second-level-sidebar-content {
+    padding: pxToRem(12);
+    .paragraph {
+        font-size: pxToRem(12);
+        color: #817a7a;
+        font-weight: 700;
+        cursor: pointer;
+    }
+}

@@ -7,6 +7,8 @@ import {
   MENU_SECOND_LEVEL_SIDEBAR_TOGGLED
 } from "./actionTypes";
 
+import { push } from "connected-react-router";
+
 export const initMenu = (menuItems, initialActiveIcon) => ({
   type: MENU_INIT,
   payload: {
@@ -38,3 +40,23 @@ export const closeSecondLevelSidebar = () => ({
 export const toggleSecondLevelSidebar = () => ({
   type: MENU_SECOND_LEVEL_SIDEBAR_TOGGLED
 });
+
+export const closeSidebarAndResetIconClicked = () => dispatch => {
+  dispatch(closeSecondLevelSidebar());
+  dispatch(clickMenuIcon(null));
+};
+
+export const navigateAndCloseSidebar = (
+  route,
+  milliseconds = 0
+) => dispatch => {
+  dispatch(push(route));
+  setTimeout(() => {
+    dispatch(closeSidebarAndResetIconClicked());
+  }, milliseconds);
+};
+
+export const openSidebarWithChildren = menuIcon => dispatch => {
+  dispatch(clickMenuIcon(menuIcon));
+  dispatch(openSecondLevelSidebar());
+};

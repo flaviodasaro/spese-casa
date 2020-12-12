@@ -13,7 +13,17 @@ import {
   HOME_KEY,
   PAYMENTS_KEY,
   USERS_KEY,
-  SETTINGS_KEY
+  SETTINGS_KEY,
+  ADD_USER_ROUTE,
+  CREATE_GROUP_ROUTE,
+  MANAGE_USER_ROUTE,
+  ADD_PAYMENT_ROUTE,
+  REPORTS_ROUTE,
+  ADD_PAYMENT_KEY,
+  REPORTS_KEY,
+  ADD_USER_KEY,
+  CREATE_GROUP_KEY,
+  MANAGE_USER_KEY
 } from "../../common/constants";
 
 const iconSettings = [
@@ -28,19 +38,48 @@ const iconSettings = [
     key: PAYMENTS_KEY,
     iconName: faEuroSign,
     tooltipMessage: "Pagamenti",
-    openSecondLevel: true
+    openSecondLevel: true,
+    children: [
+      {
+        key: ADD_PAYMENT_KEY,
+        route: ADD_PAYMENT_ROUTE,
+        label: "Aggiungi pagamento"
+      },
+      {
+        key: REPORTS_KEY,
+        route: REPORTS_ROUTE,
+        label: "Reports"
+      }
+    ]
   },
   {
     key: USERS_KEY,
     iconName: faUser,
     tooltipMessage: "Gruppi e Utenti",
-    openSecondLevel: true
+    openSecondLevel: true,
+    children: [
+      {
+        key: ADD_USER_KEY,
+        route: ADD_USER_ROUTE,
+        label: "Aggiungi utente"
+      },
+      {
+        key: CREATE_GROUP_KEY,
+        route: CREATE_GROUP_ROUTE,
+        label: "Crea gruppo"
+      },
+      {
+        key: MANAGE_USER_KEY,
+        route: MANAGE_USER_ROUTE,
+        label: "Gestisci utenti"
+      }
+    ]
   },
   {
     key: SETTINGS_KEY,
     iconName: faCog,
     tooltipMessage: "Impostazioni",
-    openSecondLevel: true,
+    openSecondLevel: false,
     route: SETTINGS_ROUTE
   }
 ];
@@ -48,23 +87,33 @@ const iconSettings = [
 const SidebarIconWrapper = ({
   iconSetting,
   activeIcon,
-  openSecondLevelSidebar,
-  push
+  clickedIcon,
+  openSidebarWithChildren,
+  navigateAndCloseSidebar,
+  closeSidebarAndResetIconClicked
 }) => {
   const { openSecondLevel, route, key } = iconSetting;
+
   const selectedClassName =
     activeIcon && activeIcon.key === key ? " selected" : "";
+  const clickedClassName =
+    clickedIcon && clickedIcon.key === key ? " clicked" : "";
+
   function onClick(event) {
     if (openSecondLevel) {
-      openSecondLevelSidebar();
+      if (clickedIcon && clickedIcon.key === key) {
+        closeSidebarAndResetIconClicked();
+      } else {
+        openSidebarWithChildren(iconSetting);
+      }
     }
     if (route) {
-      push(route);
+      navigateAndCloseSidebar(route);
     }
   }
   return (
     <div
-      className={`sidebar-icon-wrapper${selectedClassName}`}
+      className={`sidebar-icon-wrapper${selectedClassName}${clickedClassName}`}
       onClick={onClick}
     >
       <SidebarIcon
@@ -77,17 +126,12 @@ const SidebarIconWrapper = ({
 };
 
 export const Sidebar = ({
-  menuItems,
-  clickedIcon,
   activeIcon,
-  secondLevelSidebarOpen,
   initMenu,
-  clickMenuIcon,
-  changeActiveIcon,
-  openSecondLevelSidebar,
-  closeSecondLevelSidebar,
-  toggleSecondLevelSidebar,
-  push
+  clickedIcon,
+  openSidebarWithChildren,
+  navigateAndCloseSidebar,
+  closeSidebarAndResetIconClicked
 }) => {
   useEffect(() => {
     initMenu(iconSettings);
@@ -100,8 +144,10 @@ export const Sidebar = ({
           key={`sidebarIcon${index}`}
           iconSetting={el}
           activeIcon={activeIcon}
-          openSecondLevelSidebar={openSecondLevelSidebar}
-          push={push}
+          clickedIcon={clickedIcon}
+          openSidebarWithChildren={openSidebarWithChildren}
+          navigateAndCloseSidebar={navigateAndCloseSidebar}
+          closeSidebarAndResetIconClicked={closeSidebarAndResetIconClicked}
         />
       ))}
     </div>

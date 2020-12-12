@@ -25,7 +25,10 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: gray;
+    background-color: $background-second-level-sidebar;
+    -webkit-box-shadow: 5px 5px 9px #dacccc;
+    -moz-box-shadow: 5px 5px 9px #dacccc;
+    box-shadow: 5px 5px 9px #dacccc;
 }
 
 .open {

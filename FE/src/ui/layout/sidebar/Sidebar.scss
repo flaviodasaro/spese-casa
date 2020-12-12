@@ -32,5 +32,8 @@
         &.disabled{
             opacity:0.5;
         }
+        &.clicked{
+            background-color: $background-second-level-sidebar;
+        }
     }
 }

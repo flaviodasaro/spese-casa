@@ -1,16 +1,14 @@
-import { useState } from "react";
 import { SidebarContainer } from "./sidebar/SidebarContainer";
-import { SecondLevelSidebar } from "./secondLevelSidebar/SecondLevelSidebar";
+import { SecondLevelSidebarContainer } from "./second-level-sidebar/SecondLevelSidebarContainer";
 import { Content } from "./content/Content";
 import "./Layout.scss";
 
-export const Layout = props => {
-  const [closed, setClosed] = useState(true);
+export const Layout = ({children, closeSidebarAndResetIconClicked}) => {
   return (
     <div>
-      <SidebarContainer onClickSidebar={() => setClosed(false)} />
-      <SecondLevelSidebar closed={closed} onClick={() => setClosed(true)} />
-      <Content>{props.children}</Content>
+      <SidebarContainer />
+      <SecondLevelSidebarContainer />
+      <Content onClick={closeSidebarAndResetIconClicked}>{children}</Content>
     </div>
   );
 };

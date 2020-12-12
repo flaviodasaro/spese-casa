@@ -4,4 +4,5 @@
 .content {
     margin-left: $sidebar-width;
     padding: pxToRem(10);
+    min-height: $sidebar-heigth;
 }

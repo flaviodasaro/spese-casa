@@ -1,12 +1,12 @@
 import { AppRouter } from "./ui/app-router/AppRouter";
-import { Layout } from "./ui/layout/Layout";
+import { LayoutContainer } from "./ui/layout/LayoutContainer";
 
 const App = () => {
   return (
     <>
-      <Layout>
+      <LayoutContainer>
         <AppRouter />
-      </Layout>
+      </LayoutContainer>
     </>
   );
 };
