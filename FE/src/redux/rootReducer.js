@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from "connected-react-router";
 
 import testReducer from "./test/reducer";
+import { menuReducer } from "./menu/reducer";
 
-const rootReducer = combineReducers({
-  // Define a top-level state field named `todos`, handled by `todosReducer`
-  testReducer
+export const createRootReducer = history => combineReducers({
+  testReducer,
+  menuReducer,
+  connectedRouterReducer:connectRouter(history)
 })
-
-export default rootReducer;
