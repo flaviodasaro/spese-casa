@@ -2,7 +2,7 @@ import TestContainer from "../../testComponent/TestContainer";
 import {
   ClassCounterComponent,
   FunctionCounterComponent,
-} from "../../classCounterComponent/ClassCounterComponent";
+} from "../../class-counter-component/ClassCounterComponent";
 
 export const Tutorial = props => (
   <div>
