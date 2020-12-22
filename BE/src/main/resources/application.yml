@@ -1,5 +1,5 @@
 server:
-  port : 8080 #default: 8080
+  port : 8081 #default: 8080
 
 
 spring:
@@ -14,3 +14,8 @@ spring:
     username: root
     password: root
     driver-class-name=com: com.mysql.cj.jdbc.Driver
+
+
+custom:
+  exceptions:
+    returnStackTrace: true

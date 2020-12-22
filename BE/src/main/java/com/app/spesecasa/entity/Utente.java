@@ -1,5 +1,8 @@
 package com.app.spesecasa.entity;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -16,6 +19,8 @@ public class Utente implements Serializable {
 	private Integer idUtente;
 
 	@Column(name = "username")
+	@NotNull
+	@Size(max = 45)
 	private String username;
 
 	@Column(name = "tms_inserimento")
