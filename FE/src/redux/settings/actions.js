@@ -23,9 +23,20 @@ export const doTestGet = () => dispatch => {
     url,
     null,
     response => {
-      debugger;
       dispatch(saveTestApiCall(response));
     },
     console.log
   );
 };
+
+export const testGetUserById = (id) => dispatch => {
+  const url = `${dispatch(getHostName())}/utente/${id}`;
+  performGet(
+    url,
+    null,
+    response => {
+      console.log(response);
+    },
+    console.log
+  );
+}

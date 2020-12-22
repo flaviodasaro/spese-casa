@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { withChangeIconOnInit } from "../../common/hocs/withChangeIconOnInit";
 import { SETTINGS_KEY } from "../../common/constants";
 
@@ -5,9 +6,11 @@ const SettingsPageComponent = ({
   isMockHostName,
   toggleMockHostName,
   doTestGet,
+  testGetUserById,
   testResponse
 }) => {
     const textAreaValue = testResponse && JSON.stringify(testResponse);
+    const [idUtente, setIdUtente] = useState(0);
   return (
     <div>
       <h1>SettingsPage</h1>
@@ -27,6 +30,11 @@ const SettingsPageComponent = ({
               console.log(testResponse)
               }}></textarea>
         </p>
+      </div>
+      <div>
+        <label>ID</label>
+        <input type="number" value={idUtente} onChange={event => setIdUtente(event.target.value)} />
+        <button onClick={() => testGetUserById(idUtente)}>Submit</button>
       </div>
     </div>
   );

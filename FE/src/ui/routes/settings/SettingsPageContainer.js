@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { SettingsPage } from "./SettingsPage";
 
-import { toggleMockHostName, doTestGet } from "../../../redux/settings/actions";
+import { toggleMockHostName, doTestGet, testGetUserById } from "../../../redux/settings/actions";
 import {
   getIsMockHostName,
   getTestResponse
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
   testResponse: getTestResponse(state)
 });
 
-const mapDispatchToProps = { toggleMockHostName, doTestGet };
+const mapDispatchToProps = { toggleMockHostName, doTestGet, testGetUserById };
 
 export const SettingsPageContainer = connect(
   mapStateToProps,
