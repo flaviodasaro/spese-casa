@@ -1,7 +1,7 @@
 package com.app.spesecasa.controller;
 
-import com.app.spesecasa.entity.Utente;
-import com.app.spesecasa.service.UtenteService;
+import com.app.spesecasa.entity.CategoriaSpesa;
+import com.app.spesecasa.repository.CategoriaSpesaRepository;
 import com.app.spesecasa.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,17 +13,16 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/utente")
-@CrossOrigin("*")
-public class UtenteController {
+@RequestMapping("/categoria-spesa")
+public class CategoriaSpesaController {
 
 	@Autowired
-	private UtenteService utenteService;
+	private CategoriaSpesaRepository categoriaSpesaRepository;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Utente> getUtente(@PathVariable(name = "id")  Integer id) {
+	public ResponseEntity<CategoriaSpesa> getGruppo(@PathVariable(name = "id")  Integer id) {
 		try{
-			Utente result = utenteService.getUtenteById(id);
+			CategoriaSpesa result = categoriaSpesaRepository.findById(id).orElse(null);
 			if(result == null){
 				return ResponseEntity.notFound().build();
 			}
@@ -36,9 +35,9 @@ public class UtenteController {
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<List<Utente>> getAllUtenti() {
+	public ResponseEntity<List<CategoriaSpesa>> getAllGruppi() {
 		try{
-			return ResponseEntity.ok(utenteService.getAllUsers());
+			return ResponseEntity.ok(categoriaSpesaRepository.findAll());
 		}
 		catch(Exception e){
 			Utils.handleCommonError(e);
@@ -48,10 +47,10 @@ public class UtenteController {
 
 	@PostMapping("/save")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Void> saveUtente(@Valid @RequestBody Utente utente) {
+	public ResponseEntity<Void> saveGruppo(@Valid @RequestBody CategoriaSpesa body) {
 		try{
-			utenteService.insertUtente(utente);
-			return ResponseEntity.created(URI.create("/utente/save")).build();
+			categoriaSpesaRepository.save(body);
+			return ResponseEntity.created(URI.create("/gruppo/save")).build();
 		}
 		catch(Exception e){
 			Utils.handleCommonError(e);
@@ -61,9 +60,9 @@ public class UtenteController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public ResponseEntity<Void> deleteUtente(@PathVariable(name = "id") Integer id) {
+	public ResponseEntity<Void> deleteGruppo(@PathVariable(name = "id") Integer id) {
 		try{
-			utenteService.deleteUtenteById(id);
+			categoriaSpesaRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
 		}
 		catch(Exception e){

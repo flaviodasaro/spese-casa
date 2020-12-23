@@ -1,5 +1,5 @@
 server:
-  port : 8081 #default: 8080
+  port : 8080 #default: 8080
 
 
 spring:
@@ -10,7 +10,7 @@ spring:
       hibernate:
         dialect: 'org.hibernate.dialect.MySQL8Dialect'
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/spese_casa?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: root
     driver-class-name=com: com.mysql.cj.jdbc.Driver
