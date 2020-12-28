@@ -80,6 +80,7 @@ public class PagamentoService {
 		Pagamento p = getPagamentoById(idPagamento);
 		if(p == null){
 			CommonErrors.throwExeptionPagamentoNotFound(idPagamento);
+			return;
 		}
 
 		BigDecimal importo = body.getImporto();
@@ -95,7 +96,14 @@ public class PagamentoService {
 		pagamentoRepository.save(p);
 	}
 
-	public List<GetTotAvereDto> testGroupBy(Integer idUtente1, Integer idUtente2){
-		return pagamentoRepository.getTotAvereByUtenti(idUtente1, idUtente2, idUtente2, idUtente1);
+	public GetTotAvereDto getTotAvereByUtenti(Integer idUtente1, Integer idUtente2){
+		List<GetTotAvereDto> queryResult = pagamentoRepository.getTotAvereByUtenti(idUtente1, idUtente2, idUtente2, idUtente1);
+		if(queryResult.isEmpty()){
+			throw new CommonRunTimeException("Errore getTotAvereByUtenti", Constants.GET_TOT_AVERE_BY_UTENTI_ERROR);
+		}
+		else{
+			return queryResult.get(0);
+		}
+
 	}
 }

@@ -1,5 +1,7 @@
 package com.app.spesecasa.entity;
 
+import com.app.spesecasa.dto.GetTotAvereDto;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -9,9 +11,15 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(schema = "spese_casa", name="saldo_parziale")
+@SqlResultSetMapping(name = "SaldoParziale.QUERY_SALDO_PARZIALE_BY_USERS", classes = {
+		@ConstructorResult(targetClass = GetTotAvereDto.class, columns = {
+				@ColumnResult(name = "TOT_AVERE", type = BigDecimal.class) }) })
+@NamedNativeQuery(query = SaldoParziale.QUERY_SALDO_PARZIALE_BY_USERS, resultSetMapping = "SaldoParziale.QUERY_SALDO_PARZIALE_BY_USERS", name = "SaldoParziale.getTotAvereSaldoByUtenti")
 public class SaldoParziale implements Serializable {
 
 	private static final long serialVersionUID = 5762187537385150215L;
+
+	public static final String QUERY_SALDO_PARZIALE_BY_USERS = "SELECT SUM(s.importo) as TOT_AVERE FROM spese_casa.pagamento p INNER JOIN spese_casa.saldo_parziale s on s.fk_pagamento = p.id_pagamento where p.flg_pagato = 0 and p.utente_pagante = :idUtentePagamento and s.utente_pagante = :idUtenteSaldo ";
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)

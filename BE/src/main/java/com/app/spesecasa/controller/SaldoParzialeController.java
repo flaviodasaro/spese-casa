@@ -1,6 +1,8 @@
 package com.app.spesecasa.controller;
 
+import com.app.spesecasa.dto.GetTotAvereDto;
 import com.app.spesecasa.dto.RequestInserisciSaldoParziale;
+import com.app.spesecasa.dto.ResponseGetTotSingoloUtente;
 import com.app.spesecasa.entity.SaldoParziale;
 import com.app.spesecasa.service.SaldoParzialeService;
 import com.app.spesecasa.utils.Utils;
@@ -78,6 +80,29 @@ public class SaldoParzialeController {
 		try{
 			saldoParzialeService.deleteSaldoParzialeById(id);
 			return ResponseEntity.noContent().build();
+		}
+		catch(Exception e){
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
+
+	@GetMapping("/get-tot-avere")
+	public ResponseEntity<GetTotAvereDto> getTotAvere(@RequestHeader(value = "idUtentePagamento") Integer idUtentePagamento, @RequestHeader(value = "idUtenteSaldo") Integer idUtenteSaldo ) {
+		try{
+			return ResponseEntity.ok(saldoParzialeService.getTotAvereSaldo(idUtentePagamento, idUtenteSaldo));
+		}
+		catch(Exception e){
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
+
+
+	@GetMapping("/get-tot-avere-for-each")
+	public ResponseEntity<List<ResponseGetTotSingoloUtente>> getTotAvereForEach(@RequestParam(value = "idUtente") Integer idUtente ) {
+		try{
+			return ResponseEntity.ok(saldoParzialeService.getTotSingoloUtente(idUtente));
 		}
 		catch(Exception e){
 			Utils.handleCommonError(e);

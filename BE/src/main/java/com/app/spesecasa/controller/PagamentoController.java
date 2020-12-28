@@ -1,5 +1,6 @@
 package com.app.spesecasa.controller;
 
+import com.app.spesecasa.dto.GetTotAvereDto;
 import com.app.spesecasa.dto.RequestInserisciPagamento;
 import com.app.spesecasa.dto.RequestUpdatePagamento;
 import com.app.spesecasa.entity.Pagamento;
@@ -104,10 +105,10 @@ public class PagamentoController {
 		}
 	}
 
-	@GetMapping("/akdhaskdh")
-			public ResponseEntity<Object> testGroupBy(@RequestHeader(value = "idUtente1") Integer idUtente1, @RequestHeader(value = "idUtente2") Integer idUtente2 ) {
+	@GetMapping("/get-tot-avere")
+			public ResponseEntity<GetTotAvereDto> getTotAvere(@RequestParam(value = "idUtente1") Integer idUtente1, @RequestParam(value = "idUtente2") Integer idUtente2 ) {
 		try{
-			return ResponseEntity.ok(pagamentoService.testGroupBy(idUtente1, idUtente2));
+			return ResponseEntity.ok(pagamentoService.getTotAvereByUtenti(idUtente1, idUtente2));
 		}
 		catch(Exception e){
 			Utils.handleCommonError(e);
