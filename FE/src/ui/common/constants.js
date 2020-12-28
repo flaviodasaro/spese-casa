@@ -1,4 +1,3 @@
-
 // ****************** ROUTES *********************
 export const ADD_USER_ROUTE = "/add-user";
 export const CREATE_GROUP_ROUTE = "/create-group";

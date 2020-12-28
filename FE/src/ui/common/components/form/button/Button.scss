@@ -1,0 +1,14 @@
+
+.common{
+    border:none;
+    width:250px;
+    height: 45px;
+    border-radius: 6px;
+    font-size:15px;
+    font-weight: 600;
+    cursor: pointer;
+    &.primary{
+        background-image: linear-gradient(90deg, rgba(73,207,183,1) 0%, rgba(69,184,102,0.9192051820728291) 29%, rgba(0,255,231,1) 100%);
+        color:white;
+    }
+}

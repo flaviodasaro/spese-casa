@@ -1,0 +1,9 @@
+@import '../../../styles/utils.scss';
+
+.body-wrapper{
+    min-width: pxToRem(500);
+    text-align: center;
+    >div{
+        width: pxToRem(500);
+    }
+}

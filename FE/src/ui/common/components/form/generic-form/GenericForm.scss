@@ -1,0 +1,18 @@
+.form-tag {
+    padding: 30px;
+    background-color: aliceblue;
+    .inputs-container {
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            > div {
+                width: 45%;
+            }
+        }
+    }
+    .submit-container {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+    }
+}
