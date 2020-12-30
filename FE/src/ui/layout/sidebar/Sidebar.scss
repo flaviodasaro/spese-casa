@@ -8,7 +8,7 @@
     width: $sidebar-width;
     height: $sidebar-heigth;
     background-color: #007cffad;
-    z-index: 1;
+    z-index: $z-index-sidebar;
 
     .sidebar-icon-wrapper {
         display: flex;

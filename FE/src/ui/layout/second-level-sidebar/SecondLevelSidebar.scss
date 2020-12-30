@@ -23,6 +23,7 @@
     margin-left: $sidebar-width;
     min-height: $sidebar-heigth;
     position: fixed;
+    z-index: $z-index-sidebar-second-level;
     top: 0;
     left: 0;
     background-color: $background-second-level-sidebar;

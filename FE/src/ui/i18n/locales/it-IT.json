@@ -3,5 +3,10 @@
         "TITLE":"AGGIUNGI UTENTE",
         "SUBTITLE_OK":"Utente aggiunto correttamente",
         "SUBTITLE_KO":"Errore, utente non aggiunto"
+    },
+    "ALERT":{
+        "SUCCESS":"Operazione eseguita con successo",
+        "INFO":"Operazione eseguita",
+        "ERROR":"Operazione fallita"
     }
 }
