@@ -8,9 +8,9 @@ import {
   getIsFeedbackModalSuccess,
   getFeedbackModalTitleKey,
   getFeedbackModalSubtitleKey
-} from "../../../../redux/feedback-manager/selectors";
+} from "../../../redux/feedback-manager/selectors";
 
-import { hideAlert } from "../../../../redux/feedback-manager/actions";
+import { hideAlert } from "../../../redux/feedback-manager/actions";
 
 const mapStateToProps = state => ({
   showAlert: getShowAlert(state),

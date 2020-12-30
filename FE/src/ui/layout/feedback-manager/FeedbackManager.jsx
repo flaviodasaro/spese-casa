@@ -1,5 +1,5 @@
-import { Alert } from "../alert/Alert";
-import { FeedbackModal } from "../feedback-modal/FeedbackModal";
+import { Alert } from "../../common/components/alert/Alert";
+import { FeedbackModal } from "../../common/components/feedback-modal/FeedbackModal";
 import { withNamespaces } from "react-i18next";
 
 export const FeedbackManager = withNamespaces()(
