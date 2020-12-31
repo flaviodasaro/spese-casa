@@ -1,5 +1,6 @@
 package com.app.spesecasa.service;
 
+import com.app.spesecasa.dto.RequestSaveUtenteAndGruppo;
 import com.app.spesecasa.entity.AssociazioneUtenteGruppo;
 import com.app.spesecasa.entity.Gruppo;
 import com.app.spesecasa.entity.Utente;
@@ -64,5 +65,25 @@ public class AssociazioneUtenteGruppoService {
 
 			associazioneUtenteGruppoRepository.save(associazioneUtenteGruppo);
 		});
+	}
+
+
+	public void addUtenteAndGruppo(RequestSaveUtenteAndGruppo body) {
+		Utente utente = new Utente();
+		String username = body.getUsername();
+		utente.setUsername(username);
+		utente = utenteService.insertAndGetUtente(utente);
+
+		if (Boolean.TRUE.equals(body.getAddGroupWothSingleUserToo())) {
+			Gruppo gruppo = new Gruppo();
+			gruppo.setNomeGruppo(String.format("Gruppo singolo con utente: %s", username).substring(0, 45));
+			gruppo.setNoteGruppo("Gruppo auto generato dal servizio /add-user-and-group");
+			gruppo = gruppoService.insertAndGetGruppo(gruppo);
+
+			AssociazioneUtenteGruppo associazioneUtenteGruppo = new AssociazioneUtenteGruppo();
+			associazioneUtenteGruppo.setUtente(utente);
+			associazioneUtenteGruppo.setGruppo(gruppo);
+			insertAssociazioneUtenteGruppo(associazioneUtenteGruppo);
+		}
 	}
 }

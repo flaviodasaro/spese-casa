@@ -2,7 +2,6 @@ package com.app.spesecasa.service;
 
 import com.app.spesecasa.entity.Utente;
 import com.app.spesecasa.repository.UtenteRepository;
-import com.app.spesecasa.utils.CommonRunTimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +23,10 @@ public class UtenteService {
 
 	public void insertUtente(Utente utente) {
 			utenteRepository.save(utente);
+
+	}
+	public Utente insertAndGetUtente(Utente utente) {
+			return utenteRepository.save(utente);
 
 	}
 

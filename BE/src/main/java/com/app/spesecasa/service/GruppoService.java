@@ -12,20 +12,25 @@ public class GruppoService {
 	@Autowired
 	private GruppoRepository gruppoRepository;
 
-	public Gruppo getGruppoById(Integer id){
+	public Gruppo getGruppoById(Integer id) {
 		return gruppoRepository.findById(id).orElse(null);
 	}
 
-	public List<Gruppo> getAllGruppi(){
+	public List<Gruppo> getAllGruppi() {
 		return gruppoRepository.findAll();
 	}
 
-	public void insertGruppo(Gruppo g){
+	public void insertGruppo(Gruppo g) {
 		gruppoRepository.save(g);
 	}
 
-	public void deleteGruppoById(Integer id){
+	public Gruppo insertAndGetGruppo(Gruppo g) {
+		return gruppoRepository.save(g);
+	}
+
+	public void deleteGruppoById(Integer id) {
 		gruppoRepository.deleteById(id);
 	}
+
 
 }
