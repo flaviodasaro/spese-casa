@@ -10,26 +10,17 @@ const AddUserPageComponent = ({
   addGroupWithSingleUser,
   changeUserName,
   changeAddGroupWithSingleUser,
-  submitCreateUSer,
+  createUserAndGroup,
   resetCreateUserForm
 }) => {
   const handleSubmit = ({ formDataEntries }) => {
-    for (let el of formDataEntries) {
-      console.log(el);
-      console.log(el[0]);
-      console.log(el[1]);
-    }
-    //mockSuccess(1);
+    createUserAndGroup(username, addGroupWithSingleUser);
   };
   return (
     <div>
       <h1 className="h1-txt">Aggiungi utente</h1>
       <div className="form-wrapper">
-        <GenericForm
-          
-          onSubmit={handleSubmit}
-          onClearForm={resetCreateUserForm}
-        >
+        <GenericForm onSubmit={handleSubmit} onClearForm={resetCreateUserForm}>
           <InputRow
             Component1={
               <Input

@@ -3,8 +3,8 @@ import { AddUserPage } from "./AddUserPage";
 import {
   changeUserName,
   changeAddGroupWithSingleUser,
-  submitCreateUSer,
-  resetCreateUserForm
+  resetCreateUserForm,
+  createUserAndGroup
 } from "../../../../redux/users/actions";
 import {
   getUsername,
@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   changeUserName,
   changeAddGroupWithSingleUser,
-  submitCreateUSer,
+  createUserAndGroup,
   resetCreateUserForm
 };
 

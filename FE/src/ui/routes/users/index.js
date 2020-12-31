@@ -1,3 +1,3 @@
 export { AddUserPageContainer } from "./add-user/AddUserPageContainer";
-export { CreateGroupPage } from "./create-group/CreateGroupPage";
+export { CreateGroupPageContainer } from "./create-group/CreateGroupPageContainer";
 export { ManageUsersPage } from "./manage-users/ManageUsersPage";

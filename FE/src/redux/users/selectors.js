@@ -11,3 +11,8 @@ export const getCreateUserResponse = createSelector(
   usersSlice,
   state => state.createUserResponse
 );
+
+export const getUserList = createSelector(
+  usersSlice,
+  state => state.userList
+);

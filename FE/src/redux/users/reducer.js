@@ -2,13 +2,15 @@ import {
   USERNAME_CHANGED,
   ADD_GROUP_WITH_SINGLE_USER_CHANGED,
   CREATE_USER_SUBMITTED,
-  CREATE_USER_FORM_RESET
+  CREATE_USER_FORM_RESET,
+  USER_LIST_FETCHED
 } from "./actionTypes";
 
 const initialState = {
   username: "",
   addGroupWithSingleUser: true,
-  createUserResponse: null
+  createUserResponse: null,
+  userList:[]
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -35,6 +37,9 @@ export const usersReducer = (state = initialState, action) => {
         addGroupWithSingleUser: true,
         createUserResponse: null
       };
+    }
+    case USER_LIST_FETCHED:{
+      return { ...state, userList:action.payload.userList };
     }
     default: {
       return state;

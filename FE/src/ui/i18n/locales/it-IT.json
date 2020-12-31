@@ -4,7 +4,11 @@
         "SUBTITLE_OK":"Utente aggiunto correttamente",
         "SUBTITLE_KO":"Errore, utente non aggiunto",
         "USERNAME_LABEL":"Username",
-        "ADD_GROUP_WITH_SINGLE_USER_LABEL":"Aggiungi gruppo col singolo utente (consigliato)"
+        "ADD_GROUP_WITH_SINGLE_USER_LABEL":"Aggiungi gruppo col singolo utente (consigliato)",
+        "USER_LIST":"Utenti"
+    },
+    "GROUPS":{
+
     },
     "ALERT":{
         "SUCCESS":"Operazione eseguita con successo",
