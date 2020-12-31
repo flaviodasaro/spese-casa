@@ -7,6 +7,7 @@ import com.app.spesecasa.entity.Utente;
 import com.app.spesecasa.repository.AssociazioneUtenteGruppoRepository;
 import com.app.spesecasa.utils.CommonRunTimeException;
 import com.app.spesecasa.utils.Constants;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,9 +75,9 @@ public class AssociazioneUtenteGruppoService {
 		utente.setUsername(username);
 		utente = utenteService.insertAndGetUtente(utente);
 
-		if (Boolean.TRUE.equals(body.getAddGroupWothSingleUserToo())) {
+		if (Boolean.TRUE.equals(body.getAddGroupWithSingleUser())) {
 			Gruppo gruppo = new Gruppo();
-			gruppo.setNomeGruppo(String.format("Gruppo singolo con utente: %s", username).substring(0, 45));
+			gruppo.setNomeGruppo(StringUtils.substring(String.format("Gruppo singolo con utente: %s", username), 0, 45));
 			gruppo.setNoteGruppo("Gruppo auto generato dal servizio /add-user-and-group");
 			gruppo = gruppoService.insertAndGetGruppo(gruppo);
 

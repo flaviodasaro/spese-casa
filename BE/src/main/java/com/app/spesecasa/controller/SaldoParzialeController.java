@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/saldo-parziale")
+@CrossOrigin("*")
 public class SaldoParzialeController {
 
 	@Autowired

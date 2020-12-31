@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/associazione-utente-gruppo")
+@CrossOrigin("*")
 public class AssociazioneUtenteGruppoController {
 
 	@Autowired

@@ -9,7 +9,7 @@ public class RequestSaveUtenteAndGruppo {
 	@Size(min = 1, max = 45)
 	private String username;
 
-	private Boolean addGroupWothSingleUserToo;
+	private Boolean addGroupWithSingleUser;
 
 	public String getUsername() {
 		return username;
@@ -19,11 +19,11 @@ public class RequestSaveUtenteAndGruppo {
 		this.username = username;
 	}
 
-	public Boolean getAddGroupWothSingleUserToo() {
-		return addGroupWothSingleUserToo;
+	public Boolean getAddGroupWithSingleUser() {
+		return addGroupWithSingleUser;
 	}
 
-	public void setAddGroupWothSingleUserToo(Boolean addGroupWothSingleUserToo) {
-		this.addGroupWothSingleUserToo = addGroupWothSingleUserToo;
+	public void setAddGroupWithSingleUser(Boolean addGroupWithSingleUser) {
+		this.addGroupWithSingleUser = addGroupWithSingleUser;
 	}
 }

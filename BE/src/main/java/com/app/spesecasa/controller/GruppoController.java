@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/gruppo")
+@CrossOrigin("*")
 public class GruppoController {
 
 	@Autowired
