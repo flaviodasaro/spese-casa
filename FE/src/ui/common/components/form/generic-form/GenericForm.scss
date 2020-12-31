@@ -1,19 +1,13 @@
 .form-tag {
     padding: 30px;
     background-color: aliceblue;
-    .inputs-container {
-        .input-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            > div {
-                width: 45%;
-            }
-        }
-    }
+
     .submit-container {
         margin-top: 50px;
         display: flex;
         justify-content: center;
+        .clear-btn-wrapper {
+            margin-left: 100px;
+        }
     }
 }

@@ -2,11 +2,21 @@
     "USERS":{
         "TITLE":"AGGIUNGI UTENTE",
         "SUBTITLE_OK":"Utente aggiunto correttamente",
-        "SUBTITLE_KO":"Errore, utente non aggiunto"
+        "SUBTITLE_KO":"Errore, utente non aggiunto",
+        "USERNAME_LABEL":"Username",
+        "ADD_GROUP_WITH_SINGLE_USER_LABEL":"Aggiungi gruppo col singolo utente (consigliato)"
     },
     "ALERT":{
         "SUCCESS":"Operazione eseguita con successo",
         "INFO":"Operazione eseguita",
         "ERROR":"Operazione fallita"
+    },
+    "COMMON":{
+        "FORM":{
+            "SUBMIT":"SUBMIT",
+            "RESET":"RESET",
+            "CONFIRM":"CONFERMA",
+            "CANCEL":"ANNULLA"
+        }
     }
 }

@@ -5,7 +5,7 @@ import { FeedbackManagerContainer } from "./feedback-manager/FeedbackManagerCont
 import "./Layout.scss";
 import { GlobalLoader } from "./global-loader/GlobalLoader";
 
-export const Layout = ({children, closeSidebarAndResetIconClicked}) => {
+export const Layout = ({children, closeSidebarAndResetIconClicked, globalLoaderLoading}) => {
   
   return (
     <div>
@@ -13,7 +13,7 @@ export const Layout = ({children, closeSidebarAndResetIconClicked}) => {
       <SecondLevelSidebarContainer />
       <Content onClick={closeSidebarAndResetIconClicked}>{children}</Content>
       <FeedbackManagerContainer />
-      <GlobalLoader />
+      <GlobalLoader loading={globalLoaderLoading} />
     </div>
   );
 };
