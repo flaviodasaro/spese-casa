@@ -1,8 +1,10 @@
 @import "../../styles/utils.scss";
 @import "../Layout.scss";
 
+$padding-value:pxToRem(10);
+
 .content {
     margin-left: $sidebar-width;
-    padding: pxToRem(10);
-    min-height: $sidebar-heigth;
+    padding: $padding-value;
+    min-height: calc($sidebar-heigth - $padding-value);
 }
