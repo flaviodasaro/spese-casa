@@ -4,6 +4,7 @@ import { GenericForm } from "../../../common/components/form/generic-form/Generi
 import "./AddUserPage.scss";
 import { InputRow } from "../../../common/components/form/input-row/InputRow";
 import { Input } from "../../../common/components/form/input/Input";
+import { SinglePageTemplate } from "../../../layout/content/single-page-template/SinglePageTemplate";
 
 const AddUserPageComponent = ({
   username,
@@ -17,34 +18,31 @@ const AddUserPageComponent = ({
     createUserAndGroup(username, addGroupWithSingleUser);
   };
   return (
-    <div>
-      <h1 className="h1-txt">Aggiungi utente</h1>
-      <div className="form-wrapper">
-        <GenericForm onSubmit={handleSubmit} onClearForm={resetCreateUserForm}>
-          <InputRow
-            Component1={
-              <Input
-                name={"username"}
-                labelKey={"USERS.USERNAME_LABEL"}
-                value={username}
-                onChange={event => changeUserName(event.target.value)}
-              />
-            }
-            Component2={
-              <Input
-                labelKey={"USERS.ADD_GROUP_WITH_SINGLE_USER_LABEL"}
-                name={"addGroup"}
-                type="checkbox"
-                checked={addGroupWithSingleUser}
-                onChange={event =>
-                  changeAddGroupWithSingleUser(event.target.checked)
-                }
-              />
-            }
-          />
-        </GenericForm>
-      </div>
-    </div>
+    <SinglePageTemplate h1LabelKey="USERS.TITLE">
+      <GenericForm onSubmit={handleSubmit} onClearForm={resetCreateUserForm}>
+        <InputRow
+          Component1={
+            <Input
+              name={"username"}
+              labelKey={"USERS.USERNAME_LABEL"}
+              value={username}
+              onChange={event => changeUserName(event.target.value)}
+            />
+          }
+          Component2={
+            <Input
+              labelKey={"USERS.ADD_GROUP_WITH_SINGLE_USER_LABEL"}
+              name={"addGroup"}
+              type="checkbox"
+              checked={addGroupWithSingleUser}
+              onChange={event =>
+                changeAddGroupWithSingleUser(event.target.checked)
+              }
+            />
+          }
+        />
+      </GenericForm>
+    </SinglePageTemplate>
   );
 };
 

@@ -16,3 +16,13 @@ export const getUserList = createSelector(
   usersSlice,
   state => state.userList
 );
+
+export const getGroupName = createSelector(
+  usersSlice,
+  state => state.groupName
+);
+
+export const getGroupNotes = createSelector(
+  usersSlice,
+  state => state.groupNotes
+);

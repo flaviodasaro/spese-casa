@@ -3,14 +3,18 @@ import {
   ADD_GROUP_WITH_SINGLE_USER_CHANGED,
   CREATE_USER_SUBMITTED,
   CREATE_USER_FORM_RESET,
-  USER_LIST_FETCHED
+  USER_LIST_FETCHED,
+  GROUP_NAME_CHANGED,
+  GROUP_NOTES_CHANGED
 } from "./actionTypes";
 
 const initialState = {
   username: "",
   addGroupWithSingleUser: true,
   createUserResponse: null,
-  userList:[]
+  userList:[],
+  groupName:"",
+  groupNotes:""
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -40,6 +44,12 @@ export const usersReducer = (state = initialState, action) => {
     }
     case USER_LIST_FETCHED:{
       return { ...state, userList:action.payload.userList };
+    }
+    case GROUP_NAME_CHANGED:{
+      return { ...state, groupName:action.payload.groupName };
+    }
+    case GROUP_NOTES_CHANGED:{
+      return { ...state, groupNotes:action.payload.groupNotes };
     }
     default: {
       return state;

@@ -9,6 +9,8 @@ const GenericFormComponent = ({
   submitLabelKey,
   withClearButton,
   clearLabelKey,
+  disableSubmitBtn,
+  disableClearBtn,
   children,
   t
 }) => {
@@ -26,7 +28,11 @@ const GenericFormComponent = ({
     <form onSubmit={handleSubmit} className="form-tag">
       <div className="inputs-container">{children}</div>
       <div className="submit-container">
-        <Button type="submit" labelKey={t(submitLabelKey)} />
+        <Button
+          type="submit"
+          labelKey={t(submitLabelKey)}
+          disabled={disableSubmitBtn}
+        />
         {withClearButton && (
           <span className="clear-btn-wrapper">
             <Button
@@ -34,6 +40,7 @@ const GenericFormComponent = ({
               theme="secondary"
               labelKey={t(clearLabelKey)}
               onClick={onClearForm}
+              disabled={disableClearBtn}
             />
           </span>
         )}
@@ -47,7 +54,9 @@ GenericFormComponent.defaultProps = {
   useInternalState: true,
   submitLabelKey: "COMMON.FORM.SUBMIT",
   clearLabelKey: "COMMON.FORM.RESET",
-  withClearButton: true
+  withClearButton: true,
+  disableSubmitBtn: false,
+  disableClearBtn: false
 };
 
 export const GenericForm = withNamespaces()(GenericFormComponent);
