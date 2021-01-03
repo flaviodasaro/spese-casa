@@ -1,5 +1,6 @@
 package com.app.spesecasa.service;
 
+import com.app.spesecasa.dto.RequestAddGroupAndAssociations;
 import com.app.spesecasa.dto.RequestSaveUtenteAndGruppo;
 import com.app.spesecasa.entity.AssociazioneUtenteGruppo;
 import com.app.spesecasa.entity.Gruppo;
@@ -86,5 +87,14 @@ public class AssociazioneUtenteGruppoService {
 			associazioneUtenteGruppo.setGruppo(gruppo);
 			insertAssociazioneUtenteGruppo(associazioneUtenteGruppo);
 		}
+	}
+
+	public void addGroupAndAssociations(RequestAddGroupAndAssociations body){
+		Gruppo gruppo = new Gruppo();
+		gruppo.setNomeGruppo(body.getGroupName());
+		gruppo.setNoteGruppo(body.getGroupNotes());
+		gruppo = gruppoService.insertAndGetGruppo(gruppo);
+
+		insertAssociazioneUtenteGruppoMassiva(body.getUsers(), gruppo.getIdGruppo());
 	}
 }

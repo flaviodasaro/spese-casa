@@ -1,5 +1,6 @@
 package com.app.spesecasa.controller;
 
+import com.app.spesecasa.dto.RequestAddGroupAndAssociations;
 import com.app.spesecasa.dto.RequestInserisciAssociazione;
 import com.app.spesecasa.dto.RequestSaveUtenteAndGruppo;
 import com.app.spesecasa.entity.AssociazioneUtenteGruppo;
@@ -89,10 +90,22 @@ public class AssociazioneUtenteGruppoController {
 
 	@PostMapping("/add-user-and-group")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Void> saveUtenteAndGruppo(@Valid @RequestBody RequestSaveUtenteAndGruppo bosy) {
+	public ResponseEntity<Void> saveUtenteAndGruppo(@Valid @RequestBody RequestSaveUtenteAndGruppo body) {
 		try{
-			associazioneUtenteGruppoService.addUtenteAndGruppo(bosy);
+			associazioneUtenteGruppoService.addUtenteAndGruppo(body);
 			return ResponseEntity.created(URI.create("/add-user-and-group")).build();
+		}
+		catch(Exception e){
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
+	@PostMapping("/add-group-and-associations")
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Void> addGroupAndAssociations(@Valid @RequestBody RequestAddGroupAndAssociations body) {
+		try{
+			associazioneUtenteGruppoService.addGroupAndAssociations(body);
+			return ResponseEntity.created(URI.create("/add-group-and-associations")).build();
 		}
 		catch(Exception e){
 			Utils.handleCommonError(e);
