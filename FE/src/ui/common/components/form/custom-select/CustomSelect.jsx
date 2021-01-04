@@ -7,7 +7,9 @@ export const CustomSelect = ({
   onChange,
   optionList,
   noneElement,
-  noneElementLabel
+  noneElementLabel,
+  valueOptionProp,
+  textOptionProp
 }) => {
   return (
     <FormControl>
@@ -22,7 +24,7 @@ export const CustomSelect = ({
       >
         {noneElement && <option aria-label={noneElementLabel} value="" />}
         {optionList.map(op => (
-          <option value={op.value}>{op.text}</option>
+          <option value={op[valueOptionProp]}>{op[textOptionProp]}</option>
         ))}
       </Select>
     </FormControl>
@@ -32,5 +34,7 @@ export const CustomSelect = ({
 CustomSelect.defaultProps = {
   optionList: [],
   noneElement: true,
-  noneElementLabel: "None"
+  noneElementLabel: "None",
+  valueOptionProp:"value",
+  textOptionProp:"text"
 };

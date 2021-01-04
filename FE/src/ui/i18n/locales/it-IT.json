@@ -10,7 +10,10 @@
         "CREATE_TITLE":"Crea Gruppo",
         "USER_LIST":"Utenti",
         "GROUP_NAME":"Nome gruppo",
-        "GROUP_NOTES":"Note gruppo"
+        "GROUP_NOTES":"Note gruppo",
+        "ASSOCIATE_TITLE":"Associa utenti e gruppi",
+        "GROUP_LIST":"Gruppi",
+        "DELETE_SELECTIONS":"Elimina associazioni selezionate"
     },
     "ALERT":{
         "SUCCESS":"Operazione eseguita con successo",

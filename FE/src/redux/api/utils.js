@@ -83,7 +83,7 @@ const commonHandler = ({
 };
 
 const commonSuccess = (dispatch, onSuccess, showAlert) => response => {
-  onSuccess(response);
+  onSuccess && onSuccess(response);
   showAlert && dispatch(showSuccessAlert());
 };
 
@@ -167,6 +167,18 @@ export const genericApiCall = (verb, apiParams, settings = {}) => (
       return commonHandler({
         dispatch,
         promiseGetter: () => axios.put(url, { ...body }),
+        onSuccess,
+        showSuccessAlert,
+        onFailure,
+        handleErrorWithAlert,
+        feedbackModalErrorProps,
+        loader
+      });
+    }
+    case API_VERBS.DELETE:{
+      return commonHandler({
+        dispatch,
+        promiseGetter: () => axios.delete(url, { params: queryParams || {} }),
         onSuccess,
         showSuccessAlert,
         onFailure,

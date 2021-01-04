@@ -71,7 +71,7 @@ const iconSettings = [
       {
         key: MANAGE_USER_KEY,
         route: MANAGE_USER_ROUTE,
-        label: "Gestisci utenti"
+        label: "Gestisci associazioni"
       }
     ]
   },

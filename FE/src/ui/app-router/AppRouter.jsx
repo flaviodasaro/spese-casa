@@ -2,7 +2,7 @@ import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import { Tutorial } from "../routes/tutorial/Tutorial";
 import { Home } from "../routes/home/Home";
-import { AddUserPageContainer, CreateGroupPageContainer, ManageUsersPage } from "../routes/users";
+import { AddUserPageContainer, CreateGroupPageContainer, ManageUsersPageContainer } from "../routes/users";
 import { AddPaymentPage, ReportsPage } from "../routes/payments";
 import { SettingsPageContainer } from "../routes/settings/SettingsPageContainer";
 import {
@@ -29,7 +29,7 @@ export const AppRouter = props => {
             <CreateGroupPageContainer />
           </Route>
           <Route path={MANAGE_USER_ROUTE}>
-            <ManageUsersPage />
+            <ManageUsersPageContainer />
           </Route>
           <Route path={ADD_PAYMENT_ROUTE}>
             <AddPaymentPage />

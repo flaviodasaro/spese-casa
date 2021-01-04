@@ -1,6 +1,6 @@
 .common {
     border: none;
-    width: 250px;
+    //width: 250px;
     height: 45px;
     border-radius: 6px;
     font-size: 15px;
@@ -16,6 +16,7 @@
         color: white;
     }
     &:disabled{
+        cursor: not-allowed;
         opacity: 0.6;
     }
 }
