@@ -6,8 +6,7 @@ import com.app.spesecasa.entity.AssociazioneUtenteGruppo;
 import com.app.spesecasa.entity.Gruppo;
 import com.app.spesecasa.entity.Utente;
 import com.app.spesecasa.repository.AssociazioneUtenteGruppoRepository;
-import com.app.spesecasa.utils.CommonRunTimeException;
-import com.app.spesecasa.utils.Constants;
+import com.app.spesecasa.utils.CommonErrors;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +34,10 @@ public class AssociazioneUtenteGruppoService {
 		return associazioneUtenteGruppoRepository.findAll();
 	}
 
+	public List<AssociazioneUtenteGruppo> getAssociazioniByGruppo(Integer idGruppo){
+		return associazioneUtenteGruppoRepository.findByGruppo(idGruppo);
+	}
+
 	public void insertAssociazioneUtenteGruppo(AssociazioneUtenteGruppo g){
 		associazioneUtenteGruppoRepository.save(g);
 	}
@@ -49,13 +52,15 @@ public class AssociazioneUtenteGruppoService {
 	public void insertAssociazioneUtenteGruppoMassiva(List<Integer> idsUtente, Integer idGruppo){
 		Gruppo gruppo = gruppoService.getGruppoById(idGruppo);
 		if(gruppo == null){
-			throw new CommonRunTimeException(String.format("Gruppo con id %s non trovato", idGruppo), Constants.GRUPPO_NOT_FOUND);
+			CommonErrors.throwExeptionGruppoNotFound(idGruppo);
+			return;
 		}
 
 		List<Utente> utenti = idsUtente.stream().map(idUtente -> {
 			Utente utente = utenteService.getUtenteById(idUtente);
 			if(utente == null){
-				throw new CommonRunTimeException(String.format("Utente con id %s non trovato", idUtente), Constants.UTENTE_NOT_FOUND);
+				CommonErrors.throwExeptionUtenteNotFound(idUtente);
+				return null;
 			}
 			return utente;
 		}).collect(Collectors.toList());

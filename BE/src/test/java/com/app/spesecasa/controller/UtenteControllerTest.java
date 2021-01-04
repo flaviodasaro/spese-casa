@@ -28,7 +28,7 @@ public class UtenteControllerTest {
 	private UtenteRepository utenteRepository;
 
 	@Test
-	public void testGetUtente() throws Exception {
+	void testGetUtente() throws Exception {
 		Mockito.when(utenteRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new Utente()));
 
 		mvc.perform(MockMvcRequestBuilders.get("/utente/4").accept(MediaType.APPLICATION_JSON))

@@ -112,4 +112,15 @@ public class AssociazioneUtenteGruppoController {
 			return null;
 		}
 	}
+
+	@GetMapping("/get-by-gruppo")
+	public ResponseEntity<List<AssociazioneUtenteGruppo>> getAssociazioniByGruppo(@RequestParam("idGruppo") Integer idGruppo) {
+		try{
+			return ResponseEntity.ok(associazioneUtenteGruppoService.getAssociazioniByGruppo(idGruppo));
+		}
+		catch(Exception e){
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
 }
