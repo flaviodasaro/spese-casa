@@ -10,7 +10,8 @@ import {
   ASSOCIATION_BY_GROUP_FETCHED,
   GROUP_SELECTED,
   USER_SELECTED,
-  RESET_ASSOCIATIONS
+  RESET_ASSOCIATIONS,
+  USERS_STATE_RESET
 } from "./actionTypes";
 
 const initialState = {
@@ -20,7 +21,7 @@ const initialState = {
   userList: [],
   groupName: "",
   groupNotes: "",
-  groupList: "",
+  groupList: [],
   selectedGroupId: "",
   selectedUserIds: [],
   associationByGroup: []
@@ -74,6 +75,9 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         associationByGroup: action.payload.associationByGroup
       };
+    }
+    case USERS_STATE_RESET: {
+      return { ...initialState };
     }
     case RESET_ASSOCIATIONS: {
       return {

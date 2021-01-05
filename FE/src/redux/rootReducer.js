@@ -9,12 +9,14 @@ import { loaderReducer } from "./loader/reducer";
 import { usersReducer } from "./users/reducer";
 import { spendingCategoriesReducer } from "./spending-categories/reducer";
 import { homeReducer } from "./home/reducer";
+import { paymentsReducer } from "./payments/reducer";
 
 export const createRootReducer = history => combineReducers({
   feedbackManagerReducer,
   homeReducer,
   loaderReducer,
   menuReducer,
+  paymentsReducer,
   settingsReducer,
   spendingCategoriesReducer,
   testReducer,

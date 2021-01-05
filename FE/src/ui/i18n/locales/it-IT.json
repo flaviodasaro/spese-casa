@@ -46,6 +46,12 @@
         "SUB_QUOTE_ADDITIONAL_3":", con ",
         "SUB_QUOTE_ENDING_COMMON":" volte "
     },
+    "PAYMENTS":{
+        "TITLE":"Aggiungi Pagamenti",
+        "PAY_USER":"Utente pagante",
+        "PARTECIPATION_GROUP":"Gruppo partecipante",
+        "ASSOCIATIONS_MODAL_TITLE":"Associazioni"
+    },
     "COMMON":{
         "FORM":{
             "SUBMIT":"SUBMIT",

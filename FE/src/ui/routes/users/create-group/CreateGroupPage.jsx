@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { withChangeIconOnInit } from "../../../common/hocs/withChangeIconOnInit";
 import { USERS_KEY } from "../../../common/constants";
 import { GenericForm } from "../../../common/components/form/generic-form/GenericForm";
@@ -16,11 +16,9 @@ const CreateGroupPageComponent = ({
   createGroupByNameAndUSers
 }) => {
   const [users, setUsers] = useState([]);
-  useEffect(() => {
-    getAllUsers();
-  }, []);
+ 
   return (
-    <SinglePageTemplate h1LabelKey="GROUPS.CREATE_TITLE">
+    <SinglePageTemplate h1LabelKey="GROUPS.CREATE_TITLE" onInit={getAllUsers}>
       <GenericForm
         onSubmit={() => createGroupByNameAndUSers(groupName, groupNotes, users)}
         disableSubmitBtn={!userList || userList.length === 0}

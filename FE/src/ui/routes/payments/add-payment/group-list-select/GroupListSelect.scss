@@ -1,0 +1,18 @@
+.wrapper{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    .input-wrapper{
+        width: 90%;
+        >div{
+            width: 100%;
+        }
+    }
+    .icon-wrapper{
+        cursor: pointer;
+        &.disabled{
+            cursor: not-allowed;
+            opacity: 0.2;
+        }
+    }
+}

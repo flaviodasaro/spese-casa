@@ -12,7 +12,8 @@ import {
   ASSOCIATION_BY_GROUP_FETCHED,
   GROUP_SELECTED,
   USER_SELECTED,
-  RESET_ASSOCIATIONS
+  RESET_ASSOCIATIONS,
+  USERS_STATE_RESET
 } from "./actionTypes";
 
 const COMMON_PATH_PARAMS = {
@@ -178,3 +179,15 @@ export const handleSaveAssociations = (idsUtente, idGruppo) => dispatch =>
   dispatch(saveAssociation(idsUtente, idGruppo)).then(input =>
     dispatch(fetchAssociationByGroup(idGruppo))
   );
+
+export const resetUsersState = () => ({ type: USERS_STATE_RESET });
+
+export const commonInit = (returnAsPromiseAll) => dispatch => {
+  dispatch(resetUsersState());
+  if (returnAsPromiseAll) {
+    return Promise.all(dispatch(getAllUsers()), dispatch(fetchAllGroups()));
+  } else {
+    dispatch(getAllUsers());
+    dispatch(fetchAllGroups());
+  }
+};

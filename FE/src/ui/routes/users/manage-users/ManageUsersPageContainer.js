@@ -1,8 +1,7 @@
 import { connect } from "react-redux";
 import { ManageUsersPage } from "./ManageUsersPage";
 import {
-  getAllUsers,
-  fetchAllGroups,
+  commonInit,
   fetchAssociationByGroup,
   handleSaveAssociations,
   deleteAssociationList,
@@ -27,8 +26,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getAllUsers,
-  fetchAllGroups,
+  commonInit,
   fetchAssociationByGroup,
   handleSaveAssociations,
   deleteAssociationList,

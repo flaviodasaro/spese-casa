@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { withChangeIconOnInit } from "../../../common/hocs/withChangeIconOnInit";
 import { USERS_KEY } from "../../../common/constants";
 import { SinglePageTemplate } from "../../../layout/content/single-page-template/SinglePageTemplate";
-import { DataGrid } from "@material-ui/data-grid";
 import { GenericForm } from "../../../common/components/form/generic-form/GenericForm";
 import { Input } from "../../../common/components/form/input/Input";
 import "./ManageUsers.scss";
@@ -10,30 +9,13 @@ import { IconWithTooltip } from "../../../common/components/icon-with-tooltip/Ic
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { InputRow } from "../../../common/components/form/input-row/InputRow";
 import { Button } from "../../../common/components/form/button/Button";
-
-const columns = [
-  { field: "idAssociazioneUtenteGruppo", headerName: "Id", width: 70 },
-  {
-    field: "idUtente",
-    valueGetter: params => params.row.utente.idUtente,
-    headerName: "Id utente",
-    width: 130
-  },
-  {
-    field: "usernameUtente",
-    valueGetter: params => params.row.utente.username,
-    headerName: "Username utente",
-    width: 250
-  },
-  { field: "tmsInserimento", headerName: "Tms Inserimento", width: 250 }
-];
+import { AssociationsTable } from "./associations-table/AssociationsTable";
 
 const ManageUsersPageComponent = ({
   userList,
   groupList,
   associationByGroup,
-  getAllUsers,
-  fetchAllGroups,
+  commonInit,
   handleSaveAssociations,
   resetAssociaUtenteGruppi,
   deleteAssociationList,
@@ -43,12 +25,9 @@ const ManageUsersPageComponent = ({
   selectUserIds
 }) => {
   const [selectedRows, setSelectedRows] = useState([]);
-  useEffect(() => {
-    getAllUsers();
-    fetchAllGroups();
-  }, []);
+  
   return (
-    <SinglePageTemplate h1LabelKey="GROUPS.ASSOCIATE_TITLE">
+    <SinglePageTemplate h1LabelKey="GROUPS.ASSOCIATE_TITLE" onInit={commonInit}>
       <GenericForm
         disableSubmitBtn={!selectedUserIds || selectedUserIds.length === 0}
         onClearForm={resetAssociaUtenteGruppi}
@@ -85,10 +64,8 @@ const ManageUsersPageComponent = ({
               </Button>
             </span>
           </div>
-          <DataGrid
+          <AssociationsTable 
             rows={associationByGroup}
-            columns={columns}
-            pageSize={5}
             checkboxSelection
             onSelectionChange={event => setSelectedRows(event.rowIds)}
           />

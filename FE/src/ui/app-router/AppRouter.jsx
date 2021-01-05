@@ -3,7 +3,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import { Tutorial } from "../routes/tutorial/Tutorial";
 import { HomeContainer } from "../routes/home/HomeContainer";
 import { AddUserPageContainer, CreateGroupPageContainer, ManageUsersPageContainer } from "../routes/users";
-import { AddPaymentPage, ReportsPage } from "../routes/payments";
+import { AddPaymentPageContainer, ReportsPage } from "../routes/payments";
 import { SettingsPageContainer } from "../routes/settings/SettingsPageContainer";
 import { SpendingCategoriesContainer } from "../routes/spending-categories/SpendingCategoriesContainer";
 import {
@@ -34,7 +34,7 @@ export const AppRouter = props => {
             <ManageUsersPageContainer />
           </Route>
           <Route path={ADD_PAYMENT_ROUTE}>
-            <AddPaymentPage />
+            <AddPaymentPageContainer />
           </Route>
           <Route path={REPORTS_ROUTE}>
             <ReportsPage />

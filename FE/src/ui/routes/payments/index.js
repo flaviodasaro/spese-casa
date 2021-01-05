@@ -1,2 +1,2 @@
-export { AddPaymentPage } from "./add-payment/AddPaymentPage";
+export { AddPaymentPageContainer } from "./add-payment/AddPaymentPageContainer";
 export { ReportsPage } from "./reports/ReportsPage";
