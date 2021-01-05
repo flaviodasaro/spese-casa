@@ -40,7 +40,11 @@
         "QUOTE_3":"Picciù basta, vi devo troppi soldi, questa la pago io",
         "SUB_QUOTE_1":"Premio utente che ha pagato più volte: ",
         "SUB_QUOTE_2":"Premio gruppo con più pagamenti: ",
-        "SUB_QUOTE_3":"Premio BIG PAY all'utente: "
+        "SUB_QUOTE_3":"Premio BIG PAY all'utente: ",
+        "SUB_QUOTE_ADDITIONAL_1":", per un totale di ",
+        "SUB_QUOTE_ADDITIONAL_2":", per un totale di ",
+        "SUB_QUOTE_ADDITIONAL_3":", con ",
+        "SUB_QUOTE_ENDING_COMMON":" volte "
     },
     "COMMON":{
         "FORM":{

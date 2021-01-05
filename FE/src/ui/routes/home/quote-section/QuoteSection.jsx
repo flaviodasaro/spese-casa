@@ -7,8 +7,11 @@ export const QuoteSection = withNamespaces()(
     t,
     children,
     quoteI18nKey,
-    paragraphKey,
-    paragraphAdditionalContent,
+    paragraphMainKey,
+    paragraphValue1,
+    paragraphMinorKey,
+    paragraphValue2,
+    paragraphFinalKey,
     show
   }) => {
     if (!show) {
@@ -18,10 +21,11 @@ export const QuoteSection = withNamespaces()(
       <section className="section-wrapper">
         <Quote i18nKey={t(quoteI18nKey)} />
         <p>
-          {t(paragraphKey)}
-          <span className="additional-content">
-            {paragraphAdditionalContent}
-          </span>
+          <span>{t(paragraphMainKey)}</span>
+          <span className="additional-content">{paragraphValue1}</span>
+          <span>{t(paragraphMinorKey)}</span>
+          <span className="additional-content">{paragraphValue2}</span>
+          <span>{t(paragraphFinalKey)}</span>
         </p>
         {children}
       </section>

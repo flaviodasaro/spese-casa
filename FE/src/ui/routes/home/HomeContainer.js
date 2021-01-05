@@ -3,15 +3,11 @@ import { connect } from "react-redux";
 
 import { init } from "../../../redux/home/actions";
 import {
-  getUsernameUtentePagatoPiuVolte,
-  getNameGruppoPartecipatoPiuVolte,
-  getNameUtenteBigPay
+    dataForHome
 } from "../../../redux/home/selectors";
 
 const mapStateToProps = state => ({
-  usernameUtentePagatoPiuVolte: getUsernameUtentePagatoPiuVolte(state),
-  nameGruppoPartecipatoPiuVolte: getNameGruppoPartecipatoPiuVolte(state),
-  nameUtenteBigPay: getNameUtenteBigPay(state)
+    dataForHome:dataForHome(state)
 });
 const mapDispatchToProps = { init };
 
