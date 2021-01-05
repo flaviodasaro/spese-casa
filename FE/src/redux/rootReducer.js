@@ -7,6 +7,7 @@ import { settingsReducer } from "./settings/reducer";
 import { feedbackManagerReducer } from "./feedback-manager/reducer";
 import { loaderReducer } from "./loader/reducer";
 import { usersReducer } from "./users/reducer";
+import { spendingCategoriesReducer } from "./spending-categories/reducer";
 
 export const createRootReducer = history => combineReducers({
   testReducer,
@@ -14,6 +15,7 @@ export const createRootReducer = history => combineReducers({
   settingsReducer,
   feedbackManagerReducer,
   loaderReducer,
+  spendingCategoriesReducer,
   usersReducer,
   connectedRouterReducer:connectRouter(history)
 })

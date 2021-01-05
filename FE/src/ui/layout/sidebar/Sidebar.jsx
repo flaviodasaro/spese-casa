@@ -3,6 +3,7 @@ import "./Sidebar.scss";
 import {
   faHome,
   faCog,
+  faFunnelDollar,
   faUser,
   faEuroSign
 } from "@fortawesome/free-solid-svg-icons";
@@ -23,21 +24,23 @@ import {
   REPORTS_KEY,
   ADD_USER_KEY,
   CREATE_GROUP_KEY,
-  MANAGE_USER_KEY
+  MANAGE_USER_KEY,
+  SPENDING_CATEGORIES_KEY,
+  SPENDING_CATEGORIES_ROUTE
 } from "../../common/constants";
 
 const iconSettings = [
   {
     key: HOME_KEY,
     iconName: faHome,
-    tooltipMessage: "HOME",
+    tooltipMessageI18nKey: "MENU.HOME",
     openSecondLevel: false,
     route: HOME_ROUTE
   },
   {
     key: PAYMENTS_KEY,
     iconName: faEuroSign,
-    tooltipMessage: "Pagamenti",
+    tooltipMessageI18nKey: "MENU.PAYMENTS",
     openSecondLevel: true,
     children: [
       {
@@ -55,7 +58,7 @@ const iconSettings = [
   {
     key: USERS_KEY,
     iconName: faUser,
-    tooltipMessage: "Gruppi e Utenti",
+    tooltipMessageI18nKey: "MENU.USERS",
     openSecondLevel: true,
     children: [
       {
@@ -76,9 +79,16 @@ const iconSettings = [
     ]
   },
   {
+    key: SPENDING_CATEGORIES_KEY,
+    iconName: faFunnelDollar,
+    tooltipMessageI18nKey: "MENU.SPENDING_CATEGORIES",
+    openSecondLevel: false,
+    route: SPENDING_CATEGORIES_ROUTE
+  },
+  {
     key: SETTINGS_KEY,
     iconName: faCog,
-    tooltipMessage: "Impostazioni",
+    tooltipMessageI18nKey: "MENU.SETTINGS",
     openSecondLevel: false,
     route: SETTINGS_ROUTE
   }
@@ -117,7 +127,7 @@ const SidebarIconWrapper = ({
       onClick={onClick}
     >
       <SidebarIcon
-        tootlipMessage={iconSetting.tooltipMessage}
+        tooltipMessageI18nKey={iconSetting.tooltipMessageI18nKey}
         iconName={iconSetting.iconName}
       />
       <div className="divider"></div>

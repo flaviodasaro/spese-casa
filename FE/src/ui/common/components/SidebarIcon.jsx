@@ -1,8 +1,8 @@
 import { IconWithTooltip } from "./icon-with-tooltip/IconWithTooltip";
 
-export const SidebarIcon = ({ tootlipMessage, iconName }) => (
+export const SidebarIcon = ({ tooltipMessageI18nKey, iconName }) => (
   <IconWithTooltip
-    tootlipMessage={tootlipMessage}
+    tooltipMessageI18nKey={tooltipMessageI18nKey}
     fontAwesomeIconProps={{ icon: iconName, color: "white", size: "3x" }}
   />
 );
