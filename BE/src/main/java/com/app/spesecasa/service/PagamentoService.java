@@ -1,8 +1,6 @@
 package com.app.spesecasa.service;
 
-import com.app.spesecasa.dto.GetTotAvereDto;
-import com.app.spesecasa.dto.RequestInserisciPagamento;
-import com.app.spesecasa.dto.RequestUpdatePagamento;
+import com.app.spesecasa.dto.*;
 import com.app.spesecasa.entity.CategoriaSpesa;
 import com.app.spesecasa.entity.Gruppo;
 import com.app.spesecasa.entity.Pagamento;
@@ -105,5 +103,25 @@ public class PagamentoService {
 			return queryResult.get(0);
 		}
 
+	}
+
+	public ResponseGetDashboardInit getDashboardInit(){
+		List<DashboardAggregateWithCounter> utenteMore = pagamentoRepository.getDashboadrAggregateUtentePagatoPiuVolte();
+		List<DashboardAggregateWithCounter> gruppoMore = pagamentoRepository.getDashboadrAggregateGruppoPartecipatoPiuVolte();
+		List<DashboardAggregateWithAmount> utenteBigPay = pagamentoRepository.getDashboadrAggregateutenteBigPay();
+
+		ResponseGetDashboardInit response = new ResponseGetDashboardInit();
+
+		if(utenteMore.size() > 0){
+			response.setUtentePagatoPiuVolte(utenteMore.get(0));
+		}
+		if(gruppoMore.size() > 0){
+			response.setGruppoPartecipatoPiuVolte(gruppoMore.get(0));
+		}
+		if(utenteBigPay.size() > 0){
+			response.setUtenteBigPay(utenteBigPay.get(0));
+		}
+
+		return response;
 	}
 }
