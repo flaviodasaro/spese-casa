@@ -1,0 +1,1 @@
+export const HOME_INIT_FETCHED = "HOME/HOME_INIT_FETCHED";

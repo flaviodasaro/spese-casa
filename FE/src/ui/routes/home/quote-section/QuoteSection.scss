@@ -1,0 +1,12 @@
+@import "../../../styles/utils.scss";
+
+.section-wrapper {
+    padding: pxToRem(20);
+    border: pxToRem(2) solid rgba(58, 63, 110, 0.507);
+    border-radius: pxToRem(6);
+    margin-bottom: pxToRem(30);
+    span.additional-content {
+        font-weight: 700;
+        font-style: italic;
+    }
+}

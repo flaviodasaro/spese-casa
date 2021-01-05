@@ -20,6 +20,28 @@
         "INFO":"Operazione eseguita",
         "ERROR":"Operazione fallita"
     },
+    "SPENDING_CATEGORIES":{
+        "TITLE":"Categorie di spesa",
+        "NAME":"Nome categoria",
+        "NOTES":"Note categoria",
+        "SUBTITLE":"Aggiungi categoria"
+    },
+    "MENU":{
+        "HOME":"Home",
+        "PAYMENTS":"Pagamenti",
+        "USERS":"Utenti e gruppi",
+        "SPENDING_CATEGORIES":"Categorie di spesa",
+        "SETTINGS":"Impostazioni"
+    },
+    "HOME":{
+        "TITLE":"Home",
+        "QUOTE_1":"Pago io tranquilli, poi facciamo i conti e me li date",
+        "QUOTE_2":"Ma perché stai facendo sta cosa? Vedrai che alla fine la useremo solo noi 3",
+        "QUOTE_3":"Picciù basta, vi devo troppi soldi, questa la pago io",
+        "SUB_QUOTE_1":"Premio utente che ha pagato più volte: ",
+        "SUB_QUOTE_2":"Premio gruppo con più pagamenti: ",
+        "SUB_QUOTE_3":"Premio BIG PAY all'utente: "
+    },
     "COMMON":{
         "FORM":{
             "SUBMIT":"SUBMIT",

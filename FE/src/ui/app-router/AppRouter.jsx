@@ -1,7 +1,7 @@
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import { Tutorial } from "../routes/tutorial/Tutorial";
-import { Home } from "../routes/home/Home";
+import { HomeContainer } from "../routes/home/HomeContainer";
 import { AddUserPageContainer, CreateGroupPageContainer, ManageUsersPageContainer } from "../routes/users";
 import { AddPaymentPage, ReportsPage } from "../routes/payments";
 import { SettingsPageContainer } from "../routes/settings/SettingsPageContainer";
@@ -49,7 +49,7 @@ export const AppRouter = props => {
             <SpendingCategoriesContainer />
           </Route>
           <Route path={HOME_ROUTE}>
-            <Home />
+            <HomeContainer />
           </Route>
         </Switch>
       </Router>
