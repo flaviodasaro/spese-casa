@@ -1,10 +1,12 @@
 @import "../../../styles/utils.scss";
+@import "../../../layout/Layout.scss";
 
 .section-wrapper {
     padding: pxToRem(20);
-    border: pxToRem(2) solid rgba(58, 63, 110, 0.507);
+    border: pxToRem(2) solid $background-sidebar;
     border-radius: pxToRem(6);
     margin-bottom: pxToRem(30);
+    text-align: center;
     span.additional-content {
         font-weight: 700;
         font-style: italic;

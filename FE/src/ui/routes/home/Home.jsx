@@ -2,7 +2,6 @@ import { withChangeIconOnInit } from "../../common/hocs/withChangeIconOnInit";
 import { HOME_KEY } from "../../common/constants";
 import { SinglePageTemplate } from "../../layout/content/single-page-template/SinglePageTemplate";
 import { QuoteSection } from "./quote-section/QuoteSection";
-import "./Home.scss";
 
 const HomeComponent = ({
   usernameUtentePagatoPiuVolte,
@@ -12,7 +11,7 @@ const HomeComponent = ({
 }) => {
   return (
     <SinglePageTemplate onInit={init} h1LabelKey="HOME.TITLE">
-      <div className="home-wrapper">
+      <div>
         <QuoteSection
           quoteI18nKey="HOME.QUOTE_1"
           paragraphKey="HOME.SUB_QUOTE_1"

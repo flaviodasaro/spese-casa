@@ -7,7 +7,7 @@
     top: 0;
     width: $sidebar-width;
     height: $sidebar-heigth;
-    background-color: #007cffad;
+    background-color: $background-sidebar;
     z-index: $z-index-sidebar;
 
     .sidebar-icon-wrapper {
