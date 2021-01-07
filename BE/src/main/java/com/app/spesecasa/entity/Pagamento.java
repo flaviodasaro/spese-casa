@@ -78,6 +78,9 @@ public class Pagamento implements Serializable {
 	@Column(name = "importo", precision = 15, scale = 2)
 	private BigDecimal importo;
 
+	@Column(name = "descrizione")
+	private String descrizione;
+
 	@Column(name = "tms_inserimento")
 	private Timestamp tmsInserimento;
 
@@ -130,6 +133,14 @@ public class Pagamento implements Serializable {
 
 	public void setImporto(BigDecimal importo) {
 		this.importo = importo;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 	public Timestamp getTmsInserimento() {
