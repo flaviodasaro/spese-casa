@@ -1,63 +1,71 @@
 {
-    "USERS":{
-        "TITLE":"Aggiungi utente",
-        "SUBTITLE_OK":"Utente aggiunto correttamente",
-        "SUBTITLE_KO":"Errore, utente non aggiunto",
-        "USERNAME_LABEL":"Username",
-        "ADD_GROUP_WITH_SINGLE_USER_LABEL":"Aggiungi gruppo col singolo utente (consigliato)"
-    },
-    "GROUPS":{
-        "CREATE_TITLE":"Crea Gruppo",
-        "USER_LIST":"Utenti",
-        "GROUP_NAME":"Nome gruppo",
-        "GROUP_NOTES":"Note gruppo",
-        "ASSOCIATE_TITLE":"Associa utenti e gruppi",
-        "GROUP_LIST":"Gruppi",
-        "DELETE_SELECTIONS":"Elimina associazioni selezionate"
-    },
-    "ALERT":{
-        "SUCCESS":"Operazione eseguita con successo",
-        "INFO":"Operazione eseguita",
-        "ERROR":"Operazione fallita"
-    },
-    "SPENDING_CATEGORIES":{
-        "TITLE":"Categorie di spesa",
-        "NAME":"Nome categoria",
-        "NOTES":"Note categoria",
-        "SUBTITLE":"Aggiungi categoria"
-    },
-    "MENU":{
-        "HOME":"Home",
-        "PAYMENTS":"Pagamenti",
-        "USERS":"Utenti e gruppi",
-        "SPENDING_CATEGORIES":"Categorie di spesa",
-        "SETTINGS":"Impostazioni"
-    },
-    "HOME":{
-        "TITLE":"Home",
-        "QUOTE_1":"Pago io tranquilli, poi facciamo i conti e me li date",
-        "QUOTE_2":"Ma perché stai facendo sta cosa? Vedrai che alla fine la useremo solo noi 3",
-        "QUOTE_3":"Picciù basta, vi devo troppi soldi, questa la pago io",
-        "SUB_QUOTE_1":"Premio utente che ha pagato più volte: ",
-        "SUB_QUOTE_2":"Premio gruppo con più pagamenti: ",
-        "SUB_QUOTE_3":"Premio BIG PAY all'utente: ",
-        "SUB_QUOTE_ADDITIONAL_1":", per un totale di ",
-        "SUB_QUOTE_ADDITIONAL_2":", per un totale di ",
-        "SUB_QUOTE_ADDITIONAL_3":", con ",
-        "SUB_QUOTE_ENDING_COMMON":" volte "
-    },
-    "PAYMENTS":{
-        "TITLE":"Aggiungi Pagamenti",
-        "PAY_USER":"Utente pagante",
-        "PARTECIPATION_GROUP":"Gruppo partecipante",
-        "ASSOCIATIONS_MODAL_TITLE":"Associazioni"
-    },
-    "COMMON":{
-        "FORM":{
-            "SUBMIT":"SUBMIT",
-            "RESET":"RESET",
-            "CONFIRM":"CONFERMA",
-            "CANCEL":"ANNULLA"
-        }
+  "USERS": {
+    "TITLE": "Aggiungi utente",
+    "SUBTITLE_OK": "Utente aggiunto correttamente",
+    "SUBTITLE_KO": "Errore, utente non aggiunto",
+    "USERNAME_LABEL": "Username",
+    "ADD_GROUP_WITH_SINGLE_USER_LABEL": "Aggiungi gruppo col singolo utente (consigliato)"
+  },
+  "GROUPS": {
+    "CREATE_TITLE": "Crea Gruppo",
+    "USER_LIST": "Utenti",
+    "GROUP_NAME": "Nome gruppo",
+    "GROUP_NOTES": "Note gruppo",
+    "ASSOCIATE_TITLE": "Associa utenti e gruppi",
+    "GROUP_LIST": "Gruppi",
+    "DELETE_SELECTIONS": "Elimina associazioni selezionate"
+  },
+  "ALERT": {
+    "SUCCESS": "Operazione eseguita con successo",
+    "INFO": "Operazione eseguita",
+    "ERROR": "Operazione fallita"
+  },
+  "SPENDING_CATEGORIES": {
+    "TITLE": "Categorie di spesa",
+    "NAME": "Nome categoria",
+    "NOTES": "Note categoria",
+    "SUBTITLE": "Aggiungi categoria"
+  },
+  "MENU": {
+    "HOME": "Home",
+    "PAYMENTS": "Pagamenti",
+    "USERS": "Utenti e gruppi",
+    "SPENDING_CATEGORIES": "Categorie di spesa",
+    "SETTINGS": "Impostazioni"
+  },
+  "HOME": {
+    "TITLE": "Home",
+    "QUOTE_1": "Pago io tranquilli, poi facciamo i conti e me li date",
+    "QUOTE_2": "Ma perché stai facendo sta cosa? Vedrai che alla fine la useremo solo noi 3",
+    "QUOTE_3": "Picciù basta, vi devo troppi soldi, questa la pago io",
+    "SUB_QUOTE_1": "Premio utente che ha pagato più volte: ",
+    "SUB_QUOTE_2": "Premio gruppo con più pagamenti: ",
+    "SUB_QUOTE_3": "Premio BIG PAY all'utente: ",
+    "SUB_QUOTE_ADDITIONAL_1": ", per un totale di ",
+    "SUB_QUOTE_ADDITIONAL_2": ", per un totale di ",
+    "SUB_QUOTE_ADDITIONAL_3": ", con ",
+    "SUB_QUOTE_ENDING_COMMON": " volte "
+  },
+  "PAYMENTS": {
+    "TITLE": "Aggiungi Pagamenti",
+    "PAY_USER": "Utente pagante",
+    "PARTECIPATION_GROUP": "Gruppo partecipante",
+    "ASSOCIATIONS_MODAL_TITLE": "Associazioni",
+    "DESCRIPTION": "Descrizione",
+    "INPUT_CATEGORY": "Categoria di spesa",
+    "INPUT_AMOUNT": "Importo (€)",
+    "CLONE_ROW": "Clona riga",
+    "DELETE_ROW": "Elimina riga",
+    "ADD_ROW": "Aggiungi riga",
+    "OPEN_ASSOCIATIONS_MODAL":"Apri modale associazioni",
+    "SELECTED_GROUP":"Gruppo: "
+  },
+  "COMMON": {
+    "FORM": {
+      "SUBMIT": "SUBMIT",
+      "RESET": "RESET",
+      "CONFIRM": "CONFERMA",
+      "CANCEL": "ANNULLA"
     }
+  }
 }

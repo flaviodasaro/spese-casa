@@ -1,30 +1,54 @@
 import { AddPaymentPage } from "./AddPaymentPage";
 import { connect } from "react-redux";
-import { commonInit, selectGroupId } from "../../../../redux/users/actions";
+import { selectGroupId, selectUserIds } from "../../../../redux/users/actions";
 import {
   getUserList,
+  getSelectedSingleUserId,
   getGroupListRaw,
   getSelectedGroupId,
+  getSelectedGroupName,
   getAssociationByGroup
 } from "../../../../redux/users/selectors";
 import {
   onOpenAssociationListModal,
-  closeAssociationsModal
+  closeAssociationsModal,
+  addPaymentRow,
+  deletePaymentRow,
+  clonePaymentRow,
+  changePaymentInput,
+  init,
+  resetAddPayments
 } from "../../../../redux/payments/actions";
-import { isAssociationsModalOpen } from "../../../../redux/payments/selectors";
+import {
+  isAssociationsModalOpen,
+  getDataColumns,
+  getInputPayments,
+  getDisabledAddPaymentsForm
+} from "../../../../redux/payments/selectors";
 
 const mapStateToProps = state => ({
   userList: getUserList(state),
   groupList: getGroupListRaw(state),
+  selectedUserId:getSelectedSingleUserId(state),
   selectedGroupId: getSelectedGroupId(state),
-  isAssociationsModalOpen:isAssociationsModalOpen(state),
-  associationsByGroup:getAssociationByGroup(state)
+  selectedGroupName: getSelectedGroupName(state),
+  isAssociationsModalOpen: isAssociationsModalOpen(state),
+  associationsByGroup: getAssociationByGroup(state),
+  payments: getInputPayments(state),
+  dataColumns: getDataColumns(state),
+  disabledForm:getDisabledAddPaymentsForm(state)
 });
 const mapDispatchToProps = {
-  commonInit,
+  init,
+  selectUserIds,
   selectGroupId,
   onOpenAssociationListModal,
-  closeAssociationsModal
+  closeAssociationsModal,
+  addPaymentRow,
+  deletePaymentRow,
+  clonePaymentRow,
+  changePaymentInput,
+  resetAddPayments
 };
 
 export const AddPaymentPageContainer = connect(

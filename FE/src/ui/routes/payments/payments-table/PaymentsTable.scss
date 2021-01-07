@@ -1,0 +1,18 @@
+@import "../../../layout/Layout.scss";
+
+.icon-settings {
+    cursor: pointer;
+    &.theme-color {
+        color: $background-sidebar;
+    }
+    &.make-red {
+        color: red;
+    }
+}
+.payment-table {
+    .payment-table-head {
+        .test-class-name {
+            font-weight: bold;
+        }
+    }
+}

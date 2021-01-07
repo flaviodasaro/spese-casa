@@ -60,3 +60,19 @@ export const getUtentiNonAncoraAssociati = createSelector(
         )
       : []
 );
+
+export const getSelectedGroup = createSelector(
+  getGroupListRaw,
+  getSelectedGroupId,
+  (groups, selectedGroupId) => groups.find(gr => gr.idGruppo == selectedGroupId)
+);
+
+export const getSelectedGroupName = createSelector(
+  getSelectedGroup,
+  group => group ? group.nomeGruppo : ""
+);
+
+export const getSelectedSingleUserId = createSelector(
+  getSelectedUserIds,
+  ids => ids[0]
+);

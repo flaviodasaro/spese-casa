@@ -8,6 +8,7 @@ export const GroupListSelect = ({
   groupList,
   selectedGroupId,
   selectGroupId,
+  selectedGroupName,
   associationList,
   isAssociationsModalOpen,
   onOpenAssociationListModal,
@@ -44,6 +45,7 @@ export const GroupListSelect = ({
       </div>
       <AssociationsModal
         associationList={associationList}
+        groupName={selectedGroupName}
         isOpen={isAssociationsModalOpen}
         onClose={closeAssociationsModal}
       />

@@ -1,0 +1,15 @@
+@import '../../../styles/utils.scss';
+
+.add-payment {
+    .table-wrapper {
+        margin: pxToRem(100) 0 pxToRem(30) 0;
+    }
+    .add-icon-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        > span {
+            cursor: pointer;
+            color: green;
+        }
+    }
+}

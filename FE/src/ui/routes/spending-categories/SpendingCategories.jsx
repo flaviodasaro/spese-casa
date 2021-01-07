@@ -4,6 +4,7 @@ import { InputRow } from "../../common/components/form/input-row/InputRow";
 import { Input } from "../../common/components/form/input/Input";
 import { SinglePageTemplate } from "../../layout/content/single-page-template/SinglePageTemplate";
 import { withNamespaces } from "react-i18next";
+import "./SpendingCategories.scss";
 
 const columns = [
   { field: "idCategoriaSpesa", headerName: "Id", width: 70 },

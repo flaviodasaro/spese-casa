@@ -1,3 +1,11 @@
-.heading{
-    text-align: center;
+@import "../../styles/utils.scss";
+.spending-categories {
+    .heading {
+        text-align: center;
+    }
+    .table-wrapper {
+        margin-bottom: pxToRem(100);
+        min-height: pxToRem(300);
+        width: 100%;
+    }
 }
