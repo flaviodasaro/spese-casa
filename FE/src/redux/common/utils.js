@@ -1,1 +1,1 @@
-export const isFalsyEceptZero = input => (input === 0 ? false : !input);
+export const isFalsyExceptZero = input => (input === 0 ? false : !input);

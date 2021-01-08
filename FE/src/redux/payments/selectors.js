@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { isFalsyEceptZero } from "../common/utils";
+import { isFalsyExceptZero } from "../common/utils";
 import { getCategoryList } from "../spending-categories/selectors";
 import {
   getSelectedGroupId,
@@ -27,7 +27,7 @@ export const getDataColumns = createSelector(getCategoryList, categoryList => {
       additionalCellProps: {}
     },
     {
-      paymentKey: "categoriaSpesa",
+      paymentKey: "idCategoriaSpesa",
       headerLabelKey: "PAYMENTS.INPUT_CATEGORY",
       inputType: "select",
       optionList: categoryList,
@@ -49,18 +49,18 @@ export const getDisabledAddPaymentsForm = createSelector(
   getSelectedGroupId,
   getInputPayments,
   (selectedUserId, selectedGroupId, inputPayments) => {
-    const a = inputPayments.some(payment => {
-      const vals = Object.values(payment);
-      return vals.some(payObj =>
-        isFalsyEceptZero(payObj.value)
-      );
-    });
 
     return (
-      isFalsyEceptZero(selectedUserId) ||
-      isFalsyEceptZero(selectedGroupId) ||
-      !inputPayments 
-      || a
+      isFalsyExceptZero(selectedUserId) ||
+      isFalsyExceptZero(selectedGroupId) ||
+      !inputPayments || 
+      inputPayments.length === 0 || 
+      inputPayments.some(payment => {
+        const vals = Object.values(payment);
+        return vals.some(payObj =>
+          isFalsyExceptZero(payObj.value)
+        );
+      })
     );
   }
 );

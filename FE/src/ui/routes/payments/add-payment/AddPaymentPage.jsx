@@ -50,7 +50,8 @@ const AddPaymentPageComponent = ({
   deletePaymentRow,
   clonePaymentRow,
   changePaymentInput,
-  disabledForm
+  disabledForm,
+  handleSubmitInputPayments
 }) => {
   const [actionColumns, setActionColumns] = useState(staticActionColumns);
 
@@ -75,7 +76,7 @@ const AddPaymentPageComponent = ({
         onClearForm={resetAddPayments}
         disableSubmitBtn={disabledForm}
         onSubmit={() => {
-          console.log(selectedUserId, selectedGroupId, payments);
+          handleSubmitInputPayments(selectedUserId, selectedGroupId, payments);
         }}
       >
         <InputRow

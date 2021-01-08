@@ -17,7 +17,8 @@ import {
   clonePaymentRow,
   changePaymentInput,
   init,
-  resetAddPayments
+  resetAddPayments,
+  handleSubmitInputPayments
 } from "../../../../redux/payments/actions";
 import {
   isAssociationsModalOpen,
@@ -48,7 +49,8 @@ const mapDispatchToProps = {
   deletePaymentRow,
   clonePaymentRow,
   changePaymentInput,
-  resetAddPayments
+  resetAddPayments,
+  handleSubmitInputPayments
 };
 
 export const AddPaymentPageContainer = connect(

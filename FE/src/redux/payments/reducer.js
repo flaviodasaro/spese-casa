@@ -5,18 +5,20 @@ import {
   INPUT_PAYMENT_ROW_DELETED,
   INPUT_PAYMENT_ROW_CLONED,
   INPUT_PAYMENT_CHANGED,
-  ADD_PAYMENTS_RESET
+  ADD_PAYMENTS_RESET,
+  INPUT_PAYMENT_SUBMITTED
 } from "./actionTypes";
 
 const emptyPayment = {
   descrizione: { value: "" },
-  categoriaSpesa: { value: "" },
+  idCategoriaSpesa: { value: "" },
   importo: { value: "" }
 };
 
 const initialState = {
   associationModalOpen: false,
-  inputPayments: [emptyPayment]
+  inputPayments: [emptyPayment],
+  massiveSaveResponse:null
 };
 
 export const paymentsReducer = (state = initialState, action) => {
@@ -78,6 +80,9 @@ export const paymentsReducer = (state = initialState, action) => {
         associationModalOpen: false,
         inputPayments: [emptyPayment]
       };
+    }
+    case INPUT_PAYMENT_SUBMITTED: {
+      return { ...state, massiveSaveResponse: action.payload.massiveSaveResponse };
     }
     default: {
       return state;
