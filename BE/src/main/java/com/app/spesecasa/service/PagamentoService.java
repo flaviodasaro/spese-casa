@@ -11,6 +11,8 @@ import com.app.spesecasa.utils.CommonErrors;
 import com.app.spesecasa.utils.CommonRunTimeException;
 import com.app.spesecasa.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -31,52 +33,79 @@ public class PagamentoService {
 	@Autowired
 	private GruppoService gruppoService;
 
-	public Pagamento getPagamentoById(Integer id){
+	public Pagamento getPagamentoById(Integer id) {
 		return pagamentoRepository.findById(id).orElse(null);
 	}
 
-	public List<Pagamento> getAllPagamenti(){
+	public List<Pagamento> getAllPagamenti() {
 		return pagamentoRepository.findAll();
 	}
 
-	public void insertPagamento(Pagamento p){
+	public void insertPagamento(Pagamento p) {
 		pagamentoRepository.save(p);
 	}
 
-	public void deletePagamentoById(Integer id){
+	public void deletePagamentoById(Integer id) {
 		pagamentoRepository.deleteById(id);
 	}
 
-	public void insertPagamentoByIds(RequestInserisciPagamento body){
-		Integer idUtente = body.getIdUtentePagante();
+	private Pair<Utente, Gruppo> getPairUtenteGruppoByIds(Integer idUtente, Integer idGruppo) {
 		Utente utente = utenteService.getUtenteById(idUtente);
-		if(utente == null){
+		if (utente == null) {
 			CommonErrors.throwExeptionUtenteNotFound(idUtente);
 		}
 
-		Integer idGruppo = body.getIdGruppoPartecipante();
 		Gruppo gruppo = gruppoService.getGruppoById(idGruppo);
-		if(gruppo == null){
+		if (gruppo == null) {
 			CommonErrors.throwExeptionGruppoNotFound(idGruppo);
 		}
 
-		CategoriaSpesa categoriaSpesa = categoriaSpesaRepository.findById(body.getIdCategoriaSpesa())
-				.orElseThrow(() -> new CommonRunTimeException("Categoria spesa non trovata", Constants.CATEGORIA_SPESA_NOT_FOUND));
+		return Pair.of(utente, gruppo);
+	}
+
+	public void insertPagamentoByIds(RequestInserisciPagamentoSingolo body) {
+
+		Pair<Utente, Gruppo> pair = getPairUtenteGruppoByIds(body.getIdUtentePagante(), body.getIdGruppoPartecipante());
+		insertNewPagamento(body.getSinglePaymentInfo(), pair);
+	}
+
+	private void insertNewPagamento(SinglePaymentInfo paymentInfo, Pair<Utente, Gruppo> pair) {
+		Integer idCategoriaSpesa = paymentInfo.getIdCategoriaSpesa();
+		if (idCategoriaSpesa == null) {
+			throw new CommonRunTimeException("Id categoria di spesa non deve essere null", HttpStatus.BAD_REQUEST,
+					Constants.CATEGORIA_SPESA_NULL);
+		}
+		
+		CategoriaSpesa categoriaSpesa = categoriaSpesaRepository.findById(idCategoriaSpesa).orElseThrow(
+				() -> new CommonRunTimeException("Categoria spesa non trovata", Constants.CATEGORIA_SPESA_NOT_FOUND));
 
 		Pagamento pagamento = new Pagamento();
-		pagamento.setUtentePagante(utente);
-		pagamento.setGruppoPartecipante(gruppo);
+		pagamento.setUtentePagante(pair.getFirst());
+		pagamento.setGruppoPartecipante(pair.getSecond());
 		pagamento.setCategoriaSpesa(categoriaSpesa);
 		pagamento.setFlgPagato(Boolean.FALSE);
-		pagamento.setImporto(body.getImporto());
+		pagamento.setImporto(paymentInfo.getImporto());
+		pagamento.setDescrizione(paymentInfo.getDescrizione());
 
 		insertPagamento(pagamento);
 	}
 
-	public void updatePagamento(RequestUpdatePagamento body){
+	public void massiveInsertPagamentoByIds(RequestInserisciPagamentoMassivo body) {
+		List<SinglePaymentInfo> payments = body.getPayments();
+		if (payments == null || payments.isEmpty()) {
+			throw new CommonRunTimeException("Lista pagamenti nulla o vuota", HttpStatus.BAD_REQUEST,
+					Constants.PAYMENT_LIST_EMPTY);
+		}
+
+		Pair<Utente, Gruppo> pair = getPairUtenteGruppoByIds(body.getIdUtentePagante(), body.getIdGruppoPartecipante());
+		payments.forEach(pay -> insertNewPagamento(pay, pair));
+
+	}
+
+	public void updatePagamento(RequestUpdatePagamento body) {
 		Integer idPagamento = body.getIdPagamento();
 		Pagamento p = getPagamentoById(idPagamento);
-		if(p == null){
+		if (p == null) {
 			CommonErrors.throwExeptionPagamentoNotFound(idPagamento);
 			return;
 		}
@@ -84,41 +113,43 @@ public class PagamentoService {
 		BigDecimal importo = body.getImporto();
 		Boolean flgPagato = body.getFlgPagato();
 
-		if(importo != null){
+		if (importo != null) {
 			p.setImporto(importo);
 		}
-		if(flgPagato != null){
+		if (flgPagato != null) {
 			p.setFlgPagato(flgPagato);
 		}
 
 		pagamentoRepository.save(p);
 	}
 
-	public GetTotAvereDto getTotAvereByUtenti(Integer idUtente1, Integer idUtente2){
-		List<GetTotAvereDto> queryResult = pagamentoRepository.getTotAvereByUtenti(idUtente1, idUtente2, idUtente2, idUtente1);
-		if(queryResult.isEmpty()){
+	public GetTotAvereDto getTotAvereByUtenti(Integer idUtente1, Integer idUtente2) {
+		List<GetTotAvereDto> queryResult = pagamentoRepository
+				.getTotAvereByUtenti(idUtente1, idUtente2, idUtente2, idUtente1);
+		if (queryResult.isEmpty()) {
 			throw new CommonRunTimeException("Errore getTotAvereByUtenti", Constants.GET_TOT_AVERE_BY_UTENTI_ERROR);
-		}
-		else{
+		} else {
 			return queryResult.get(0);
 		}
 
 	}
 
-	public ResponseGetDashboardInit getDashboardInit(){
-		List<DashboardAggregateWithCounter> utenteMore = pagamentoRepository.getDashboadrAggregateUtentePagatoPiuVolte();
-		List<DashboardAggregateWithCounter> gruppoMore = pagamentoRepository.getDashboadrAggregateGruppoPartecipatoPiuVolte();
+	public ResponseGetDashboardInit getDashboardInit() {
+		List<DashboardAggregateWithCounter> utenteMore = pagamentoRepository
+				.getDashboadrAggregateUtentePagatoPiuVolte();
+		List<DashboardAggregateWithCounter> gruppoMore = pagamentoRepository
+				.getDashboadrAggregateGruppoPartecipatoPiuVolte();
 		List<DashboardAggregateWithAmount> utenteBigPay = pagamentoRepository.getDashboadrAggregateutenteBigPay();
 
 		ResponseGetDashboardInit response = new ResponseGetDashboardInit();
 
-		if(utenteMore.size() > 0){
+		if (utenteMore.size() > 0) {
 			response.setUtentePagatoPiuVolte(utenteMore.get(0));
 		}
-		if(gruppoMore.size() > 0){
+		if (gruppoMore.size() > 0) {
 			response.setGruppoPartecipatoPiuVolte(gruppoMore.get(0));
 		}
-		if(utenteBigPay.size() > 0){
+		if (utenteBigPay.size() > 0) {
 			response.setUtenteBigPay(utenteBigPay.get(0));
 		}
 

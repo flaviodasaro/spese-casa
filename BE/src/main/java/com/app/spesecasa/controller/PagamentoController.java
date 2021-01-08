@@ -1,9 +1,6 @@
 package com.app.spesecasa.controller;
 
-import com.app.spesecasa.dto.GetTotAvereDto;
-import com.app.spesecasa.dto.RequestInserisciPagamento;
-import com.app.spesecasa.dto.RequestUpdatePagamento;
-import com.app.spesecasa.dto.ResponseGetDashboardInit;
+import com.app.spesecasa.dto.*;
 import com.app.spesecasa.entity.Pagamento;
 import com.app.spesecasa.service.PagamentoService;
 import com.app.spesecasa.utils.CommonRunTimeException;
@@ -76,10 +73,22 @@ public class PagamentoController {
 
 	@PostMapping("/save-by-ids")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Void> savePagamentoByIds(@Valid @RequestBody RequestInserisciPagamento body) {
+	public ResponseEntity<Void> savePagamentoByIds(@Valid @RequestBody RequestInserisciPagamentoSingolo body) {
 		try {
 			pagamentoService.insertPagamentoByIds(body);
-			return ResponseEntity.created(URI.create("/gruppo/save-by-ids")).build();
+			return ResponseEntity.created(URI.create("/pagamento/save-by-ids")).build();
+		} catch (Exception e) {
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
+
+	@PostMapping("/massive-save-by-ids")
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Void> massiveSavePagamentoByIds(@Valid @RequestBody RequestInserisciPagamentoMassivo body) {
+		try {
+			pagamentoService.massiveInsertPagamentoByIds(body);
+			return ResponseEntity.created(URI.create("/pagamento/massive-save-by-ids")).build();
 		} catch (Exception e) {
 			Utils.handleCommonError(e);
 			return null;
