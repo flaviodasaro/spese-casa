@@ -47,6 +47,16 @@ public class PagamentoController {
 		}
 	}
 
+	@PostMapping("/by-filters")
+	public ResponseEntity<ResponsePaginatedList> getPagamentiByFilters(@RequestBody RequestGetPagamentiByFilters body) {
+		try {
+			return ResponseEntity.ok(pagamentoService.getPagamentiByFilters(body));
+		} catch (Exception e) {
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
+
 	@PostMapping("/save")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Void> savePagamento(@Valid @RequestBody Pagamento gruppo) {
@@ -108,6 +118,25 @@ public class PagamentoController {
 			Utils.handleCommonError(e);
 			return null;
 		}
+	}
+
+	@PutMapping("/massive-update")
+	public ResponseEntity<Void> massiveUpdatePagamentoByIds(@Valid @RequestBody RequestUpdatePagamentoMassivo body) {
+		try {
+			body.getList().forEach(el -> {
+				if (el.getFlgPagato() == null && el.getImporto() == null) {
+					throw new CommonRunTimeException("Update rifiutato. Valorizzare flgPagato, importo o entrambi",
+							HttpStatus.BAD_REQUEST, Constants.UPDATE_PAGAMENTO_BAD_REQUEST);
+				} else {
+					pagamentoService.updatePagamento(el);
+				}
+
+			});
+		} catch (Exception e) {
+			Utils.handleCommonError(e);
+			return null;
+		}
+		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping("/get-tot-avere")

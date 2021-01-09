@@ -16,6 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -75,7 +78,7 @@ public class PagamentoService {
 			throw new CommonRunTimeException("Id categoria di spesa non deve essere null", HttpStatus.BAD_REQUEST,
 					Constants.CATEGORIA_SPESA_NULL);
 		}
-		
+
 		CategoriaSpesa categoriaSpesa = categoriaSpesaRepository.findById(idCategoriaSpesa).orElseThrow(
 				() -> new CommonRunTimeException("Categoria spesa non trovata", Constants.CATEGORIA_SPESA_NOT_FOUND));
 
@@ -143,16 +146,41 @@ public class PagamentoService {
 
 		ResponseGetDashboardInit response = new ResponseGetDashboardInit();
 
-		if (utenteMore.size() > 0) {
+		if (!utenteMore.isEmpty()) {
 			response.setUtentePagatoPiuVolte(utenteMore.get(0));
 		}
-		if (gruppoMore.size() > 0) {
+		if (!gruppoMore.isEmpty()) {
 			response.setGruppoPartecipatoPiuVolte(gruppoMore.get(0));
 		}
-		if (utenteBigPay.size() > 0) {
+		if (!utenteBigPay.isEmpty()) {
 			response.setUtenteBigPay(utenteBigPay.get(0));
 		}
 
 		return response;
+	}
+
+	public ResponsePaginatedList getPagamentiByFilters(RequestGetPagamentiByFilters body) {
+		String descrizioneRaw = body.getDescrizione();
+		String descrizione = descrizioneRaw == null ? null : "%" + descrizioneRaw.toUpperCase() + "%";
+		LocalDate tmsInserimentoMaxRaw = body.getTmsInserimentoMax();
+		LocalDate tmsModificaMaxRaw = body.getTmsModificaMax();
+		LocalDateTime tmsInserimentoMax =  tmsInserimentoMaxRaw == null ? null : tmsInserimentoMaxRaw.atTime(LocalTime.MAX);
+		LocalDateTime tmsModificaMax =  tmsModificaMaxRaw == null ? null : tmsModificaMaxRaw.atTime(LocalTime.MAX);
+
+		List<Pagamento> list = pagamentoRepository.getPagamentiByFilters(
+				body.getIdPagamento(),
+				body.getIdUtentePagante(),
+				body.getIdGruppoPartecipante(),
+				body.getIdCategoriaSpesa(),
+				body.getFlgPagato(),
+				body.getImportoMin(),
+				body.getImportoMax(),
+				descrizione,
+				body.getTmsInserimentoMin(),
+				tmsInserimentoMax,
+				body.getTmsModificaMin(),
+				tmsModificaMax
+		);
+		return new ResponsePaginatedList(list);
 	}
 }
