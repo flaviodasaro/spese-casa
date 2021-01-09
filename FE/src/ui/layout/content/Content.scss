@@ -6,5 +6,5 @@ $padding-value:pxToRem(10);
 .content {
     margin-left: $sidebar-width;
     padding: $padding-value;
-    min-height: calc($sidebar-heigth - $padding-value);
+    min-height: calc(#{$sidebar-heigth} - #{$padding-value});
 }

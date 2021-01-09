@@ -18,6 +18,32 @@ export const getInputPayments = createSelector(
   state => state.inputPayments
 );
 
+export const getFetchByFiltersRequest = createSelector(
+  paymentsSlice,
+  state => state.fetchByFiltersRequest
+);
+
+export const getFetchByFiltersResponse = createSelector(
+  paymentsSlice,
+  state => state.fetchByFiltersResponse
+);
+
+export const getByFiltersList = createSelector(
+  getFetchByFiltersResponse,
+  response => response && response.list
+);
+
+export const listFetchedAtLeastOnce = createSelector(
+  getByFiltersList,
+  list => !!list
+);
+
+export const aggregateAmountByFiltyers = createSelector(
+  listFetchedAtLeastOnce,
+  getByFiltersList,
+  (fetched, list) => fetched && list.reduce((total, current) => total + current.importo, 0)
+);
+
 export const getDataColumns = createSelector(getCategoryList, categoryList => {
   return [
     {

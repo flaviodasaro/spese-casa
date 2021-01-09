@@ -6,7 +6,10 @@ import {
   INPUT_PAYMENT_ROW_CLONED,
   INPUT_PAYMENT_CHANGED,
   ADD_PAYMENTS_RESET,
-  INPUT_PAYMENT_SUBMITTED
+  INPUT_PAYMENT_SUBMITTED,
+  PAYMENTS_BY_FILTERS_FETCHED,
+  PAYMENTS_STATE_RESET,
+  FETCH_PAYMENTS_BY_FILTERS_STARTED
 } from "./actionTypes";
 
 const emptyPayment = {
@@ -18,7 +21,9 @@ const emptyPayment = {
 const initialState = {
   associationModalOpen: false,
   inputPayments: [emptyPayment],
-  massiveSaveResponse:null
+  massiveSaveResponse: null,
+  fetchByFiltersRequest: null,
+  fetchByFiltersResponse: null
 };
 
 export const paymentsReducer = (state = initialState, action) => {
@@ -82,7 +87,25 @@ export const paymentsReducer = (state = initialState, action) => {
       };
     }
     case INPUT_PAYMENT_SUBMITTED: {
-      return { ...state, massiveSaveResponse: action.payload.massiveSaveResponse };
+      return {
+        ...state,
+        massiveSaveResponse: action.payload.massiveSaveResponse
+      };
+    }
+    case PAYMENTS_BY_FILTERS_FETCHED: {
+      return {
+        ...state,
+        fetchByFiltersResponse: action.payload.fetchByFiltersResponse
+      };
+    }
+    case FETCH_PAYMENTS_BY_FILTERS_STARTED: {
+      return {
+        ...state,
+        fetchByFiltersRequest: action.payload.fetchByFiltersRequest
+      };
+    }
+    case PAYMENTS_STATE_RESET: {
+      return { ...initialState };
     }
     default: {
       return state;

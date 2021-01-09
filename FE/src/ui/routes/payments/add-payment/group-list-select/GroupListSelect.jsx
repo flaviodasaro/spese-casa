@@ -18,7 +18,7 @@ export const GroupListSelect = ({
   const iconWrapperClass = `${isIconEnabled ? "" : "disabled "}icon-wrapper`;
   return (
     <>
-      <div className="wrapper">
+      <div className="group-list-select-wrapper">
         <div className="input-wrapper">
           <Input
             type="select"

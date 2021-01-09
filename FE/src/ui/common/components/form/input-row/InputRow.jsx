@@ -1,10 +1,10 @@
 import "./InputRow.scss";
 
-export const InputRow = ({Component1, Component2, settings}) => {
-  const { centerIfSingle } = settings;
-  const centerClassName = centerIfSingle && !Component2 && !!Component1 ? " center-all" : ""
+export const InputRow = ({ Component1, Component2, centerIfSingle, marginBottom }) => {
+  const centerClassName =
+    centerIfSingle && !Component2 && !!Component1 ? " center-all" : "";
   return (
-    <div className={`input-row${centerClassName}`}>
+    <div className={`input-row${centerClassName}`} style={{ marginBottom }}>
       {Component1}
       {Component2}
     </div>
@@ -12,5 +12,6 @@ export const InputRow = ({Component1, Component2, settings}) => {
 };
 
 InputRow.defaultProps = {
-  settings:{ centerIfSingle: true }
-}
+  centerIfSingle: true,
+  marginBottom:"10px"
+};

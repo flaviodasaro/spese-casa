@@ -1,11 +1,6 @@
 import { AddPaymentPage } from "./AddPaymentPage";
 import { connect } from "react-redux";
-import { selectGroupId, selectUserIds } from "../../../../redux/users/actions";
 import {
-  getUserList,
-  getSelectedSingleUserId,
-  getGroupListRaw,
-  getSelectedGroupId,
   getSelectedGroupName,
   getAssociationByGroup
 } from "../../../../redux/users/selectors";
@@ -16,7 +11,6 @@ import {
   deletePaymentRow,
   clonePaymentRow,
   changePaymentInput,
-  init,
   resetAddPayments,
   handleSubmitInputPayments
 } from "../../../../redux/payments/actions";
@@ -26,12 +20,10 @@ import {
   getInputPayments,
   getDisabledAddPaymentsForm
 } from "../../../../redux/payments/selectors";
+import { commonMapDispatchToProps, commonMapStateToProps } from "../commons";
 
 const mapStateToProps = state => ({
-  userList: getUserList(state),
-  groupList: getGroupListRaw(state),
-  selectedUserId:getSelectedSingleUserId(state),
-  selectedGroupId: getSelectedGroupId(state),
+  ...commonMapStateToProps(state),
   selectedGroupName: getSelectedGroupName(state),
   isAssociationsModalOpen: isAssociationsModalOpen(state),
   associationsByGroup: getAssociationByGroup(state),
@@ -40,9 +32,7 @@ const mapStateToProps = state => ({
   disabledForm:getDisabledAddPaymentsForm(state)
 });
 const mapDispatchToProps = {
-  init,
-  selectUserIds,
-  selectGroupId,
+  ...commonMapDispatchToProps,
   onOpenAssociationListModal,
   closeAssociationsModal,
   addPaymentRow,

@@ -1,6 +1,6 @@
 import { Checkbox, FormControlLabel } from "@material-ui/core";
 
-export const CustomCheckbox = ({ checked, onChange, name, color, label }) => {
+export const CustomCheckbox = ({ checked, disabled, onChange, name, color, label }) => {
   return (
     <div className="MuiFormControl-root MuiTextField-root">
       <FormControlLabel
@@ -11,6 +11,7 @@ export const CustomCheckbox = ({ checked, onChange, name, color, label }) => {
             name={name}
             value={checked}
             color={color}
+            disabled={disabled}
           />
         }
         label={label}

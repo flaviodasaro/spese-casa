@@ -60,12 +60,29 @@
     "OPEN_ASSOCIATIONS_MODAL":"Apri modale associazioni",
     "SELECTED_GROUP":"Gruppo: "
   },
+  "REPORTS":{
+    "TITLE":"Reports",
+    "PAYMENTS_SEARCH":"Ricerca Pagamenti",
+    "PAYMENT_ID":"Id pagamento",
+    "PAID":"Saldato",
+    "IMPORTO_MIN":"Importo € - (Da)",
+    "IMPORTO_MAX":"Importo € - (A)",
+    "DATA_INS":"Data inserimento",
+    "DATA_INS_MIN":"Data inserimento (Da)",
+    "DATA_INS_MAX":"Data inserimento (A)",
+    "DATA_MOD":"Data modifica",
+    "DATA_MOD_MIN":"Data modifica (Da)",
+    "DATA_MOD_MAX":"Data modifica (A)",
+    "MARK_AS_PAID":"Marchia righe selezionate come 'SALDATE'",
+    "TOTAL":"Totale ricerca: "
+  },
   "COMMON": {
     "FORM": {
       "SUBMIT": "SUBMIT",
       "RESET": "RESET",
       "CONFIRM": "CONFERMA",
-      "CANCEL": "ANNULLA"
+      "CANCEL": "ANNULLA",
+      "SEARCH":"CERCA"
     }
   }
 }
