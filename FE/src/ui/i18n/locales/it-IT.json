@@ -74,7 +74,9 @@
     "DATA_MOD_MIN":"Data modifica (Da)",
     "DATA_MOD_MAX":"Data modifica (A)",
     "MARK_AS_PAID":"Marchia righe selezionate come 'SALDATE'",
-    "TOTAL":"Totale ricerca: "
+    "TOTAL":"Totale ricerca: ",
+    "CALCULATE_DIFFS":"Calcola Differenza Debiti",
+    "AGGREGATE_ALL":"Calcola Aggregati"
   },
   "COMMON": {
     "FORM": {
