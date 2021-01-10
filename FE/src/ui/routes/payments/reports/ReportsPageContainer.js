@@ -4,9 +4,17 @@ import {
   getByFiltersList,
   listFetchedAtLeastOnce,
   aggregateAmountByFiltyers,
-  getFetchByFiltersRequest
+  getFetchByFiltersRequest,
+  getDataStructureForDiffReport,
+  showMinnicuImg,
+  getDataStructureForAggregateReport
 } from "../../../../redux/payments/selectors";
-import { fetchPaymentsByFilters, markPaymentsAsPaid } from "../../../../redux/payments/actions";
+import {
+  fetchPaymentsByFilters,
+  markPaymentsAsPaid,
+  getReportDiffByUsers,
+  getReportAggregateByUser
+} from "../../../../redux/payments/actions";
 
 import { getCategoryList } from "../../../../redux/spending-categories/selectors";
 
@@ -18,12 +26,17 @@ const mapStateToProps = state => ({
   payments: getByFiltersList(state),
   fetched: listFetchedAtLeastOnce(state),
   aggregateAmount: aggregateAmountByFiltyers(state),
-  lastFetchRequest:getFetchByFiltersRequest(state)
+  lastFetchRequest: getFetchByFiltersRequest(state),
+  dataStructureForDiffReport:getDataStructureForDiffReport(state),
+  shouldShowMinnicuImg:showMinnicuImg(state),
+  dataStructureForAggregateReport:getDataStructureForAggregateReport(state)
 });
 const mapDispatchToProps = {
   ...commonMapDispatchToProps,
   fetchPaymentsByFilters,
-  markPaymentsAsPaid
+  markPaymentsAsPaid,
+  getReportDiffByUsers,
+  getReportAggregateByUser
 };
 
 export const ReportsPageContainer = connect(

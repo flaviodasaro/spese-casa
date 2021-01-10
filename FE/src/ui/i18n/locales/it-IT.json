@@ -76,7 +76,9 @@
     "MARK_AS_PAID":"Marchia righe selezionate come 'SALDATE'",
     "TOTAL":"Totale ricerca: ",
     "CALCULATE_DIFFS":"Calcola Differenza Debiti",
-    "AGGREGATE_ALL":"Calcola Aggregati"
+    "AGGREGATE_ALL":"Calcola Aggregati",
+    "CALCULATE_DIFFS_INFO_INNER_HTML":"<p>Data una lista di utenti in input, verranno calcolate le differenze dei debiti per ogni coppia dei suddetti utenti. Ad esempio, sia l'input: list: [\"idFlavio\", \"idGero\", \"idDaniel\"], l'output sarà qualcosa del tipo:</p><p>\"-Daniel -> Flavio: 35€ \"</p><p>\"-Daniel -> Gero: 15€ \"</p><p>\"-Flavio -> Gero: 20€ \"</p><p>\"NB: il dato va letto in avere: l'utente di sinistra deve avere quell'importo dall'utente di destra\"</p>",
+    "AGGREGATE_ALL_INFO_INNER_HTML":"Data una lista di utenti in input, verranno presi in considerazionesolo i pagamenti che coinvolgono questi utenti e verrà calcolatoquanto ogni utente deve avere(+)/dare(-). Ad esempio, sia l'input:list: [\"idFlavio\", \"idGero\", \"idDaniel\"], l'output sarà qualcosa deltipo:<p>-Daniel: -50€</p><p>-Gero: 35€</p><p>-Flavio: 15€</p><p>NB: la somma algebrica deve dare 0</p>"
   },
   "COMMON": {
     "FORM": {
@@ -85,6 +87,7 @@
       "CONFIRM": "CONFERMA",
       "CANCEL": "ANNULLA",
       "SEARCH":"CERCA"
-    }
+    },
+    "INFO":"Info: "
   }
 }

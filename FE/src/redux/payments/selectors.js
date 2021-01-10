@@ -3,7 +3,9 @@ import { isFalsyExceptZero } from "../common/utils";
 import { getCategoryList } from "../spending-categories/selectors";
 import {
   getSelectedGroupId,
-  getSelectedSingleUserId
+  getSelectedSingleUserId,
+  getUserList,
+  getUserById
 } from "../users/selectors";
 
 const paymentsSlice = state => state.paymentsReducer;
@@ -28,6 +30,16 @@ export const getFetchByFiltersResponse = createSelector(
   state => state.fetchByFiltersResponse
 );
 
+export const getDiffReportResponse = createSelector(
+  paymentsSlice,
+  state => state.diffReportResponse
+);
+
+export const getAggregateReportResponse = createSelector(
+  paymentsSlice,
+  state => state.aggregateReportResponse
+);
+
 export const getByFiltersList = createSelector(
   getFetchByFiltersResponse,
   response => response && response.list
@@ -41,7 +53,8 @@ export const listFetchedAtLeastOnce = createSelector(
 export const aggregateAmountByFiltyers = createSelector(
   listFetchedAtLeastOnce,
   getByFiltersList,
-  (fetched, list) => fetched && list.reduce((total, current) => total + current.importo, 0)
+  (fetched, list) =>
+    fetched && list.reduce((total, current) => total + current.importo, 0)
 );
 
 export const getDataColumns = createSelector(getCategoryList, categoryList => {
@@ -75,18 +88,67 @@ export const getDisabledAddPaymentsForm = createSelector(
   getSelectedGroupId,
   getInputPayments,
   (selectedUserId, selectedGroupId, inputPayments) => {
-
     return (
       isFalsyExceptZero(selectedUserId) ||
       isFalsyExceptZero(selectedGroupId) ||
-      !inputPayments || 
-      inputPayments.length === 0 || 
+      !inputPayments ||
+      inputPayments.length === 0 ||
       inputPayments.some(payment => {
         const vals = Object.values(payment);
-        return vals.some(payObj =>
-          isFalsyExceptZero(payObj.value)
-        );
+        return vals.some(payObj => isFalsyExceptZero(payObj.value));
       })
     );
   }
+);
+
+export const getDataStructureForDiffReport = createSelector(
+  getUserList,
+  getDiffReportResponse,
+  (userList, diffResponse) => {
+    if (diffResponse 
+      && userList && userList.length > 0) {
+      return diffResponse.map(diff => {
+        const { utente1, utente2, getTotAvereDto } = diff;
+        const userObj1 = getUserById(utente1, userList);
+        const userObj2 = getUserById(utente2, userList);
+        return {
+          leftArrowUser: userObj2.username,
+          rightArrowUser: userObj1.username,
+          amount: getTotAvereDto.totAvere || 0
+        };
+      });
+    }
+    return [];
+  }
+);
+
+const CONSTANTS = {
+  MINNICU_THRESHOLD: 10
+};
+
+
+export const getDataStructureForAggregateReport = createSelector(
+  getUserList,
+  getAggregateReportResponse,
+  (userList, aggregateReponse) => {
+    if (aggregateReponse 
+      && userList && userList.length > 0) {
+      return Object.entries(aggregateReponse).map(currentEntry => {
+        const userId = currentEntry[0];
+        const amount = currentEntry[1] || 0;
+        const userObj = getUserById(userId, userList);
+        if (userObj) {
+          return { username: userObj.username, amount };
+        }
+      });
+    }
+    return [];
+  }
+);
+
+
+export const showMinnicuImg = createSelector(
+  getDataStructureForDiffReport,
+  getDataStructureForAggregateReport,
+  (data1, data2) => data1.concat(data2).some(el => el.amount < CONSTANTS.MINNICU_THRESHOLD)
 );

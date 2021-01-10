@@ -9,7 +9,9 @@ import {
   INPUT_PAYMENT_SUBMITTED,
   PAYMENTS_BY_FILTERS_FETCHED,
   PAYMENTS_STATE_RESET,
-  FETCH_PAYMENTS_BY_FILTERS_STARTED
+  FETCH_PAYMENTS_BY_FILTERS_STARTED,
+  DIFF_REPORT_FETCHED,
+  AGGREGATE_REPORT_FETCHED
 } from "./actionTypes";
 
 const emptyPayment = {
@@ -23,7 +25,9 @@ const initialState = {
   inputPayments: [emptyPayment],
   massiveSaveResponse: null,
   fetchByFiltersRequest: null,
-  fetchByFiltersResponse: null
+  fetchByFiltersResponse: null,
+  diffReportResponse: null,
+  aggregateReportResponse: null
 };
 
 export const paymentsReducer = (state = initialState, action) => {
@@ -102,6 +106,18 @@ export const paymentsReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchByFiltersRequest: action.payload.fetchByFiltersRequest
+      };
+    }
+    case DIFF_REPORT_FETCHED: {
+      return {
+        ...state,
+        diffReportResponse: action.payload.diffReportResponse
+      };
+    }
+    case AGGREGATE_REPORT_FETCHED: {
+      return {
+        ...state,
+        aggregateReportResponse: action.payload.aggregateReportResponse
       };
     }
     case PAYMENTS_STATE_RESET: {

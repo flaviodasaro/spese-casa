@@ -1,0 +1,17 @@
+@import '../../../../styles/utils.scss';
+
+.reports{
+    .common-report-accordion{
+        .info-icon-row{
+            display: flex;
+            align-items: center;
+            margin: pxToRem(15) 0;
+            .txt{
+                margin-right: pxToRem(5);
+            }
+        }
+        .children-container{
+            margin: pxToRem(15) 0;
+        }
+    }
+}

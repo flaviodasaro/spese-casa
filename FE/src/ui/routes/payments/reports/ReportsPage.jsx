@@ -2,7 +2,9 @@ import { withChangeIconOnInit } from "../../../common/hocs/withChangeIconOnInit"
 import { PAYMENTS_KEY } from "../../../common/constants";
 import { SinglePageTemplate } from "../../../layout/content/single-page-template/SinglePageTemplate";
 import { SearchPaymentsAccordion } from "./search-payments-accordion/SearchPaymentsAccordion";
-import { Accordion } from "../../../common/components/accordion/Accordion";
+import { DiffReportAccordion } from "./diff-report-accordion/DiffReportAccordion";
+import { AggregateReportAccordion } from "./aggregate-report-accordion/AggregateReportAccordion";
+import { MinnicuModal } from "./minnicu-modal/MinnicuModal";
 
 const ReportsPageComponent = ({
   init,
@@ -20,7 +22,13 @@ const ReportsPageComponent = ({
   fetched,
   aggregateAmount,
   markPaymentsAsPaid,
-  lastFetchRequest
+  lastFetchRequest,
+  selectedUserIdList,
+  getReportDiffByUsers,
+  getReportAggregateByUser,
+  dataStructureForDiffReport,
+  shouldShowMinnicuImg,
+  dataStructureForAggregateReport
 }) => {
   return (
     <SinglePageTemplate onInit={init} h1LabelKey={"REPORTS.TITLE"}>
@@ -41,21 +49,22 @@ const ReportsPageComponent = ({
         markPaymentsAsPaid={markPaymentsAsPaid}
         lastFetchRequest={lastFetchRequest}
       />
-      <Accordion textKey="REPORTS.CALCULATE_DIFFS">
-        In questo report verranno calcolate le differenze dei debiti data una lista di utenti in input.
-        L'output sarà qualcosa del tipo:
-        <p>{"-Daniel -> Flavio: 35€ "}</p>
-        <p>{"-Daniel -> Gero: 15€ "}</p>
-        <p>{"-Flavio -> Gero: 20€ "}</p>
-      </Accordion>
-      <Accordion textKey="REPORTS.AGGREGATE_ALL">
-        In questo report, data una lista di utenti in input, verrà calcolata l'ottimizzazione finale di quanto ognuno di questi utenti tra di loro deve dare/avere.
-        L'output sarà qualcosa del tipo:
-        <p>{"-Daniel: -50€ "}</p>
-        <p>{"-Gero: 35€ "}</p>
-        <p>{"-Flavio: 15€ "}</p>
-        <p>{"NB: la somma algebrica deve dare 0 "}</p>
-      </Accordion>
+      <DiffReportAccordion
+        userList={userList}
+        getReportDiffByUsers={getReportDiffByUsers}
+        selectedUserIdList={selectedUserIdList}
+        selectUserIds={selectUserIds}
+        dataStructureForDiffReport={dataStructureForDiffReport}
+        //shouldShowMinnicuImg={shouldShowMinnicuImg}
+      />
+      <AggregateReportAccordion
+        userList={userList}
+        getReportAggregateByUser={getReportAggregateByUser}
+        selectedUserIds={selectedUserIdList}
+        selectUserIds={selectUserIds}
+        dataStructureForAggregateReport={dataStructureForAggregateReport}
+      />
+      <MinnicuModal shouldShowMinnicuModal={shouldShowMinnicuImg} />
     </SinglePageTemplate>
   );
 };

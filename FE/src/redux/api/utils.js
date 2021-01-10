@@ -16,7 +16,7 @@ export const API_VERBS = {
   DELETE: "delete"
 };
 
-const COMMON_READ_SETTINGS = {
+export const COMMON_READ_SETTINGS = {
   handleErrorWithAlert: true,
   showSuccessAlert: false
 };

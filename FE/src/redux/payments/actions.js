@@ -9,17 +9,20 @@ import {
   INPUT_PAYMENT_SUBMITTED,
   PAYMENTS_BY_FILTERS_FETCHED,
   PAYMENTS_STATE_RESET,
-  FETCH_PAYMENTS_BY_FILTERS_STARTED
+  FETCH_PAYMENTS_BY_FILTERS_STARTED,
+  DIFF_REPORT_FETCHED,
+  AGGREGATE_REPORT_FETCHED
 } from "./actionTypes";
 import { fetchAssociationByGroup, commonInit } from "../users/actions";
 import { fetchAllSpendingCategories } from "../spending-categories/actions";
-import { API_VERBS, genericApiCall } from "../api/utils";
-import { isFalsyExceptZero } from "../common/utils";
+import { API_VERBS, genericApiCall, COMMON_READ_SETTINGS } from "../api/utils";
 
 const PAYMENT_CONTROLLER_SUB_URL = "pagamento";
 const MASSIVE_SAVE_PAYMENT_URL = `${PAYMENT_CONTROLLER_SUB_URL}/massive-save-by-ids`;
 const FETCH_PAYMENTS_WITH_FILTERS_URL = `${PAYMENT_CONTROLLER_SUB_URL}/by-filters`;
 const PAYMENTS_MASSIVE_UPDATE_URL = `${PAYMENT_CONTROLLER_SUB_URL}/massive-update`;
+const REPORTS_DIFF_BY_USERS_URL = `${PAYMENT_CONTROLLER_SUB_URL}/get-tot-avere-by-utenti-list`;
+const REPORTS_AGGREGATE_BY_USERS_URL = `${PAYMENT_CONTROLLER_SUB_URL}/get-tot-avere-aggregate`;
 
 const openAssociationModal = () => ({ type: ASSOCIATIONS_MODAL_OPENED });
 
@@ -103,15 +106,19 @@ const fetchPaymentsByFiltersFromBody = body => dispatch => {
   dispatch(startFetchPaymentsByFilter(body));
 
   return dispatch(
-    genericApiCall(API_VERBS.POST, {
-      endpoint: FETCH_PAYMENTS_WITH_FILTERS_URL,
-      body,
-      onSuccess: resp => {
-        dispatch(fetchPaymentsByFilterAction(resp.data));
-      }
-    })
+    genericApiCall(
+      API_VERBS.POST,
+      {
+        endpoint: FETCH_PAYMENTS_WITH_FILTERS_URL,
+        body,
+        onSuccess: resp => {
+          dispatch(fetchPaymentsByFilterAction(resp.data));
+        }
+      },
+      COMMON_READ_SETTINGS
+    )
   );
-}
+};
 
 export const fetchPaymentsByFilters = rawBody => dispatch => {
   const body = Object.entries(rawBody)
@@ -137,5 +144,46 @@ export const markPaymentsAsPaid = (
         dispatch(fetchPaymentsByFiltersFromBody(lastFetchRequest));
       }
     })
+  );
+};
+
+const getReportDiffByUsersAction = diffReportResponse => ({
+  type: DIFF_REPORT_FETCHED,
+  payload: { diffReportResponse }
+});
+const getReportAggregateByUserAction = aggregateReportResponse => ({
+  type: AGGREGATE_REPORT_FETCHED,
+  payload: { aggregateReportResponse }
+});
+
+export const getReportDiffByUsers = idList => dispatch => {
+  return dispatch(
+    genericApiCall(
+      API_VERBS.POST,
+      {
+        endpoint: REPORTS_DIFF_BY_USERS_URL,
+        body: { idList },
+        onSuccess: resp => {
+          dispatch(getReportDiffByUsersAction(resp.data));
+        }
+      },
+      COMMON_READ_SETTINGS
+    )
+  );
+};
+
+export const getReportAggregateByUser = idList => dispatch => {
+  return dispatch(
+    genericApiCall(
+      API_VERBS.POST,
+      {
+        endpoint: REPORTS_AGGREGATE_BY_USERS_URL,
+        body: { idList },
+        onSuccess: resp => {
+          dispatch(getReportAggregateByUserAction(resp.data));
+        }
+      },
+      COMMON_READ_SETTINGS
+    )
   );
 };

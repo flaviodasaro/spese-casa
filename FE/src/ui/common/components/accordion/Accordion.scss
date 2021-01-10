@@ -1,20 +1,24 @@
-@import '../../../styles/utils.scss';
+@import "../../../styles/utils.scss";
 
 .accordion-wrapper {
     .accordion-trigger {
         cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .txt {
-            font-weight: 700;
-            font-style: italic;
+        height: pxToRem(45);
+        background-color: #f3f0f0c4;
+        > p {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .txt {
+                font-weight: 700;
+                font-style: italic;
+            }
         }
     }
-    .underline{
+    .underline {
         height: pxToRem(2);
         border-radius: pxToRem(6);
         background-color: #ab9d9d;
-        margin-top:pxToRem(5);
     }
 }

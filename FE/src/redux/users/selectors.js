@@ -14,6 +14,9 @@ export const getCreateUserResponse = createSelector(
 
 export const getUserList = createSelector(usersSlice, state => state.userList);
 
+export const getUserById = (id, userList) =>
+  userList.find(el => el.idUtente == id);
+
 export const getGroupName = createSelector(
   usersSlice,
   state => state.groupName
@@ -67,9 +70,8 @@ export const getSelectedGroup = createSelector(
   (groups, selectedGroupId) => groups.find(gr => gr.idGruppo == selectedGroupId)
 );
 
-export const getSelectedGroupName = createSelector(
-  getSelectedGroup,
-  group => group ? group.nomeGruppo : ""
+export const getSelectedGroupName = createSelector(getSelectedGroup, group =>
+  group ? group.nomeGruppo : ""
 );
 
 export const getSelectedSingleUserId = createSelector(

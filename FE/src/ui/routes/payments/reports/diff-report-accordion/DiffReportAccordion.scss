@@ -1,0 +1,27 @@
+@import "../../../../styles/utils.scss";
+
+.reports {
+    .common-report-accordion {
+        .unordered-list {
+            margin: 0 auto;
+            max-width: 50%;
+            .output-item-content {
+                display: flex;
+                align-items: center;
+                .user-txt {
+                    font-weight: 500;
+                    font-size: larger;
+                }
+                .icon {
+                    margin: 0 pxToRem(35);
+                }
+
+                .amount {
+                    font-size: pxToRem(30);
+                    font-weight: 700;
+                    margin-left: pxToRem(35);
+                }
+            }
+        }
+    }
+}

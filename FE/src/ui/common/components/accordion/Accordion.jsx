@@ -20,18 +20,21 @@ export const Accordion = withNamespaces()(props => {
   const [open, setOpen] = useState(false);
   return (
     <div className="accordion-wrapper">
-      <p
+      <div
         className="accordion-trigger"
         onClick={event => {
           onClick && onClick(event);
           setOpen(!open);
         }}
       >
-        <span className="txt">{t(textKey)}</span>
-        <span>
-          <FontAwesomeIcon icon={open ? iconIfOpen : iconIfClosed} />
-        </span>
-      </p>
+        <p
+        >
+          <span className="txt">{t(textKey)}</span>
+          <span>
+            <FontAwesomeIcon icon={open ? iconIfOpen : iconIfClosed} />
+          </span>
+        </p>
+      </div>
       <Collapse in={open} {...props} />
       {withUnderline && <div className="underline" />}
     </div>

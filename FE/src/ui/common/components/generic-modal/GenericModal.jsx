@@ -19,9 +19,7 @@ const useStyles = makeStyles(theme => ({
 export const GenericModal = ({ externalOpen, isOpen, onClose, timeoutOnInit, children }) => {
   const classes = useStyles();
   const [stateOpen, setOpen] = useState(false);
-
   const open = externalOpen ? isOpen : stateOpen;
-
   useEffect(() => {
     if (!externalOpen) {
       setTimeout(() => setOpen(true), timeoutOnInit || 0);

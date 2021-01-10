@@ -20,3 +20,6 @@ export const CREATE_GROUP_KEY = "create-group";
 export const MANAGE_USER_KEY = "manage-user";
 export const SETTINGS_KEY = "settings";
 export const SPENDING_CATEGORIES_KEY = "spending-categories";
+
+// ***************** STYLE ********************
+export const SIDEBAR_COLOR_EX = "#007cffad";
