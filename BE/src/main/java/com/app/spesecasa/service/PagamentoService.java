@@ -19,7 +19,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class PagamentoService {
@@ -135,6 +139,49 @@ public class PagamentoService {
 			return queryResult.get(0);
 		}
 
+	}
+
+	public List<DiffsByUtentiDto> getTotAvereByUtentiList(List<Integer> idList){
+		List<Utente> utenteList = idList.stream().map(utenteService::getUtenteById).collect(Collectors.toList());
+		if(utenteList.contains(null)){
+		List<Integer> utentiNull = idList.stream().filter(id -> utenteList.stream().noneMatch(ut -> ut != null && ut.getIdUtente().equals(id))).collect(Collectors.toList());
+			throw new CommonRunTimeException("Errore utente/i non trovato: " + utentiNull, Constants.UTENTE_NOT_FOUND);
+		}
+
+		//tutto ok
+		List<DiffsByUtentiDto> res = new ArrayList<>();
+		for(int i = 0; i< idList.size() - 1; ++i){
+			for(int j = i + 1; j< idList.size(); ++j){
+				Integer utente1 = idList.get(i);
+				Integer utente2 = idList.get(j);
+
+				GetTotAvereDto getTotAvereDto =  getTotAvereByUtenti(utente1, utente2);
+				BigDecimal value = getTotAvereDto.getTotAvere() != null ? getTotAvereDto.getTotAvere() : BigDecimal.ZERO;
+
+				if( BigDecimal.ZERO.compareTo(value) > 0){
+					utente1 = idList.get(j);
+					utente2 = idList.get(i);
+					getTotAvereDto.setTotAvere(value.multiply(BigDecimal.valueOf(-1)));
+				}
+				res.add(new DiffsByUtentiDto(utente1, utente2, getTotAvereDto));
+			}
+		}
+		return res;
+
+	}
+	public Map<Integer, BigDecimal> getTotAvereAggregate(List<Integer> idList){
+		List<DiffsByUtentiDto> diffsByUtentiDtos = getTotAvereByUtentiList(idList);
+		Map<Integer, BigDecimal> result = new HashMap<>();
+		idList.forEach(id -> result.put(id, BigDecimal.ZERO));
+		diffsByUtentiDtos.forEach(el -> {
+			BigDecimal value = el.getGetTotAvereDto().getTotAvere() != null ? el.getGetTotAvereDto().getTotAvere() : BigDecimal.ZERO;
+			Integer utente1 = el.getUtente1();
+			Integer utente2 = el.getUtente2();
+			result.put(utente1, result.get(utente1).add(value));
+			result.put(utente2, result.get(utente2).subtract(value));
+		});
+
+		return result;
 	}
 
 	public ResponseGetDashboardInit getDashboardInit() {

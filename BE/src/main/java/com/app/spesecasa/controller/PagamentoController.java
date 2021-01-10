@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/pagamento")
@@ -144,6 +146,35 @@ public class PagamentoController {
 			@RequestParam(value = "idUtente2") Integer idUtente2) {
 		try {
 			return ResponseEntity.ok(pagamentoService.getTotAvereByUtenti(idUtente1, idUtente2));
+		} catch (Exception e) {
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
+
+	@PostMapping("/get-tot-avere-by-utenti-list")
+	public ResponseEntity<List<DiffsByUtentiDto>> getTotAvereByUtentiList(
+			@RequestBody GetTotAvereByUtentiList body) {
+		List<Integer> idList = body.getIdList();
+		if(idList == null || idList.size() < 2){
+			throw new CommonRunTimeException("idLlist deve avere una lunghezza >= 2", HttpStatus.BAD_REQUEST, Constants.UTENTE_LIST_NOT_ENOUGH);
+		}
+		try {
+			return ResponseEntity.ok(pagamentoService.getTotAvereByUtentiList(idList));
+		} catch (Exception e) {
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
+	@PostMapping("/get-tot-avere-aggregate")
+	public ResponseEntity<Map<Integer, BigDecimal>> getTotAvereAggregate(
+			@RequestBody GetTotAvereByUtentiList body) {
+		List<Integer> idList = body.getIdList();
+		if(idList == null || idList.size() < 2){
+			throw new CommonRunTimeException("idLlist deve avere una lunghezza >= 2", HttpStatus.BAD_REQUEST, Constants.UTENTE_LIST_NOT_ENOUGH);
+		}
+		try {
+			return ResponseEntity.ok(pagamentoService.getTotAvereAggregate(idList));
 		} catch (Exception e) {
 			Utils.handleCommonError(e);
 			return null;

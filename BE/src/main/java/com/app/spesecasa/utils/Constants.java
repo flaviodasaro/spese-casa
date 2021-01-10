@@ -6,6 +6,7 @@ public class Constants {
 	//ERRORS
 	public static final String GENERIC_ERROR_CODE = "GENERIC.ERROR";
 	public static final String UTENTE_NOT_FOUND = "UTENTE.NOT.FOUND";
+	public static final String UTENTE_LIST_NOT_ENOUGH = "UTENTE.LIST.NOT.ENOUGH";
 	public static final String GRUPPO_NOT_FOUND = "GRUPPO.NOT.FOUND";
 	public static final String CATEGORIA_SPESA_NOT_FOUND = "CATEGORIA.SPESA.NOT.FOUND";
 	public static final String CATEGORIA_SPESA_NULL = "CATEGORIA.SPESA.NULL";
