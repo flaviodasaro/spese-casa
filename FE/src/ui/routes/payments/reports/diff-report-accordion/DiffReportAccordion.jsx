@@ -32,8 +32,7 @@ export const DiffReportAccordion = ({
   getReportDiffByUsers,
   selectedUserIdList,
   selectUserIds,
-  dataStructureForDiffReport,
-  shouldShowMinnicuImg
+  dataStructureForDiffReport
 }) => {
   return (
     <CommonReportAccordion
@@ -49,7 +48,6 @@ export const DiffReportAccordion = ({
           <OutputRow element={el} />
         ))}
       </ul>
-      {shouldShowMinnicuImg && "MINNICU"}
     </CommonReportAccordion>
   );
 };

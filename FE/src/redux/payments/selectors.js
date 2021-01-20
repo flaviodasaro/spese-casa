@@ -140,6 +140,7 @@ export const getDataStructureForAggregateReport = createSelector(
         if (userObj) {
           return { username: userObj.username, amount };
         }
+        return null;
       });
     }
     return [];

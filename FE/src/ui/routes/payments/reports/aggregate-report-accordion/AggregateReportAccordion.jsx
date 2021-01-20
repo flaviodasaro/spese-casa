@@ -35,7 +35,6 @@ export const AggregateReportAccordion = ({
   getReportAggregateByUser,
   selectedUserIdList,
   selectUserIds,
-  shouldShowMinnicuImg,
   dataStructureForAggregateReport
 }) => {
   return (

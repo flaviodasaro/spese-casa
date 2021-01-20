@@ -1,6 +1,5 @@
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
-import { Tutorial } from "../routes/tutorial/Tutorial";
 import { HomeContainer } from "../routes/home/HomeContainer";
 import { AddUserPageContainer, CreateGroupPageContainer, ManageUsersPageContainer } from "../routes/users";
 import { AddPaymentPageContainer, ReportsPageContainer } from "../routes/payments";
@@ -13,7 +12,6 @@ import {
   ADD_PAYMENT_ROUTE,
   REPORTS_ROUTE,
   SETTINGS_ROUTE,
-  TUTORIAL_ROUTE,
   HOME_ROUTE,
   SPENDING_CATEGORIES_ROUTE
 } from "../common/constants";
@@ -41,9 +39,6 @@ export const AppRouter = props => {
           </Route>
           <Route path={SETTINGS_ROUTE}>
             <SettingsPageContainer />
-          </Route>
-          <Route path={TUTORIAL_ROUTE}>
-            <Tutorial />
           </Route>
           <Route path={SPENDING_CATEGORIES_ROUTE}>
             <SpendingCategoriesContainer />

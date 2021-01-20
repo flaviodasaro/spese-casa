@@ -5,7 +5,6 @@ export const MANAGE_USER_ROUTE = "/manage-user";
 export const ADD_PAYMENT_ROUTE = "/add-payment";
 export const REPORTS_ROUTE = "/reports";
 export const SETTINGS_ROUTE = "/settings";
-export const TUTORIAL_ROUTE = "/tutorial";
 export const SPENDING_CATEGORIES_ROUTE = "/spending-categories";
 export const HOME_ROUTE = "/";
 
