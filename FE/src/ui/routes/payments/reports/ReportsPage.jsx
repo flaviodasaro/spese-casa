@@ -55,12 +55,11 @@ const ReportsPageComponent = ({
         selectedUserIdList={selectedUserIdList}
         selectUserIds={selectUserIds}
         dataStructureForDiffReport={dataStructureForDiffReport}
-        //shouldShowMinnicuImg={shouldShowMinnicuImg}
       />
       <AggregateReportAccordion
         userList={userList}
         getReportAggregateByUser={getReportAggregateByUser}
-        selectedUserIds={selectedUserIdList}
+        selectedUserIdList={selectedUserIdList}
         selectUserIds={selectUserIds}
         dataStructureForAggregateReport={dataStructureForAggregateReport}
       />
