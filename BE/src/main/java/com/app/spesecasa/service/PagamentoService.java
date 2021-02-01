@@ -7,22 +7,20 @@ import com.app.spesecasa.entity.Pagamento;
 import com.app.spesecasa.entity.Utente;
 import com.app.spesecasa.repository.CategoriaSpesaRepository;
 import com.app.spesecasa.repository.PagamentoRepository;
-import com.app.spesecasa.utils.CommonErrors;
-import com.app.spesecasa.utils.CommonRunTimeException;
-import com.app.spesecasa.utils.Constants;
+import com.app.spesecasa.utils.*;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +37,17 @@ public class PagamentoService {
 
 	@Autowired
 	private GruppoService gruppoService;
+
+	private List<DtoTest> excelMappers = new ArrayList<>();
+
+	@PostConstruct
+	public void init(){
+		this.excelMappers = Arrays.asList(new DtoTest("utentePagante", cell -> {
+			Integer idUtente = Double.valueOf(cell.getNumericCellValue()).intValue();
+			Utente utente = utenteService.getUtenteById(idUtente);
+			return utente;
+		}));
+	}
 
 	public Pagamento getPagamentoById(Integer id) {
 		return pagamentoRepository.findById(id).orElse(null);
@@ -229,5 +238,11 @@ public class PagamentoService {
 				tmsModificaMax
 		);
 		return new ResponsePaginatedList(list);
+	}
+
+	public List<Pagamento> convertFileToObjects(byte[] excelFileBody) throws IOException {
+		FileUtils<Pagamento> fileUtils = new FileUtils(Pagamento.class);
+		List<Pagamento> payments = fileUtils.convertExcelToObjects(excelFileBody, excelMappers);
+		return payments;
 	}
 }

@@ -8,12 +8,14 @@ import com.app.spesecasa.utils.Constants;
 import com.app.spesecasa.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.net.URI;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -191,4 +193,22 @@ public class PagamentoController {
 		}
 	}
 
+	@PostMapping(value = "/massive-load-by-file", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<List<Pagamento>> massiveLoadByFile(@RequestBody byte[] excelFileBody){
+		try {
+			return ResponseEntity.ok(pagamentoService.convertFileToObjects(excelFileBody));
+		} catch (Exception e) {
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
+	@PostMapping(value = "/massive-load-by-file-base64")
+	public ResponseEntity<List<Pagamento>> massiveLoadByFileBase64(@RequestBody String excelFileBodyBase64){
+		try {
+			return ResponseEntity.ok(pagamentoService.convertFileToObjects(Base64.getDecoder().decode(excelFileBodyBase64)));
+		} catch (Exception e) {
+			Utils.handleCommonError(e);
+			return null;
+		}
+	}
 }
