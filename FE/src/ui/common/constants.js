@@ -1,12 +1,14 @@
 // ****************** ROUTES *********************
-export const ADD_USER_ROUTE = "/add-user";
-export const CREATE_GROUP_ROUTE = "/create-group";
-export const MANAGE_USER_ROUTE = "/manage-user";
-export const ADD_PAYMENT_ROUTE = "/add-payment";
-export const REPORTS_ROUTE = "/reports";
-export const SETTINGS_ROUTE = "/settings";
-export const SPENDING_CATEGORIES_ROUTE = "/spending-categories";
-export const HOME_ROUTE = "/";
+const BASE_HREF = "/spese-casa";
+
+export const ADD_USER_ROUTE = BASE_HREF + "/add-user";
+export const CREATE_GROUP_ROUTE = BASE_HREF + "/create-group";
+export const MANAGE_USER_ROUTE = BASE_HREF + "/manage-user";
+export const ADD_PAYMENT_ROUTE = BASE_HREF + "/add-payment";
+export const REPORTS_ROUTE = BASE_HREF + "/reports";
+export const SETTINGS_ROUTE = BASE_HREF + "/settings";
+export const SPENDING_CATEGORIES_ROUTE = BASE_HREF + "/spending-categories";
+export const HOME_ROUTE = BASE_HREF + "/";
 
 // ***************** MENU ********************
 export const HOME_KEY = "home";
