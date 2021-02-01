@@ -45,6 +45,7 @@ Desktop.ini
 dist/*
 target/*
 docs/*
+FE/build/*
 
 #eslint
 .eslintcache
