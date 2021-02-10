@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Switch, Route } from "react-router-dom";
+import { Switch, Route, HashRouter } from "react-router-dom";
 import { HomeContainer } from "../routes/home/HomeContainer";
 import { AddUserPageContainer, CreateGroupPageContainer, ManageUsersPageContainer } from "../routes/users";
 import { AddPaymentPageContainer, ReportsPageContainer } from "../routes/payments";
@@ -20,7 +20,7 @@ import { history } from "../../redux/store";
 export const AppRouter = props => {
   return (
     <>
-      <Router history={history}>
+      <HashRouter history={history}>
         <Switch>
           <Route path={ADD_USER_ROUTE}>
             <AddUserPageContainer />
@@ -47,7 +47,7 @@ export const AppRouter = props => {
             <HomeContainer />
           </Route>
         </Switch>
-      </Router>
+      </HashRouter>
     </>
   );
 };
