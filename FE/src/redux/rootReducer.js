@@ -19,5 +19,5 @@ export const createRootReducer = history => combineReducers({
   settingsReducer,
   spendingCategoriesReducer,
   usersReducer,
-  connectedRouterReducer:connectRouter(history)
+  router:connectRouter(history)
 })

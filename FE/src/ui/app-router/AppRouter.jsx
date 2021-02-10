@@ -1,5 +1,6 @@
 import React from "react";
-import { Switch, Route, HashRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
 import { HomeContainer } from "../routes/home/HomeContainer";
 import { AddUserPageContainer, CreateGroupPageContainer, ManageUsersPageContainer } from "../routes/users";
 import { AddPaymentPageContainer, ReportsPageContainer } from "../routes/payments";
@@ -20,7 +21,7 @@ import { history } from "../../redux/store";
 export const AppRouter = props => {
   return (
     <>
-      <HashRouter history={history}>
+      <ConnectedRouter history={history}>
         <Switch>
           <Route path={ADD_USER_ROUTE}>
             <AddUserPageContainer />
@@ -47,7 +48,7 @@ export const AppRouter = props => {
             <HomeContainer />
           </Route>
         </Switch>
-      </HashRouter>
+      </ConnectedRouter>
     </>
   );
 };
