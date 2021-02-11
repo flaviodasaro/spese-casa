@@ -4,6 +4,7 @@ import { InputRow } from "../../common/components/form/input-row/InputRow";
 import { Input } from "../../common/components/form/input/Input";
 import { SinglePageTemplate } from "../../layout/content/single-page-template/SinglePageTemplate";
 import { withNamespaces } from "react-i18next";
+import { SPENDING_CATEGORIES_KEY } from "../../common/constants";
 import "./SpendingCategories.scss";
 
 const columns = [
@@ -73,4 +74,4 @@ const SpendingCategoriesComponent = withNamespaces()(
   }
 );
 
-export const SpendingCategories = withChangeIconOnInit(SETTINGS_KEY)(SpendingCategoriesComponent);
+export const SpendingCategories = withChangeIconOnInit(SPENDING_CATEGORIES_KEY)(SpendingCategoriesComponent);
