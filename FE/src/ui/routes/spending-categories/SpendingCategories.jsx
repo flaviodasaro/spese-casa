@@ -16,7 +16,7 @@ const columns = [
   { field: "noteCategoria", headerName: "Note Categoria", width: 750 }
 ];
 
-export const SpendingCategories = withNamespaces()(
+const SpendingCategoriesComponent = withNamespaces()(
   ({
     t,
     categoryList,
@@ -72,3 +72,5 @@ export const SpendingCategories = withNamespaces()(
     );
   }
 );
+
+export const SpendingCategories = withChangeIconOnInit(SETTINGS_KEY)(SpendingCategoriesComponent);
