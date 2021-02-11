@@ -5,6 +5,7 @@ import { Input } from "../../common/components/form/input/Input";
 import { SinglePageTemplate } from "../../layout/content/single-page-template/SinglePageTemplate";
 import { withNamespaces } from "react-i18next";
 import { SPENDING_CATEGORIES_KEY } from "../../common/constants";
+import { withChangeIconOnInit } from "../../common/hocs/withChangeIconOnInit";
 import "./SpendingCategories.scss";
 
 const columns = [
