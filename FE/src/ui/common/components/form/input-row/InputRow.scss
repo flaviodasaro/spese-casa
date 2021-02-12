@@ -1,10 +1,24 @@
+@import "../../../../styles/utils.scss";
+
 .input-row {
     display: flex;
-    justify-content: space-between;
-    &.center-all{
-        justify-content: center;
+    @include phone {
+        justify-content: unset;
+        flex-direction: column;
+        align-items: center;
+    }
+    @include tablet-and-up {
+        justify-content: space-between;
+        &.center-all {
+            justify-content: center;
+        }
     }
     > div {
-        width: 45%;
+        @include phone {
+            width: 95%;
+        }
+        @include tablet-and-up {
+            width: 45%;
+        }
     }
 }
