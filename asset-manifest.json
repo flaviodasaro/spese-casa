@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/spese-casa/static/css/main.888b5838.chunk.css",
-    "main.js": "/spese-casa/static/js/main.19716d17.chunk.js",
-    "main.js.map": "/spese-casa/static/js/main.19716d17.chunk.js.map",
+    "main.css": "/spese-casa/static/css/main.12952a0d.chunk.css",
+    "main.js": "/spese-casa/static/js/main.6aabe09c.chunk.js",
+    "main.js.map": "/spese-casa/static/js/main.6aabe09c.chunk.js.map",
     "runtime-main.js": "/spese-casa/static/js/runtime-main.f23589b7.js",
     "runtime-main.js.map": "/spese-casa/static/js/runtime-main.f23589b7.js.map",
-    "static/js/2.41e1a1a6.chunk.js": "/spese-casa/static/js/2.41e1a1a6.chunk.js",
-    "static/js/2.41e1a1a6.chunk.js.map": "/spese-casa/static/js/2.41e1a1a6.chunk.js.map",
+    "static/js/2.c97869ab.chunk.js": "/spese-casa/static/js/2.c97869ab.chunk.js",
+    "static/js/2.c97869ab.chunk.js.map": "/spese-casa/static/js/2.c97869ab.chunk.js.map",
     "static/js/3.cc5f33d2.chunk.js": "/spese-casa/static/js/3.cc5f33d2.chunk.js",
     "static/js/3.cc5f33d2.chunk.js.map": "/spese-casa/static/js/3.cc5f33d2.chunk.js.map",
     "index.html": "/spese-casa/index.html",
-    "static/css/main.888b5838.chunk.css.map": "/spese-casa/static/css/main.888b5838.chunk.css.map",
-    "static/js/2.41e1a1a6.chunk.js.LICENSE.txt": "/spese-casa/static/js/2.41e1a1a6.chunk.js.LICENSE.txt"
+    "static/css/main.12952a0d.chunk.css.map": "/spese-casa/static/css/main.12952a0d.chunk.css.map",
+    "static/js/2.c97869ab.chunk.js.LICENSE.txt": "/spese-casa/static/js/2.c97869ab.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f23589b7.js",
-    "static/js/2.41e1a1a6.chunk.js",
-    "static/css/main.888b5838.chunk.css",
-    "static/js/main.19716d17.chunk.js"
+    "static/js/2.c97869ab.chunk.js",
+    "static/css/main.12952a0d.chunk.css",
+    "static/js/main.6aabe09c.chunk.js"
   ]
 }
