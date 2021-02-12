@@ -63,21 +63,6 @@ const handleApiresult = (promise, onSuccess, onFailure, onFinally) =>
       return res;
     });
 
-export const performGet = (
-  url,
-  queryParams,
-  onSuccess,
-  onFailure,
-  onFinally
-) => {
-  return handleApiresult(
-    axios.get(url, { params: queryParams || {} }),
-    onSuccess,
-    onFailure,
-    onFinally
-  );
-};
-
 const commonHandler = ({
   dispatch,
   promiseGetter,

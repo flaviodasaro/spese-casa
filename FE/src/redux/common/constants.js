@@ -1,4 +1,6 @@
 //HOSTNAME
+export const SESSION_STORAGE_HOST_TYPE_KEY = "commonHostType";
+export const SESSION_STORAGE_HOSTNAME_KEY = "commonHostname";
 export const MOCKED_HOST_NAME = "http://localhost:4000";
 export const LOCAL_BE_HOST_NAME = "http://localhost:8080";
 export const HOSTNAME_VALUES = {

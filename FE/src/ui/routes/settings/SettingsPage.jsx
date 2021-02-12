@@ -15,7 +15,7 @@ const SettingsPageComponent = ({
   selectedHostname,
   selectHostname,
   isCustomSelected,
-  setHostnameByType,
+  handleSubmit,
   t
 }) => {
   const [hostnameOptions, setHostnameOptions] = useState([]);
@@ -29,7 +29,7 @@ const SettingsPageComponent = ({
   }, []);
   return (
     <SinglePageTemplate h1LabelKey={"SETTINGS.TITLE"}>
-      <GenericForm disableSubmitBtn={isFormDisabled} onSubmit={() => setHostnameByType(selectedHostname, customHostname)}>
+      <GenericForm disableSubmitBtn={isFormDisabled} onSubmit={() => handleSubmit(selectedHostname, customHostname)}>
         <InputRow
           Component1={
             <Input

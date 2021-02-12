@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { SettingsPage } from "./SettingsPage";
 
 import {
-  setHostnameByType,
+  handleSubmit,
   selectHostname,
   changeCustomHostname
 } from "../../../redux/settings/actions";
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
   isCustomSelected:isCustomHostnameSelected(state)
 });
 
-const mapDispatchToProps = { setHostnameByType, selectHostname, changeCustomHostname };
+const mapDispatchToProps = { handleSubmit, selectHostname, changeCustomHostname };
 
 export const SettingsPageContainer = connect(
   mapStateToProps,
