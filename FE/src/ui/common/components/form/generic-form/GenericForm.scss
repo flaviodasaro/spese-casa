@@ -1,6 +1,9 @@
+@import "../../../../styles/utils.scss";
+
 .form-tag {
     padding: 30px;
     background-color: aliceblue;
+    overflow: auto;
 
     .submit-container {
         margin-top: 50px;
@@ -8,6 +11,14 @@
         justify-content: center;
         .clear-btn-wrapper {
             margin-left: 100px;
+        }
+        @include phone{
+            flex-direction: column;
+            justify-content: unset;
+            .clear-btn-wrapper {
+                margin-left: 0;
+                margin-top: 10px;
+            }   
         }
     }
 }
