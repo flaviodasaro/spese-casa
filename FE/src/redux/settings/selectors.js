@@ -1,19 +1,56 @@
+import {
+  HOSTNAME_VALUES,
+  LOCAL_BE_HOST_NAME,
+  MOCKED_HOST_NAME
+} from "../common/constants";
 import { createSelector } from "reselect";
 
-import { LOCAL_BE_HOST_NAME, MOCKED_HOST_NAME } from "../common/constants";
+export const MAP_TYPE_TO_HOSTNAME = {
+  LOCAL_BE: LOCAL_BE_HOST_NAME,
+  LOCAL_MOCK_BE: MOCKED_HOST_NAME
+};
 
 export const getSettingsSlice = state => state.settingsReducer;
 
-export const getIsMockHostName = createSelector(
+export const getHostname = createSelector(
   getSettingsSlice,
-  state => state.isMockHostName
+  state => state.hostname
 );
 
-export const getHostName = createSelector(getIsMockHostName, isMockHostName =>
-  isMockHostName ? MOCKED_HOST_NAME : LOCAL_BE_HOST_NAME
+export const getSelectedHostname = createSelector(
+  getSettingsSlice,
+  state => state.selectedHostname
 );
 
-export const getTestResponse = createSelector(
+export const getCustomHostname = createSelector(
   getSettingsSlice,
-  state => state.testResponse
+  state => state.customHostname
+);
+
+export const isLocalBeHostname = createSelector(
+  getHostname,
+  hostname => hostname === LOCAL_BE_HOST_NAME
+);
+export const isLocalMockBeHostname = createSelector(
+  getHostname,
+  hostname => hostname === MOCKED_HOST_NAME
+);
+
+export const isCustomHostname = createSelector(
+  isLocalBeHostname,
+  isLocalMockBeHostname,
+  (isLocal, isLocalMock) => !isLocal && !isLocalMock
+);
+
+export const isCustomHostnameSelected = createSelector(
+  getSelectedHostname,
+  selectedHostname => selectedHostname === HOSTNAME_VALUES.CUSTOM
+);
+
+export const isSelectHostnameFormDisabled = createSelector(
+  getSelectedHostname,
+  isCustomHostnameSelected,
+  getCustomHostname,
+  (selectedHostname, isCustom, customHostname) =>
+    !selectedHostname || (isCustom && !customHostname)
 );

@@ -51,7 +51,6 @@ const GenericFormComponent = ({
 
 GenericFormComponent.defaultProps = {
   preventDefaultOnSubmit: true,
-  useInternalState: true,
   submitLabelKey: "COMMON.FORM.SUBMIT",
   clearLabelKey: "COMMON.FORM.RESET",
   withClearButton: true,

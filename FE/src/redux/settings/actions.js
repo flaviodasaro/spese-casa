@@ -1,42 +1,28 @@
+import { CUSTOM_HOSTNAME_CHANGED, HOSTNAME_CHANGED, HOSTNAME_SELECTED } from "./actionTypes";
 import {
-  MOCK_HOST_NAME_TOGGLED,
-  TEST_API_CALL_RESPONSE_SAVED
-} from "./actionTypes";
-import { performGet } from "../api/utils";
-import { getHostName as getHostNameSelector } from "./selectors";
+  getHostname as getHostNameSelector,
+  MAP_TYPE_TO_HOSTNAME
+} from "./selectors";
 
-export const getHostName = () => (dispatch, getState) =>
+export const getHostname = () => (dispatch, getState) =>
   getHostNameSelector(getState());
 
-export const toggleMockHostName = () => ({
-  type: MOCK_HOST_NAME_TOGGLED
+const changeHostname = hostname => ({
+  type: HOSTNAME_CHANGED,
+  payload: { hostname }
 });
 
-export const saveTestApiCall = testResponse => ({
-  type: TEST_API_CALL_RESPONSE_SAVED,
-  payload: { testResponse }
+export const changeCustomHostname = customHostname => ({
+  type: CUSTOM_HOSTNAME_CHANGED,
+  payload: { customHostname }
 });
 
-export const doTestGet = () => dispatch => {
-  const url = `${dispatch(getHostName())}/user`;
-  performGet(
-    url,
-    null,
-    response => {
-      dispatch(saveTestApiCall(response));
-    },
-    console.log
-  );
+export const selectHostname = selectedHostname => ({
+  type: HOSTNAME_SELECTED,
+  payload: { selectedHostname }
+});
+
+export const setHostnameByType = (selectedHostname, customHostname) => dispatch => {
+  const newHostname = MAP_TYPE_TO_HOSTNAME[selectedHostname] || customHostname;
+  newHostname && dispatch(changeHostname(newHostname));
 };
-
-export const testGetUserById = (id) => dispatch => {
-  const url = `${dispatch(getHostName())}/utente/${id}`;
-  performGet(
-    url,
-    null,
-    response => {
-      console.log(response);
-    },
-    console.log
-  );
-}

@@ -1,20 +1,31 @@
+import { LOCAL_BE_HOST_NAME, HOSTNAME_VALUES } from "../common/constants";
 import {
-  MOCK_HOST_NAME_TOGGLED,
-  TEST_API_CALL_RESPONSE_SAVED
+  CUSTOM_HOSTNAME_CHANGED,
+  HOSTNAME_CHANGED,
+  HOSTNAME_SELECTED
 } from "./actionTypes";
 
 const initialState = {
-  isMockHostName:false,
-  testResponse:null
+  hostname:LOCAL_BE_HOST_NAME,
+  selectedHostname:HOSTNAME_VALUES.LOCAL_BE,
+  customHostname:""
 };
 
 export const settingsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case MOCK_HOST_NAME_TOGGLED: {
-      return { ...state, isMockHostName:!state.isMockHostName };
+    case HOSTNAME_CHANGED: {
+      return { ...state, hostname:action.payload.hostname };
     }
-    case TEST_API_CALL_RESPONSE_SAVED: {
-      return { ...state, testResponse:action.payload.testResponse };
+    case HOSTNAME_SELECTED: {
+      const selectedHostname = action.payload.selectedHostname;
+      const newState = { ...state, selectedHostname };
+      if(selectedHostname !== HOSTNAME_VALUES.CUSTOM){
+        newState.customHostname = "";
+      }
+      return { ...newState };
+    }
+    case CUSTOM_HOSTNAME_CHANGED: {
+      return { ...state, customHostname:action.payload.customHostname };
     }
     default: {
       return state;

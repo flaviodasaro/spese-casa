@@ -23,9 +23,11 @@ export const CustomSelect = ({
         }}
       >
         {noneElement && <option aria-label={noneElementLabel} value="" />}
-        {optionList.map(op => (
-          <option value={op[valueOptionProp]}>{op[textOptionProp]}</option>
-        ))}
+        {optionList.map(op => {
+          const value = op[valueOptionProp];
+          return (
+          <option key={value} value={value}>{op[textOptionProp]}</option>
+        )})}
       </Select>
     </FormControl>
   );

@@ -1,45 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { withChangeIconOnInit } from "../../common/hocs/withChangeIconOnInit";
 import { SETTINGS_KEY } from "../../common/constants";
+import { GenericForm } from "../../common/components/form/generic-form/GenericForm";
+import { SinglePageTemplate } from "../../layout/content/single-page-template/SinglePageTemplate";
+import { InputRow } from "../../common/components/form/input-row/InputRow";
+import { Input } from "../../common/components/form/input/Input";
+import { HOSTNAME_OPTIONS } from "../../../redux/common/constants";
+import { withNamespaces } from "react-i18next";
 
 const SettingsPageComponent = ({
-  isMockHostName,
-  toggleMockHostName,
-  doTestGet,
-  testGetUserById,
-  testResponse
+  customHostname,
+  isFormDisabled,
+  changeCustomHostname,
+  selectedHostname,
+  selectHostname,
+  isCustomSelected,
+  setHostnameByType,
+  t
 }) => {
-    const textAreaValue = testResponse && JSON.stringify(testResponse);
-    const [idUtente, setIdUtente] = useState(0);
+  const [hostnameOptions, setHostnameOptions] = useState([]);
+  useEffect(() => {
+    setHostnameOptions(
+      HOSTNAME_OPTIONS.map(id => ({
+        id,
+        label: t(`SETTINGS.FORM.OPTION_LIST.${id}`)
+      }))
+    );
+  }, []);
   return (
-    <div>
-      <h1>SettingsPage</h1>
-      <div>
-        <p>
-          <label>Mock hostname</label>
-          <input
-            type="checkbox"
-            value={isMockHostName}
-            checked={isMockHostName}
-            onChange={toggleMockHostName}
-          />
-        </p>
-        <p>
-          <button onClick={doTestGet}>Test Get </button>
-          <textarea defaultValue={textAreaValue} onMouseEnter={() => {
-              console.log(testResponse)
-              }}></textarea>
-        </p>
-      </div>
-      <div>
-        <label>ID</label>
-        <input type="number" value={idUtente} onChange={event => setIdUtente(event.target.value)} />
-        <button onClick={() => testGetUserById(idUtente)}>Submit</button>
-      </div>
-    </div>
+    <SinglePageTemplate h1LabelKey={"SETTINGS.TITLE"}>
+      <GenericForm disableSubmitBtn={isFormDisabled} onSubmit={() => setHostnameByType(selectedHostname, customHostname)}>
+        <InputRow
+          Component1={
+            <Input
+              type="select"
+              name="SETTINGS.FORM.HOSTNAME_LIST"
+              labelKey="SETTINGS.FORM.HOSTNAME_LIST"
+              optionList={hostnameOptions}
+              value={selectedHostname}
+              onChangeByValue={selectHostname}
+              valueOptionProp="id"
+              textOptionProp="label"
+            />
+          }
+          Component2={
+            isCustomSelected ? (
+              <Input
+                name="SETTINGS.FORM.CUSTOM_HOSTNAME"
+                labelKey="SETTINGS.FORM.CUSTOM_HOSTNAME"
+                value={customHostname}
+                onChangeByValue={changeCustomHostname}
+              />
+            ) : (
+              <></>
+            )
+          }
+        />
+        {}
+      </GenericForm>
+    </SinglePageTemplate>
   );
 };
 
-export const SettingsPage = withChangeIconOnInit(SETTINGS_KEY)(
-  SettingsPageComponent
+export const SettingsPage = withNamespaces()(
+  withChangeIconOnInit(SETTINGS_KEY)(SettingsPageComponent)
 );

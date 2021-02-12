@@ -7,7 +7,7 @@ import {
   showFeedbackModalWithProps
 } from "../feedback-manager/actions";
 
-import { getHostName } from "../settings/selectors";
+import { getHostname } from "../settings/selectors";
 
 export const API_VERBS = {
   POST: "post",
@@ -134,7 +134,7 @@ export const genericApiCall = (verb, apiParams, settings = {}) => (
   const { endpoint, queryParams, body, onSuccess, onFailure } = apiParams;
 
   const loader = loaderKey || LOADER_KEYS.GLOBAL;
-  const url = `${getHostName(getState())}/${endpoint}`;
+  const url = `${getHostname(getState())}/${endpoint}`;
 
   dispatch(increaseLoader(loader));
 
