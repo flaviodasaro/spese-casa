@@ -1,4 +1,5 @@
 import axios from "axios";
+import https from "https";
 import { LOADER_KEYS } from "../loader/loaderKeys";
 import { increaseLoader, decreaseLoader } from "../loader/actions";
 import {
@@ -8,6 +9,24 @@ import {
 } from "../feedback-manager/actions";
 
 import { getHostname } from "../settings/selectors";
+
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false
+});
+
+const DEFAULT_HEADERS = { "Access-Control-Allow-Origin": "*" };
+
+const combineConfigs = (customHeaders, noRejectUnauthorized, otherConfigs) => {
+  const result = {
+    headers: { ...DEFAULT_HEADERS, ...(customHeaders || {}) },
+    httpsAgent,
+    ...otherConfigs
+  };
+  if (noRejectUnauthorized) {
+    delete result.httpsAgent;
+  }
+  return result;
+};
 
 export const API_VERBS = {
   POST: "post",
@@ -142,7 +161,11 @@ export const genericApiCall = (verb, apiParams, settings = {}) => (
     case API_VERBS.GET: {
       return commonHandler({
         dispatch,
-        promiseGetter: () => axios.get(url, { params: queryParams || {} }),
+        promiseGetter: () =>
+          axios.get(url, {
+            params: queryParams || {},
+            ...combineConfigs()
+          }),
         onSuccess,
         showSuccessAlert,
         onFailure,
@@ -154,7 +177,8 @@ export const genericApiCall = (verb, apiParams, settings = {}) => (
     case API_VERBS.POST: {
       return commonHandler({
         dispatch,
-        promiseGetter: () => axios.post(url, { ...body }),
+        promiseGetter: () =>
+          axios.post(url, { ...body }, { ...combineConfigs() }),
         onSuccess,
         showSuccessAlert,
         onFailure,
@@ -166,7 +190,8 @@ export const genericApiCall = (verb, apiParams, settings = {}) => (
     case API_VERBS.PUT: {
       return commonHandler({
         dispatch,
-        promiseGetter: () => axios.put(url, { ...body }),
+        promiseGetter: () =>
+          axios.put(url, { ...body }, { ...combineConfigs() }),
         onSuccess,
         showSuccessAlert,
         onFailure,
@@ -175,10 +200,11 @@ export const genericApiCall = (verb, apiParams, settings = {}) => (
         loader
       });
     }
-    case API_VERBS.DELETE:{
+    case API_VERBS.DELETE: {
       return commonHandler({
         dispatch,
-        promiseGetter: () => axios.delete(url, { params: queryParams || {} }),
+        promiseGetter: () =>
+          axios.delete(url, { params: queryParams || {}, ...combineConfigs() }),
         onSuccess,
         showSuccessAlert,
         onFailure,
