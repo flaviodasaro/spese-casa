@@ -1,5 +1,6 @@
 package com.app.spesecasa.service;
 
+import com.app.spesecasa.dto.InquiryForArchiveDto;
 import com.app.spesecasa.entity.Utente;
 import com.app.spesecasa.repository.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,13 @@ public class UtenteService {
 
 	public void deleteUtenteById(Integer id){
 		utenteRepository.deleteById(id);
+	}
+
+	public Integer getUserCount(){
+		return utenteRepository.getUsersCount();
+	}
+
+	public List<InquiryForArchiveDto> getInquiryForArchive(){
+		return utenteRepository.getUsersWithSingleGroup();
 	}
 }

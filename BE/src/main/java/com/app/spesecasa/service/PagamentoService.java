@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -77,6 +78,11 @@ public class PagamentoService {
 	}
 
 	private void insertNewPagamento(SinglePaymentInfo paymentInfo, Pair<Utente, Gruppo> pair) {
+		Pagamento pagamento = getPagamentoReadyForInsert(paymentInfo, pair);
+		insertPagamento(pagamento);
+	}
+
+	private Pagamento getPagamentoReadyForInsert(SinglePaymentInfo paymentInfo, Pair<Utente, Gruppo> pair) {
 		Integer idCategoriaSpesa = paymentInfo.getIdCategoriaSpesa();
 		if (idCategoriaSpesa == null) {
 			throw new CommonRunTimeException("Id categoria di spesa non deve essere null", HttpStatus.BAD_REQUEST,
@@ -93,8 +99,7 @@ public class PagamentoService {
 		pagamento.setFlgPagato(Boolean.FALSE);
 		pagamento.setImporto(paymentInfo.getImporto());
 		pagamento.setDescrizione(paymentInfo.getDescrizione());
-
-		insertPagamento(pagamento);
+		return pagamento;
 	}
 
 	public void massiveInsertPagamentoByIds(RequestInserisciPagamentoMassivo body) {
@@ -141,44 +146,52 @@ public class PagamentoService {
 
 	}
 
-	public List<DiffsByUtentiDto> getTotAvereByUtentiList(List<Integer> idList){
+	public List<DiffsByUtentiDto> getTotAvereByUtentiList(List<Integer> idList) {
 		List<Utente> utenteList = idList.stream().map(utenteService::getUtenteById).collect(Collectors.toList());
-		if(utenteList.contains(null)){
-		List<Integer> utentiNull = idList.stream().filter(id -> utenteList.stream().noneMatch(ut -> ut != null && ut.getIdUtente().equals(id))).collect(Collectors.toList());
+		if (utenteList.contains(null)) {
+			List<Integer> utentiNull = idList.stream()
+					.filter(id -> utenteList.stream().noneMatch(ut -> ut != null && ut.getIdUtente().equals(id)))
+					.collect(Collectors.toList());
 			throw new CommonRunTimeException("Errore utente/i non trovato: " + utentiNull, Constants.UTENTE_NOT_FOUND);
 		}
 
 		//tutto ok
 		List<DiffsByUtentiDto> res = new ArrayList<>();
-		for(int i = 0; i< idList.size() - 1; ++i){
-			for(int j = i + 1; j< idList.size(); ++j){
+		for (int i = 0; i < idList.size() - 1; ++i) {
+			for (int j = i + 1; j < idList.size(); ++j) {
 				Integer utente1 = idList.get(i);
 				Integer utente2 = idList.get(j);
 
-				GetTotAvereDto getTotAvereDto =  getTotAvereByUtenti(utente1, utente2);
-				BigDecimal value = getTotAvereDto.getTotAvere() != null ? getTotAvereDto.getTotAvere() : BigDecimal.ZERO;
+				GetTotAvereDto getTotAvereDto = getTotAvereByUtenti(utente1, utente2);
+				BigDecimal value = getTotAvereDto.getTotAvere() != null ?
+						getTotAvereDto.getTotAvere() :
+						BigDecimal.ZERO;
+				value = value.setScale(2, RoundingMode.HALF_DOWN);
 
-				if( BigDecimal.ZERO.compareTo(value) > 0){
+				if (BigDecimal.ZERO.compareTo(value) > 0) {
 					utente1 = idList.get(j);
 					utente2 = idList.get(i);
-					getTotAvereDto.setTotAvere(value.multiply(BigDecimal.valueOf(-1)));
+					value = value.multiply(BigDecimal.valueOf(-1)).setScale(2, RoundingMode.HALF_DOWN);
 				}
-				res.add(new DiffsByUtentiDto(utente1, utente2, getTotAvereDto));
+				res.add(new DiffsByUtentiDto(utente1, utente2, new GetTotAvereDto(value)));
 			}
 		}
 		return res;
 
 	}
-	public Map<Integer, BigDecimal> getTotAvereAggregate(List<Integer> idList){
+
+	public Map<Integer, BigDecimal> getTotAvereAggregate(List<Integer> idList) {
 		List<DiffsByUtentiDto> diffsByUtentiDtos = getTotAvereByUtentiList(idList);
 		Map<Integer, BigDecimal> result = new HashMap<>();
 		idList.forEach(id -> result.put(id, BigDecimal.ZERO));
 		diffsByUtentiDtos.forEach(el -> {
-			BigDecimal value = el.getGetTotAvereDto().getTotAvere() != null ? el.getGetTotAvereDto().getTotAvere() : BigDecimal.ZERO;
+			BigDecimal value = el.getGetTotAvereDto().getTotAvere() != null ?
+					el.getGetTotAvereDto().getTotAvere() :
+					BigDecimal.ZERO;
 			Integer utente1 = el.getUtente1();
 			Integer utente2 = el.getUtente2();
-			result.put(utente1, result.get(utente1).add(value));
-			result.put(utente2, result.get(utente2).subtract(value));
+			result.put(utente1, result.get(utente1).add(value).setScale(2, RoundingMode.HALF_EVEN));
+			result.put(utente2, result.get(utente2).subtract(value).setScale(2, RoundingMode.HALF_EVEN));
 		});
 
 		return result;
@@ -211,23 +224,59 @@ public class PagamentoService {
 		String descrizione = descrizioneRaw == null ? null : "%" + descrizioneRaw.toUpperCase() + "%";
 		LocalDate tmsInserimentoMaxRaw = body.getTmsInserimentoMax();
 		LocalDate tmsModificaMaxRaw = body.getTmsModificaMax();
-		LocalDateTime tmsInserimentoMax =  tmsInserimentoMaxRaw == null ? null : tmsInserimentoMaxRaw.atTime(LocalTime.MAX);
-		LocalDateTime tmsModificaMax =  tmsModificaMaxRaw == null ? null : tmsModificaMaxRaw.atTime(LocalTime.MAX);
+		LocalDateTime tmsInserimentoMax = tmsInserimentoMaxRaw == null ?
+				null :
+				tmsInserimentoMaxRaw.atTime(LocalTime.MAX);
+		LocalDateTime tmsModificaMax = tmsModificaMaxRaw == null ? null : tmsModificaMaxRaw.atTime(LocalTime.MAX);
 
-		List<Pagamento> list = pagamentoRepository.getPagamentiByFilters(
-				body.getIdPagamento(),
-				body.getIdUtentePagante(),
-				body.getIdGruppoPartecipante(),
-				body.getIdCategoriaSpesa(),
-				body.getFlgPagato(),
-				body.getImportoMin(),
-				body.getImportoMax(),
-				descrizione,
-				body.getTmsInserimentoMin(),
-				tmsInserimentoMax,
-				body.getTmsModificaMin(),
-				tmsModificaMax
-		);
+		List<Pagamento> list = pagamentoRepository
+				.getPagamentiByFilters(body.getIdPagamento(), body.getIdUtentePagante(), body.getIdGruppoPartecipante(),
+						body.getIdCategoriaSpesa(), body.getFlgPagato(), body.getImportoMin(), body.getImportoMax(),
+						descrizione, body.getTmsInserimentoMin(), tmsInserimentoMax, body.getTmsModificaMin(),
+						tmsModificaMax);
 		return new ResponsePaginatedList(list);
+	}
+
+	public void archiveAll() {
+		List<Utente> users = utenteService.getAllUsers();
+		List<InquiryForArchiveDto> inquiryData = utenteService.getInquiryForArchive();
+		if (inquiryData == null || users == null || inquiryData.size() != users.size()) {
+			throw new CommonRunTimeException("Almeno un utente non ha un gruppo singolo associato",
+					HttpStatus.INTERNAL_SERVER_ERROR, Constants.GROUPS_WITH_SINGLE_USER_MANDATORY);
+		}
+
+		List<DiffsByUtentiDto> diffs = getTotAvereByUtentiList(
+				inquiryData.stream().map(data -> data.getIdUtente()).collect(Collectors.toList()));
+
+		if (diffs != null && diffs.size() > 0) {
+
+			//prepare New Payments
+			List<Pagamento> fakePayments = diffs.stream()
+					.map(diff -> getPagamentoForArchiveInsert(diff, users, inquiryData)).collect(Collectors.toList());
+
+			System.out.println("AA");
+			//pagamentoRepository.payAll();
+		}
+
+	}
+
+	private Pagamento getPagamentoForArchiveInsert(DiffsByUtentiDto diff, List<Utente> users,
+			List<InquiryForArchiveDto> inquiryData) {
+		Integer idUtentePagante = diff.getUtente2(); //utente avere +; utente che a FE sta a destra della freccia
+		Utente utente = users.stream().filter(u -> u.getIdUtente().equals(idUtentePagante)).findFirst()
+				.orElseThrow(() -> new CommonRunTimeException("Utente non trovato", Constants.UTENTE_NOT_FOUND));
+
+		Integer idGruppo = inquiryData.stream().filter(el -> el.getIdUtente().equals(idUtentePagante)).findFirst()
+				.orElseThrow(() -> new CommonRunTimeException("Gruppo non trovato", Constants.GRUPPO_NOT_FOUND))
+				.getIdGruppo();
+		Gruppo gruppo = new Gruppo();
+		gruppo.setIdGruppo(idGruppo);
+
+		SinglePaymentInfo payInfo = new SinglePaymentInfo();
+		payInfo.setDescrizione("Pagamento fittizio post archiviazione pregresso");
+		payInfo.setIdCategoriaSpesa(Constants.CATEGORIA_SPESA_FITTIZIA);
+		payInfo.setImporto(diff.getGetTotAvereDto().getTotAvere());
+
+		return getPagamentoReadyForInsert(payInfo, Pair.of(utente, gruppo));
 	}
 }

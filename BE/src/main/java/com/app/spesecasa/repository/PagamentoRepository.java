@@ -58,4 +58,8 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer> {
 			@Param("tmsModificaMin") LocalDate tmsModificaMin,
 			@Param("tmsModificaMax") LocalDateTime tmsModificaMax
 	);
+
+
+	@Query(nativeQuery = true, value = "UPDATE spese_casa.pagamento SET flg_pagato = 1 WHERE flg_pagato = 0 ")
+	Integer payAll();
 }

@@ -153,25 +153,28 @@ public class PagamentoController {
 	}
 
 	@PostMapping("/get-tot-avere-by-utenti-list")
-	public ResponseEntity<List<DiffsByUtentiDto>> getTotAvereByUtentiList(
-			@RequestBody GetTotAvereByUtentiList body) {
+	public ResponseEntity<List<DiffsByUtentiDto>> getTotAvereByUtentiList(@RequestBody GetTotAvereByUtentiList body) {
 		List<Integer> idList = body.getIdList();
-		if(idList == null || idList.size() < 2){
-			throw new CommonRunTimeException("idLlist deve avere una lunghezza >= 2", HttpStatus.BAD_REQUEST, Constants.UTENTE_LIST_NOT_ENOUGH);
+		if (idList == null || idList.size() < 2) {
+			throw new CommonRunTimeException("idLlist deve avere una lunghezza >= 2", HttpStatus.BAD_REQUEST,
+					Constants.UTENTE_LIST_NOT_ENOUGH);
 		}
 		try {
-			return ResponseEntity.ok(pagamentoService.getTotAvereByUtentiList(idList));
+			List<DiffsByUtentiDto> list = pagamentoService.getTotAvereByUtentiList(idList);
+			return ResponseEntity.ok(list);
+
 		} catch (Exception e) {
 			Utils.handleCommonError(e);
 			return null;
 		}
 	}
+
 	@PostMapping("/get-tot-avere-aggregate")
-	public ResponseEntity<Map<Integer, BigDecimal>> getTotAvereAggregate(
-			@RequestBody GetTotAvereByUtentiList body) {
+	public ResponseEntity<Map<Integer, BigDecimal>> getTotAvereAggregate(@RequestBody GetTotAvereByUtentiList body) {
 		List<Integer> idList = body.getIdList();
-		if(idList == null || idList.size() < 2){
-			throw new CommonRunTimeException("idLlist deve avere una lunghezza >= 2", HttpStatus.BAD_REQUEST, Constants.UTENTE_LIST_NOT_ENOUGH);
+		if (idList == null || idList.size() < 2) {
+			throw new CommonRunTimeException("idLlist deve avere una lunghezza >= 2", HttpStatus.BAD_REQUEST,
+					Constants.UTENTE_LIST_NOT_ENOUGH);
 		}
 		try {
 			return ResponseEntity.ok(pagamentoService.getTotAvereAggregate(idList));
@@ -189,6 +192,18 @@ public class PagamentoController {
 			Utils.handleCommonError(e);
 			return null;
 		}
+	}
+
+	@PostMapping("/archive-all")
+	public ResponseEntity<Void> archiveAll() {
+		try{
+			pagamentoService.archiveAll();
+		}
+		catch(Exception e){
+			Utils.handleCommonError(e);
+		}
+
+		return ResponseEntity.noContent().build();
 	}
 
 }
