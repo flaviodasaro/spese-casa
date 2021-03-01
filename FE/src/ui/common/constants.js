@@ -8,6 +8,7 @@ export const ADD_PAYMENT_ROUTE = BASE_HREF + "/add-payment";
 export const REPORTS_ROUTE = BASE_HREF + "/reports";
 export const SETTINGS_ROUTE = BASE_HREF + "/settings";
 export const SPENDING_CATEGORIES_ROUTE = BASE_HREF + "/spending-categories";
+export const NOTES_ROUTE = BASE_HREF + "/notes";
 export const HOME_ROUTE = BASE_HREF + "/";
 
 // ***************** MENU ********************
@@ -21,6 +22,7 @@ export const CREATE_GROUP_KEY = "create-group";
 export const MANAGE_USER_KEY = "manage-user";
 export const SETTINGS_KEY = "settings";
 export const SPENDING_CATEGORIES_KEY = "spending-categories";
+export const NOTES_KEY = "notes";
 
 // ***************** STYLE ********************
 export const SIDEBAR_COLOR_EX = "#007cffad";

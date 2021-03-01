@@ -1,0 +1,9 @@
+@import '../../styles/utils.scss';
+
+.text-area-wrapper {
+    >textarea{
+        min-height: pxToRem(100);
+        min-width: 100%;
+        max-width: 100%;
+    }
+}

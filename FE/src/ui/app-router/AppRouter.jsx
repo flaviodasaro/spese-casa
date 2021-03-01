@@ -6,6 +6,7 @@ import { AddUserPageContainer, CreateGroupPageContainer, ManageUsersPageContaine
 import { AddPaymentPageContainer, ReportsPageContainer } from "../routes/payments";
 import { SettingsPageContainer } from "../routes/settings/SettingsPageContainer";
 import { SpendingCategoriesContainer } from "../routes/spending-categories/SpendingCategoriesContainer";
+import { NotesPageContainer } from "../routes/notes/NotesPageContainer";
 import {
   ADD_USER_ROUTE,
   CREATE_GROUP_ROUTE,
@@ -14,7 +15,8 @@ import {
   REPORTS_ROUTE,
   SETTINGS_ROUTE,
   HOME_ROUTE,
-  SPENDING_CATEGORIES_ROUTE
+  SPENDING_CATEGORIES_ROUTE,
+  NOTES_ROUTE
 } from "../common/constants";
 import { history } from "../../redux/store";
 
@@ -43,6 +45,9 @@ export const AppRouter = props => {
           </Route>
           <Route path={SPENDING_CATEGORIES_ROUTE}>
             <SpendingCategoriesContainer />
+          </Route>
+          <Route path={NOTES_ROUTE}>
+            <NotesPageContainer />
           </Route>
           <Route path={HOME_ROUTE}>
             <HomeContainer />

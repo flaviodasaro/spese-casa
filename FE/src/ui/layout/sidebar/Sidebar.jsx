@@ -5,7 +5,8 @@ import {
   faCog,
   faFunnelDollar,
   faUser,
-  faEuroSign
+  faEuroSign,
+  faStickyNote
 } from "@fortawesome/free-solid-svg-icons";
 import { SidebarIcon } from "../../common/components/SidebarIcon";
 import {
@@ -26,7 +27,9 @@ import {
   CREATE_GROUP_KEY,
   MANAGE_USER_KEY,
   SPENDING_CATEGORIES_KEY,
-  SPENDING_CATEGORIES_ROUTE
+  SPENDING_CATEGORIES_ROUTE,
+  NOTES_KEY,
+  NOTES_ROUTE
 } from "../../common/constants";
 
 const iconSettings = [
@@ -84,6 +87,13 @@ const iconSettings = [
     tooltipMessageI18nKey: "MENU.SPENDING_CATEGORIES",
     openSecondLevel: false,
     route: SPENDING_CATEGORIES_ROUTE
+  },
+  {
+    key: NOTES_KEY,
+    iconName: faStickyNote,
+    tooltipMessageI18nKey: "MENU.NOTES",
+    openSecondLevel: false,
+    route: NOTES_ROUTE
   },
   {
     key: SETTINGS_KEY,

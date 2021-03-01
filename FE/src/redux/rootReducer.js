@@ -9,6 +9,7 @@ import { usersReducer } from "./users/reducer";
 import { spendingCategoriesReducer } from "./spending-categories/reducer";
 import { homeReducer } from "./home/reducer";
 import { paymentsReducer } from "./payments/reducer";
+import { notesReducer } from "./notes/reducer";
 
 export const createRootReducer = history => combineReducers({
   feedbackManagerReducer,
@@ -18,6 +19,7 @@ export const createRootReducer = history => combineReducers({
   paymentsReducer,
   settingsReducer,
   spendingCategoriesReducer,
+  notesReducer,
   usersReducer,
   router:connectRouter(history)
 })
