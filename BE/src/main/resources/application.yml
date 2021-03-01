@@ -19,3 +19,5 @@ spring:
 custom:
   exceptions:
     returnStackTrace: true
+  dynamic-resources:
+    path: 'C:\Users\DASAROF\Documents\Cose spam non lavoro\Documentazione spese-casa\Dynamic Resources'
