@@ -1,24 +1,26 @@
 @import "../../../../styles/utils.scss";
 
 .form-tag {
-    padding: 30px;
+    padding: pxToRem(30);
     background-color: aliceblue;
-    overflow: auto;
+    @include phone {
+        overflow: auto;
+    }
 
     .submit-container {
-        margin-top: 50px;
+        margin-top: pxToRem(50);
         display: flex;
         justify-content: center;
         .clear-btn-wrapper {
-            margin-left: 100px;
+            margin-left: pxToRem(100);
         }
-        @include phone{
+        @include phone {
             flex-direction: column;
             justify-content: unset;
             .clear-btn-wrapper {
                 margin-left: 0;
-                margin-top: 10px;
-            }   
+                margin-top: pxToRem(10);
+            }
         }
     }
 }
