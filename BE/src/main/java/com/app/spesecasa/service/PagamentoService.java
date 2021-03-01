@@ -176,7 +176,7 @@ public class PagamentoService {
 				res.add(new DiffsByUtentiDto(utente1, utente2, new GetTotAvereDto(value)));
 			}
 		}
-		return res;
+		return res.stream().filter(diff -> BigDecimal.ZERO.compareTo(diff.getGetTotAvereDto().getTotAvere()) < 0).collect(Collectors.toList());
 
 	}
 
@@ -253,6 +253,8 @@ public class PagamentoService {
 			//prepare New Payments
 			List<Pagamento> fakePayments = diffs.stream()
 					.map(diff -> getPagamentoForArchiveInsert(diff, users, inquiryData)).collect(Collectors.toList());
+
+
 
 			System.out.println("AA");
 			//pagamentoRepository.payAll();
