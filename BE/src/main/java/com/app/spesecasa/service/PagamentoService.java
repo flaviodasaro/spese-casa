@@ -263,12 +263,16 @@ public class PagamentoService {
 	private Pagamento getPagamentoForArchiveInsert(DiffsByUtentiDto diff, List<Utente> users,
 			List<InquiryForArchiveDto> inquiryData) {
 		Integer idUtentePagante = diff.getUtente2(); //utente avere +; utente che a FE sta a destra della freccia
-		Utente utente = users.stream().filter(u -> u.getIdUtente().equals(idUtentePagante)).findFirst()
+
+		Utente utente = users.stream()
+				.filter(u -> u.getIdUtente().equals(idUtentePagante))
+				.findFirst()
 				.orElseThrow(() -> new CommonRunTimeException("Utente non trovato", Constants.UTENTE_NOT_FOUND));
 
 		Integer idGruppo = inquiryData.stream().filter(el -> el.getIdUtente().equals(idUtentePagante)).findFirst()
 				.orElseThrow(() -> new CommonRunTimeException("Gruppo non trovato", Constants.GRUPPO_NOT_FOUND))
 				.getIdGruppo();
+
 		Gruppo gruppo = new Gruppo();
 		gruppo.setIdGruppo(idGruppo);
 
