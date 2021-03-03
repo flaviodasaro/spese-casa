@@ -2,8 +2,16 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { HomeContainer } from "../routes/home/HomeContainer";
-import { AddUserPageContainer, CreateGroupPageContainer, ManageUsersPageContainer } from "../routes/users";
-import { AddPaymentPageContainer, ReportsPageContainer } from "../routes/payments";
+import {
+  AddUserPageContainer,
+  CreateGroupPageContainer,
+  ManageUsersPageContainer
+} from "../routes/users";
+import {
+  AddPaymentPageContainer,
+  ReportsPageContainer,
+  ArchiveContainer
+} from "../routes/payments";
 import { SettingsPageContainer } from "../routes/settings/SettingsPageContainer";
 import { SpendingCategoriesContainer } from "../routes/spending-categories/SpendingCategoriesContainer";
 import { NotesPageContainer } from "../routes/notes/NotesPageContainer";
@@ -16,7 +24,8 @@ import {
   SETTINGS_ROUTE,
   HOME_ROUTE,
   SPENDING_CATEGORIES_ROUTE,
-  NOTES_ROUTE
+  NOTES_ROUTE,
+  ARCHIVE_ROUTE
 } from "../common/constants";
 import { history } from "../../redux/store";
 
@@ -39,6 +48,9 @@ export const AppRouter = props => {
           </Route>
           <Route path={REPORTS_ROUTE}>
             <ReportsPageContainer />
+          </Route>
+          <Route path={ARCHIVE_ROUTE}>
+            <ArchiveContainer />
           </Route>
           <Route path={SETTINGS_ROUTE}>
             <SettingsPageContainer />

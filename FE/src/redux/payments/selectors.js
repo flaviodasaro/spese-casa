@@ -138,7 +138,7 @@ export const getDataStructureForAggregateReport = createSelector(
         const amount = currentEntry[1] || 0;
         const userObj = getUserById(userId, userList);
         if (userObj) {
-          return { username: userObj.username, amount };
+          return { userId, username: userObj.username, amount };
         }
         return null;
       });

@@ -1,0 +1,31 @@
+@import "../../../styles/utils.scss";
+.archive {
+    .utenti-list {
+        > h5 {
+            font-size: pxToRem(20);
+        }
+        .username {
+            font-weight: 500;
+            font-size: larger;
+        }
+        .amount {
+            font-size: pxToRem(30);
+            font-weight: 700;
+            margin-left: pxToRem(35);
+            &.positive {
+                color: green;
+            }
+            &.negative {
+                color: red;
+            }
+        }
+    }
+    .add-icon-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        > span {
+            cursor: pointer;
+            color: green;
+        }
+    }
+}

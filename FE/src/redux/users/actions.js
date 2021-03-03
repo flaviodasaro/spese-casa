@@ -65,13 +65,11 @@ export const changeGroupNotes = groupNotes => ({
 export const resetCreateUserForm = () => ({ type: CREATE_USER_FORM_RESET });
 
 export const getAllUsers = () => dispatch => {
-  dispatch(
+  return dispatch(
     genericApiCall(API_VERBS.GET, {
       endpoint: GET_ALL_USERS_ENDPOINT,
       queryParams: {},
-      onSuccess: resp => {
-        dispatch(fetchUserList(resp.data));
-      }
+      onSuccess: resp => dispatch(fetchUserList(resp.data))
     })
   );
 };

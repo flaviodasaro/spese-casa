@@ -7,28 +7,11 @@ import { InputRow } from "../../../common/components/form/input-row/InputRow";
 import { Input } from "../../../common/components/form/input/Input";
 import { GroupListSelect } from "./group-list-select/GroupListSelect";
 import { PaymentsTable } from "../payments-table/PaymentsTable";
-import { faClone, faEraser, faPlus } from "@fortawesome/free-solid-svg-icons";
-import "./AddPaymentPage.scss";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { IconWithTooltip } from "../../../common/components/icon-with-tooltip/IconWithTooltip";
+import { staticActionColumns } from "../commons";
+import "./AddPaymentPage.scss";
 
-const staticActionColumns = [
-  {
-    actionKey: "cloneRow",
-    headerLabelKey: "PAYMENTS.CLONE_ROW",
-    iconName: faClone,
-    additionalClassname: "theme-color",
-    additionalCellProps: { align: "center" },
-    additionalHeadCellProps: { align: "center" }
-  },
-  {
-    actionKey: "deleteRow",
-    headerLabelKey: "PAYMENTS.DELETE_ROW",
-    iconName: faEraser,
-    additionalClassname: "make-red",
-    additionalCellProps: { align: "center" },
-    additionalHeadCellProps: { align: "center" }
-  }
-];
 
 const AddPaymentPageComponent = ({
   init,
