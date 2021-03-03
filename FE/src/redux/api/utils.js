@@ -89,6 +89,7 @@ const commonHandler = ({
 const commonSuccess = (dispatch, onSuccess, showAlert) => response => {
   onSuccess && onSuccess(response);
   showAlert && dispatch(showSuccessAlert());
+  return response;
 };
 
 const commonFailure = (
@@ -113,6 +114,7 @@ const commonFailure = (
       )
     );
   }
+  return response;
 };
 
 const commonFinally = (dispatch, loaderKey) => response => {
