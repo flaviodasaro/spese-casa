@@ -59,7 +59,16 @@
     "DELETE_ROW": "Elimina riga",
     "ADD_ROW": "Aggiungi riga",
     "OPEN_ASSOCIATIONS_MODAL":"Apri modale associazioni",
-    "SELECTED_GROUP":"Gruppo: "
+    "SELECTED_GROUP":"Gruppo: ",
+    "ARCHIVE":{
+      "TITLE":"Archivia",
+      "BRV_USERS_PLURAL":"Utenti BRV",
+      "BRV_USERS_SINGULAR":"Utente BRV",
+      "KTV_USERS_PLURAL":"Utenti KTV",
+      "KTV_USERS_SINGULAR":"Utente KTV",
+      "AUTO_MODE":"Avvia auto mode"
+
+    }
   },
   "REPORTS":{
     "TITLE":"Reports",

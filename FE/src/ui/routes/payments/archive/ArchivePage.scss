@@ -28,4 +28,9 @@
             color: green;
         }
     }
+    .auto-mode-wrapper{
+        display: flex;
+        justify-content: center;
+        margin: pxToRem(20) 0;
+    }
 }

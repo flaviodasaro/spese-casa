@@ -13,7 +13,7 @@ import {
   DIFF_REPORT_FETCHED,
   AGGREGATE_REPORT_FETCHED
 } from "./actionTypes";
-import { fetchAssociationByGroup, commonInit } from "../users/actions";
+import { getAllUsers, fetchAssociationByGroup, commonInit } from "../users/actions";
 import { fetchAllSpendingCategories } from "../spending-categories/actions";
 import { API_VERBS, genericApiCall, COMMON_READ_SETTINGS } from "../api/utils";
 
@@ -186,4 +186,18 @@ export const getReportAggregateByUser = idList => dispatch => {
       COMMON_READ_SETTINGS
     )
   );
+};
+
+export const fetchArchiveInitApi = () => dispatch => {
+  return dispatch(getAllUsers()).then(res =>
+    dispatch(getReportAggregateByUser(res.data.map(el => el.idUtente)))
+  );
+};
+
+export const handleArchiveInit = (
+  needInit
+) => dispatch => () => {
+  if (needInit) {
+    return dispatch(fetchArchiveInitApi());
+  }
 };

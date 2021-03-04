@@ -29,7 +29,9 @@ import {
   SPENDING_CATEGORIES_KEY,
   SPENDING_CATEGORIES_ROUTE,
   NOTES_KEY,
-  NOTES_ROUTE
+  NOTES_ROUTE,
+  ARCHIVE_KEY, 
+  ARCHIVE_ROUTE
 } from "../../common/constants";
 
 const iconSettings = [
@@ -55,6 +57,11 @@ const iconSettings = [
         key: REPORTS_KEY,
         route: REPORTS_ROUTE,
         label: "Reports"
+      },
+      {
+        key: ARCHIVE_KEY,
+        route: ARCHIVE_ROUTE,
+        label: "Archivia"
       }
     ]
   },
