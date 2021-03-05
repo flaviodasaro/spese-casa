@@ -13,9 +13,15 @@ import {
   DIFF_REPORT_FETCHED,
   AGGREGATE_REPORT_FETCHED
 } from "./actionTypes";
-import { getAllUsers, fetchAssociationByGroup, commonInit } from "../users/actions";
+import {
+  getAllUsers,
+  fetchAssociationByGroup,
+  commonInit
+} from "../users/actions";
 import { fetchAllSpendingCategories } from "../spending-categories/actions";
 import { API_VERBS, genericApiCall, COMMON_READ_SETTINGS } from "../api/utils";
+import { push } from "connected-react-router";
+import { REPORTS_ROUTE } from "../../ui/common/constants";
 
 const PAYMENT_CONTROLLER_SUB_URL = "pagamento";
 const MASSIVE_SAVE_PAYMENT_URL = `${PAYMENT_CONTROLLER_SUB_URL}/massive-save-by-ids`;
@@ -23,6 +29,7 @@ const FETCH_PAYMENTS_WITH_FILTERS_URL = `${PAYMENT_CONTROLLER_SUB_URL}/by-filter
 const PAYMENTS_MASSIVE_UPDATE_URL = `${PAYMENT_CONTROLLER_SUB_URL}/massive-update`;
 const REPORTS_DIFF_BY_USERS_URL = `${PAYMENT_CONTROLLER_SUB_URL}/get-tot-avere-by-utenti-list`;
 const REPORTS_AGGREGATE_BY_USERS_URL = `${PAYMENT_CONTROLLER_SUB_URL}/get-tot-avere-aggregate`;
+const ARCHIVE_URL = `${PAYMENT_CONTROLLER_SUB_URL}/archive-all`;
 
 const openAssociationModal = () => ({ type: ASSOCIATIONS_MODAL_OPENED });
 
@@ -194,10 +201,28 @@ export const fetchArchiveInitApi = () => dispatch => {
   );
 };
 
-export const handleArchiveInit = (
-  needInit
-) => dispatch => () => {
+export const handleArchiveInit = needInit => dispatch => () => {
   if (needInit) {
     return dispatch(fetchArchiveInitApi());
   }
+};
+
+export const onSubmitArchive = payments => dispatch =>
+  dispatch(
+    genericApiCall(API_VERBS.POST, {
+      endpoint: ARCHIVE_URL,
+      body: [...payments]
+    })
+  );
+
+export const handleArchiveSubmit = rawPayments => dispatch => {
+  const payments = rawPayments.map(pay => ({
+    idUtenteBrv: pay.utenteBrv.value,
+    idUtenteKtv: pay.utenteKtv.value,
+    importo: pay.amount.value
+  }));
+
+  return dispatch(onSubmitArchive(payments)).then(res =>
+    dispatch(push(REPORTS_ROUTE))
+  );
 };

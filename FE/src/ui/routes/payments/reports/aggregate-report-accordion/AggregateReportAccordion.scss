@@ -2,6 +2,17 @@
 
 .reports {
     .common-report-accordion {
+        .accordion-content{
+            display: flex;
+            justify-content: space-around;
+            .unordered-list{
+                margin:unset;
+            }
+            .btn-container{
+                display: flex;
+                align-items: center;
+            }
+        }
         .output-list-item {
             .output-item-content {
                 > span {

@@ -19,6 +19,8 @@ import {
 import { getCategoryList } from "../../../../redux/spending-categories/selectors";
 
 import { commonMapDispatchToProps, commonMapStateToProps } from "../commons";
+import { push } from "connected-react-router";
+import { ARCHIVE_ROUTE } from "../../../common/constants";
 
 const mapStateToProps = state => ({
   ...commonMapStateToProps(state),
@@ -36,7 +38,8 @@ const mapDispatchToProps = {
   fetchPaymentsByFilters,
   markPaymentsAsPaid,
   getReportDiffByUsers,
-  getReportAggregateByUser
+  getReportAggregateByUser,
+  goToArchive: () => push(ARCHIVE_ROUTE)
 };
 
 export const ReportsPageContainer = connect(

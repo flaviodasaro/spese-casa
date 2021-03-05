@@ -28,7 +28,8 @@ const ReportsPageComponent = ({
   getReportAggregateByUser,
   dataStructureForDiffReport,
   shouldShowMinnicuImg,
-  dataStructureForAggregateReport
+  dataStructureForAggregateReport,
+  goToArchive
 }) => {
   return (
     <SinglePageTemplate onInit={init} h1LabelKey={"REPORTS.TITLE"}>
@@ -62,6 +63,7 @@ const ReportsPageComponent = ({
         selectedUserIdList={selectedUserIdList}
         selectUserIds={selectUserIds}
         dataStructureForAggregateReport={dataStructureForAggregateReport}
+        goToArchive={goToArchive}
       />
       <MinnicuModal shouldShowMinnicuModal={shouldShowMinnicuImg} />
     </SinglePageTemplate>

@@ -1,3 +1,4 @@
+import { Button } from "../../../../common/components/form/button/Button";
 import { CommonReportAccordion } from "../common-report-accordion/CommonReportAccordion";
 import "./AggregateReportAccordion.scss";
 
@@ -35,7 +36,8 @@ export const AggregateReportAccordion = ({
   getReportAggregateByUser,
   selectedUserIdList,
   selectUserIds,
-  dataStructureForAggregateReport
+  dataStructureForAggregateReport,
+  goToArchive
 }) => {
   return (
     <CommonReportAccordion
@@ -46,11 +48,19 @@ export const AggregateReportAccordion = ({
       selectedUserIds={selectedUserIdList}
       selectUserIds={selectUserIds}
     >
-      <ul className="unordered-list">
-        {dataStructureForAggregateReport.map(el => (
-          <OutputRow element={el} />
-        ))}
-      </ul>
+      <div className="accordion-content">
+        <ul className="unordered-list">
+          {dataStructureForAggregateReport.map(el => (
+            <OutputRow element={el} />
+          ))}
+        </ul>
+        {dataStructureForAggregateReport &&
+          dataStructureForAggregateReport.length > 0 && (
+            <div className="btn-container">
+              <Button onClick={goToArchive} labelKey={"REPORTS.GO_TO_ARCHIVE"}></Button>
+            </div>
+          )}
+      </div>
     </CommonReportAccordion>
   );
 };

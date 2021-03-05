@@ -113,7 +113,7 @@ const debouncedCallback = (callback, debounceTime = 400) => {
   timeoutId = setTimeout(callback, debounceTime);
 };
 
-const ArchiveComponent = ({ aggregateData, handleArchiveInit }) => {
+const ArchiveComponent = ({ aggregateData, handleArchiveInit, handleArchiveSubmit }) => {
   const [utentiBrvOrigin, setUtentiBrvOrigin] = useState([]);
   const [utentiBrv, setUtentiBrv] = useState([]);
   const [utentiKtvOrigin, setUtentiKtvOrigin] = useState([]);
@@ -283,7 +283,7 @@ const ArchiveComponent = ({ aggregateData, handleArchiveInit }) => {
       </div>
       <GenericForm
         disableSubmitBtn={disableSubmit}
-        onSubmit={() => console.log("Pay: ", payments)}
+        onSubmit={() => handleArchiveSubmit(payments)}
         onClearForm={resetForm}
       >
         <PaymentsTable

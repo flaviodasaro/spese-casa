@@ -6,6 +6,7 @@
         height: pxToRem(45);
         background-color: #f3f0f0c4;
         > p {
+            padding:0 pxToRem(20);
             height: 100%;
             display: flex;
             justify-content: space-between;
