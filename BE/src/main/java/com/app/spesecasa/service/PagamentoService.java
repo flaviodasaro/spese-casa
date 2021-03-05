@@ -177,7 +177,8 @@ public class PagamentoService {
 				res.add(new DiffsByUtentiDto(utente1, utente2, new GetTotAvereDto(value)));
 			}
 		}
-		return res.stream().filter(diff -> BigDecimal.ZERO.compareTo(diff.getGetTotAvereDto().getTotAvere()) < 0).collect(Collectors.toList());
+		return res.stream().filter(diff -> BigDecimal.ZERO.compareTo(diff.getGetTotAvereDto().getTotAvere()) < 0)
+				.collect(Collectors.toList());
 
 	}
 
@@ -238,52 +239,52 @@ public class PagamentoService {
 		return new ResponsePaginatedList(list);
 	}
 
-	public void archiveAll() {
+	public void archiveAll(List<ArchiveRequestElement> body) {
 		List<Utente> users = utenteService.getAllUsers();
+
+		boolean everyUserExists = body.stream().allMatch(
+				el -> users.stream().anyMatch(user -> user.getIdUtente().equals(el.getIdUtenteBrv())) && users.stream()
+						.anyMatch(user -> user.getIdUtente().equals(el.getIdUtenteKtv())));
+
+		if (!everyUserExists) {
+			throw new CommonRunTimeException("Utente non trovato", HttpStatus.PRECONDITION_REQUIRED,
+					Constants.UTENTE_NOT_FOUND);
+		}
+
 		List<InquiryForArchiveDto> inquiryData = utenteService.getInquiryForArchive();
-		if (inquiryData == null || users == null || inquiryData.size() != users.size()) {
+		if (inquiryData == null || inquiryData.size() != users.size()) {
 			throw new CommonRunTimeException("Almeno un utente non ha un gruppo singolo associato",
-					HttpStatus.INTERNAL_SERVER_ERROR, Constants.GROUPS_WITH_SINGLE_USER_MANDATORY);
+					Constants.GROUPS_WITH_SINGLE_USER_MANDATORY);
 		}
 
-		List<DiffsByUtentiDto> diffs = getTotAvereByUtentiList(
-				inquiryData.stream().map(data -> data.getIdUtente()).collect(Collectors.toList()));
+		List<Pagamento> pagamentiFake = body.stream().map(pay -> {
+			Utente utente = users.stream().filter(u -> u.getIdUtente().equals(pay.getIdUtenteBrv())).findFirst()
+					.orElseThrow(
+							() -> new CommonRunTimeException("Utente brv non trovato", Constants.UTENTE_NOT_FOUND));
 
-		if (diffs != null && diffs.size() > 0) {
+			Integer idGruppo = inquiryData.stream().filter(el -> el.getIdUtente().equals(pay.getIdUtenteKtv()))
+					.findFirst()
+					.orElseThrow(() -> new CommonRunTimeException("Gruppo singolo per utente ktv non trovato", Constants.GRUPPO_NOT_FOUND))
+					.getIdGruppo();
 
-			//prepare New Payments
-			List<Pagamento> fakePayments = diffs.stream()
-					.map(diff -> getPagamentoForArchiveInsert(diff, users, inquiryData)).collect(Collectors.toList());
+			Gruppo gruppo = gruppoService.getGruppoById(idGruppo);
 
+			SinglePaymentInfo payInfo = new SinglePaymentInfo();
+			payInfo.setDescrizione("Pagamento fittizio post archiviazione pregresso");
+			payInfo.setIdCategoriaSpesa(Constants.CATEGORIA_SPESA_FITTIZIA);
+			payInfo.setImporto(pay.getImporto());
 
+			return getPagamentoReadyForInsert(payInfo, Pair.of(utente, gruppo));
 
-			System.out.println("AA");
-			//pagamentoRepository.payAll();
+		}).collect(Collectors.toList());
+
+		Integer pagamentiAggiornati = pagamentoRepository.payAll();
+
+		if(pagamentiAggiornati == null || pagamentiAggiornati.equals(0)){
+			throw new CommonRunTimeException("Update fallito");
 		}
-
-	}
-
-	private Pagamento getPagamentoForArchiveInsert(DiffsByUtentiDto diff, List<Utente> users,
-			List<InquiryForArchiveDto> inquiryData) {
-		Integer idUtentePagante = diff.getUtente2(); //utente avere +; utente che a FE sta a destra della freccia
-
-		Utente utente = users.stream()
-				.filter(u -> u.getIdUtente().equals(idUtentePagante))
-				.findFirst()
-				.orElseThrow(() -> new CommonRunTimeException("Utente non trovato", Constants.UTENTE_NOT_FOUND));
-
-		Integer idGruppo = inquiryData.stream().filter(el -> el.getIdUtente().equals(idUtentePagante)).findFirst()
-				.orElseThrow(() -> new CommonRunTimeException("Gruppo non trovato", Constants.GRUPPO_NOT_FOUND))
-				.getIdGruppo();
-
-		Gruppo gruppo = new Gruppo();
-		gruppo.setIdGruppo(idGruppo);
-
-		SinglePaymentInfo payInfo = new SinglePaymentInfo();
-		payInfo.setDescrizione("Pagamento fittizio post archiviazione pregresso");
-		payInfo.setIdCategoriaSpesa(Constants.CATEGORIA_SPESA_FITTIZIA);
-		payInfo.setImporto(diff.getGetTotAvereDto().getTotAvere());
-
-		return getPagamentoReadyForInsert(payInfo, Pair.of(utente, gruppo));
+		else {
+			pagamentiFake.forEach(this::insertPagamento);
+		}
 	}
 }

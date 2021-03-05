@@ -5,9 +5,11 @@ import com.app.spesecasa.dto.pagamenti.DashboardAggregateWithCounter;
 import com.app.spesecasa.dto.pagamenti.GetTotAvereDto;
 import com.app.spesecasa.entity.Pagamento;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -59,7 +61,8 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Integer> {
 			@Param("tmsModificaMax") LocalDateTime tmsModificaMax
 	);
 
-
+	@Modifying(clearAutomatically = true)
+	@Transactional
 	@Query(nativeQuery = true, value = "UPDATE spese_casa.pagamento SET flg_pagato = 1 WHERE flg_pagato = 0 ")
 	Integer payAll();
 }

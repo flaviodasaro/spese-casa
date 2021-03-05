@@ -10,15 +10,18 @@ import com.app.spesecasa.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@Validated
 @RequestMapping("/pagamento")
 @CrossOrigin("*")
 public class PagamentoController {
@@ -196,14 +199,13 @@ public class PagamentoController {
 	}
 
 	@PostMapping("/archive-all")
-	public ResponseEntity<Void> archiveAll() {
+	public ResponseEntity<Void> archiveAll(@RequestBody @NotEmpty List<@Valid ArchiveRequestElement> body) {
 		try{
-			pagamentoService.archiveAll();
+			//pagamentoService.archiveAll(body);
 		}
 		catch(Exception e){
 			Utils.handleCommonError(e);
 		}
-
 		return ResponseEntity.noContent().build();
 	}
 
