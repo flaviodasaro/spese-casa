@@ -1,4 +1,4 @@
-package com.app.spesecasa.dto;
+package com.app.spesecasa.dto.pagamenti;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

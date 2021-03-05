@@ -1,6 +1,6 @@
 package com.app.spesecasa.service;
 
-import com.app.spesecasa.dto.GetTotAvereDto;
+import com.app.spesecasa.dto.pagamenti.GetTotAvereDto;
 import com.app.spesecasa.dto.RequestInserisciSaldoParziale;
 import com.app.spesecasa.dto.ResponseGetTotSingoloUtente;
 import com.app.spesecasa.entity.Pagamento;

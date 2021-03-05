@@ -1,6 +1,6 @@
 package com.app.spesecasa.repository;
 
-import com.app.spesecasa.dto.GetTotAvereDto;
+import com.app.spesecasa.dto.pagamenti.GetTotAvereDto;
 import com.app.spesecasa.entity.SaldoParziale;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

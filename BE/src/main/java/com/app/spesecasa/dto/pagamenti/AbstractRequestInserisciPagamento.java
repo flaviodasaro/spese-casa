@@ -1,4 +1,4 @@
-package com.app.spesecasa.dto;
+package com.app.spesecasa.dto.pagamenti;
 
 import javax.validation.constraints.NotNull;
 

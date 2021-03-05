@@ -1,7 +1,7 @@
 package com.app.spesecasa.service;
 
-import com.app.spesecasa.dto.RequestAddGroupAndAssociations;
-import com.app.spesecasa.dto.RequestSaveUtenteAndGruppo;
+import com.app.spesecasa.dto.utenti.RequestAddGroupAndAssociations;
+import com.app.spesecasa.dto.utenti.RequestSaveUtenteAndGruppo;
 import com.app.spesecasa.entity.AssociazioneUtenteGruppo;
 import com.app.spesecasa.entity.Gruppo;
 import com.app.spesecasa.entity.Utente;

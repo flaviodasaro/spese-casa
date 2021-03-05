@@ -1,6 +1,6 @@
 package com.app.spesecasa.entity;
 
-import com.app.spesecasa.dto.GetTotAvereDto;
+import com.app.spesecasa.dto.pagamenti.GetTotAvereDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

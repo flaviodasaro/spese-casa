@@ -1,4 +1,7 @@
-package com.app.spesecasa.dto;
+package com.app.spesecasa.dto.pagamenti;
+
+import com.app.spesecasa.dto.pagamenti.DashboardAggregateWithAmount;
+import com.app.spesecasa.dto.pagamenti.DashboardAggregateWithCounter;
 
 public class ResponseGetDashboardInit {
 	private DashboardAggregateWithCounter utentePagatoPiuVolte;
