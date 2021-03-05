@@ -2,7 +2,7 @@
   "name": "spese-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://spese.casa.prod.com/spese-casa",
+  "homepage": "https://flaviodasaro.github.io/spese-casa",
   "dependencies": {
     "@date-io/date-fns": "^1.3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
