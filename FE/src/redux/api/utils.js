@@ -165,7 +165,7 @@ export const genericApiCall = (verb, apiParams, settings = {}) => (
       return commonHandler({
         dispatch,
         promiseGetter: () =>
-          axios.post(url, { ...body }, { ...combineConfigs() }),
+          axios.post(url, body, { ...combineConfigs() }),
         onSuccess,
         showSuccessAlert,
         onFailure,
