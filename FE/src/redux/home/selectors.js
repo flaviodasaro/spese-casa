@@ -4,6 +4,8 @@ const homeSlice = state => state.homeReducer;
 
 const getInitResponse = createSelector(homeSlice, state => state.initResponse);
 
+export const forbiddenDetected = createSelector(homeSlice, state => state.forbiddenDetected);
+
 const getName = obj => obj && obj.name;
 const getValue = obj => obj && obj.counter;
 
