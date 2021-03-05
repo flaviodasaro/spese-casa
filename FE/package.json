@@ -2,7 +2,7 @@
   "name": "spese-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://spese-casa-prod-fe.com/spese-casa",
+  "homepage": "http://spese.casa.prod.com/spese-casa",
   "dependencies": {
     "@date-io/date-fns": "^1.3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
