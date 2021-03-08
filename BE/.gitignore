@@ -8,7 +8,7 @@
 *.ctxt
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.nar
 *.ear
@@ -28,5 +28,5 @@
 
 # Build files
 dist/*
-target/*
+#target/*
 docs/*
