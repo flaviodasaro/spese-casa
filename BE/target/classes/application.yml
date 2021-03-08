@@ -1,0 +1,23 @@
+server:
+  port : ${PORT:8080} #default: 8080
+
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: UPDATE
+    properties:
+      hibernate:
+        dialect: 'org.hibernate.dialect.MySQL8Dialect'
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/spese_casa?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
+    username: root
+    password: root
+    driver-class-name=com: com.mysql.cj.jdbc.Driver
+
+
+custom:
+  exceptions:
+    returnStackTrace: true
+  dynamic-resources:
+    path: 'C:\Users\DASAROF\Documents\Cose spam non lavoro\Documentazione spese-casa\Dynamic Resources'
