@@ -19,9 +19,11 @@ spring:
 custom:
   exceptions:
     returnStackTrace: true
+  hostname: ${ DB_MY_SQL_HOSTNAME }
   dynamic-resources:
     path: 'C:\Users\DASAROF\Documents\Cose spam non lavoro\Documentazione spese-casa\Dynamic Resources'
 
 #DB_MY_SQL_HOSTNAME: localhost
 #DB_MY_SQL_PORT: 3306
 #DB_NAME: spese_casa
+
