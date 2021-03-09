@@ -10,20 +10,22 @@ spring:
       hibernate:
         dialect: 'org.hibernate.dialect.MySQL8Dialect'
   datasource:
-    url: jdbc:mysql://${DB_MY_SQL_HOSTNAME}:3306/${DB_NAME}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
-    username: root
-    password: root
+    url: "jdbc:mysql://${DB_MY_SQL_HOSTNAME}:3306/${DB_NAME}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"
+    username: ${DB_USERNAME}
+    password: ${DB_PW}
     driver-class-name=com: com.mysql.cj.jdbc.Driver
 
 
 custom:
   exceptions:
     returnStackTrace: true
-  hostname: ${ DB_MY_SQL_HOSTNAME }
+  hostname: "${DB_MY_SQL_HOSTNAME}"
   dynamic-resources:
     path: 'C:\Users\DASAROF\Documents\Cose spam non lavoro\Documentazione spese-casa\Dynamic Resources'
 
-#DB_MY_SQL_HOSTNAME: localhost
-#DB_MY_SQL_PORT: 3306
-#DB_NAME: spese_casa
+#DB_MY_SQL_HOSTNAME:
+#DB_MY_SQL_PORT:
+#DB_NAME:
+#DB_USERNAME:
+#DB_PW:
 
