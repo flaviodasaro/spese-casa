@@ -1,5 +1,5 @@
 server:
-  port : 8080 #default: 8080
+  port : ${PORT:8080} #default: 8080
 
 
 spring:
@@ -10,7 +10,7 @@ spring:
       hibernate:
         dialect: 'org.hibernate.dialect.MySQL8Dialect'
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://${DB_MY_SQL_HOSTNAME}:${DB_MY_SQL_PORT}/${DB_NAME}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
     username: root
     password: root
     driver-class-name=com: com.mysql.cj.jdbc.Driver
@@ -18,4 +18,10 @@ spring:
 
 custom:
   exceptions:
-    returnStackTrace: false
+    returnStackTrace: true
+  dynamic-resources:
+    path: 'C:\Users\DASAROF\Documents\Cose spam non lavoro\Documentazione spese-casa\Dynamic Resources'
+
+DB_MY_SQL_HOSTNAME: 
+DB_MY_SQL_PORT: 
+DB_NAME: 
