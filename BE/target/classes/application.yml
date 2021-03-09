@@ -10,7 +10,7 @@ spring:
       hibernate:
         dialect: 'org.hibernate.dialect.MySQL8Dialect'
   datasource:
-    url: jdbc:mysql://${DB_MY_SQL_HOSTNAME}:${DB_MY_SQL_PORT}/${DB_NAME}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
+    url: jdbc:mysql://${DB_MY_SQL_HOSTNAME}:3306/${DB_NAME}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
     username: root
     password: root
     driver-class-name=com: com.mysql.cj.jdbc.Driver
