@@ -10,9 +10,9 @@ spring:
       hibernate:
         dialect: 'org.hibernate.dialect.MySQL8Dialect'
   datasource:
-    url: jdbc:mysql://${DB_MY_SQL_HOSTNAME}:${DB_MY_SQL_PORT}/${DB_NAME}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET
-    username: root
-    password: root
+    url: "jdbc:mysql://${DB_MY_SQL_HOSTNAME}:${DB_MY_SQL_PORT}/${DB_NAME}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=CET"
+    username: ${DB_USERNAME}
+    password: ${DB_PW}
     driver-class-name=com: com.mysql.cj.jdbc.Driver
 
 
@@ -25,3 +25,6 @@ custom:
 DB_MY_SQL_HOSTNAME: localhost
 DB_MY_SQL_PORT: 3306
 DB_NAME: spese_casa
+DB_USERNAME: root
+DB_PW: root
+
