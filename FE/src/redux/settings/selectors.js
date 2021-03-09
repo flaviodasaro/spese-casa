@@ -1,13 +1,15 @@
 import {
   HOSTNAME_VALUES,
   LOCAL_BE_HOST_NAME,
-  MOCKED_HOST_NAME
+  MOCKED_HOST_NAME,
+  PASSPARTOUT_HOSTNAME
 } from "../common/constants";
 import { createSelector } from "reselect";
 
 export const MAP_TYPE_TO_HOSTNAME = {
-  LOCAL_BE: LOCAL_BE_HOST_NAME,
-  LOCAL_MOCK_BE: MOCKED_HOST_NAME
+  [HOSTNAME_VALUES.PASSPARTOUT]: PASSPARTOUT_HOSTNAME,
+  [HOSTNAME_VALUES.LOCAL_BE]: LOCAL_BE_HOST_NAME,
+  [HOSTNAME_VALUES.LOCAL_MOCK_BE]: MOCKED_HOST_NAME
 };
 
 export const getSettingsSlice = state => state.settingsReducer;

@@ -97,6 +97,7 @@
       "HOSTNAME_LIST":"Hostname",
       "CUSTOM_HOSTNAME":"Custom hostname",
       "OPTION_LIST":{
+        "PASSPARTOUT":"CORS-ANYWHERE", 
         "LOCAL_BE":"Localhost:8080", 
         "LOCAL_MOCK_BE":"Localhost:4000", 
         "CUSTOM":"Custom"

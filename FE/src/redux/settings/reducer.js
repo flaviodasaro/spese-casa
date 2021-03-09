@@ -1,5 +1,5 @@
 import {
-  LOCAL_BE_HOST_NAME,
+  PASSPARTOUT_HOSTNAME,
   HOSTNAME_VALUES,
   SESSION_STORAGE_HOSTNAME_KEY,
   SESSION_STORAGE_HOST_TYPE_KEY
@@ -11,8 +11,8 @@ import {
 } from "./actionTypes";
 
 const initialState = {
-  hostname: LOCAL_BE_HOST_NAME,
-  selectedHostname: HOSTNAME_VALUES.LOCAL_BE,
+  hostname: PASSPARTOUT_HOSTNAME,
+  selectedHostname: HOSTNAME_VALUES.PASSPARTOUT,
   customHostname: ""
 };
 
